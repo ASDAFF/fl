@@ -255,7 +255,10 @@ $isAdmin = $user->IsAdmin();
 			</div>
 		</div>
 	</div>
-</div>
+</div><?
+
+    /*
+    ?>
 <div class="commerce-tab-container">
 	<div class="container">
 		<div class="col-md-12">
@@ -409,252 +412,25 @@ $isAdmin = $user->IsAdmin();
 			</div>
 		</div>
 	</div>
-</div>
+</div><?*/
+
+    ?>
 <div class="container">
 <div class="row">
-<div class="col-sm-12">
-<div class="related products">
-<div class="related-title">
-	<h3><span>We know you will love</span></h3>
-</div>
-<ul class="products columns-4" data-columns="4">
-<li class="product product-no-border style-2">
-	<div class="product-container">
-		<figure>
-			<div class="product-wrap">
-				<div class="product-images">
-					<span class="onsale">Sale!</span>
+    <div class="col-sm-12"><?
 
-					<div class="shop-loop-thumbnail shop-loop-front-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328.jpg" alt=""/></a>
-					</div>
-					<div class="shop-loop-thumbnail shop-loop-back-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328alt.jpg" alt=""/></a>
-					</div>
-				</div>
-			</div>
-			<figcaption>
-				<div class="shop-loop-product-info">
-					<div class="info-meta clearfix">
-						<div class="star-rating">
-							<span style="width:0%"></span>
-						</div>
-						<div class="loop-add-to-wishlist">
-							<div class="yith-wcwl-add-to-wishlist">
-								<div class="yith-wcwl-add-button">
-									<a href="#" class="add_to_wishlist">
-										Add to Wishlist
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="info-content-wrap">
-						<h3 class="product_title">
-							<a href="shop-detail-1.html">Daniel Stromborg Round</a>
-						</h3>
+		$APPLICATION->IncludeComponent('tim:empty', 'similar', [
+			'OFFER' => $offer,
+		]);
 
-						<div class="info-price">
-																						<span class="price">
-																							<del><span class="amount">£23.00</span>
-																							</del> <ins><span
-																									class="amount">£20.00</span>
-																							</ins>
-																						</span>
-						</div>
-						<div class="loop-action">
-							<div class="loop-add-to-cart">
-								<a href="#" class="add_to_cart_button">
-									Add to cart
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</figcaption>
-		</figure>
-	</div>
-</li>
-<li class="product product-no-border style-2">
-	<div class="product-container">
-		<figure>
-			<div class="product-wrap">
-				<div class="product-images">
-					<div class="shop-loop-thumbnail shop-loop-front-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328.jpg" alt=""/></a>
-					</div>
-					<div class="shop-loop-thumbnail shop-loop-back-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328alt.jpg" alt=""/></a>
-					</div>
-				</div>
-			</div>
-			<figcaption>
-				<div class="shop-loop-product-info">
-					<div class="info-meta clearfix">
-						<div class="star-rating">
-							<span style="width:0%"></span>
-						</div>
-						<div class="loop-add-to-wishlist">
-							<div class="yith-wcwl-add-to-wishlist">
-								<div class="yith-wcwl-add-button">
-									<a href="#" class="add_to_wishlist">
-										Add to Wishlist
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="info-content-wrap">
-						<h3 class="product_title">
-							<a href="shop-detail-1.html">Hans Wegner Shell Chair</a>
-						</h3>
-
-						<div class="info-price">
-																						<span class="price">
-																							<span class="amount">&pound;10.75</span>
-																						</span>
-						</div>
-						<div class="loop-action">
-							<div class="loop-add-to-cart">
-								<a href="#" class="add_to_cart_button">
-									Add to cart
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</figcaption>
-		</figure>
-	</div>
-</li>
-<li class="product product-no-border style-2">
-	<div class="product-container">
-		<figure>
-			<div class="product-wrap">
-				<div class="product-images">
-					<span class="onsale">Sale!</span>
-
-					<div class="shop-loop-thumbnail shop-loop-front-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328.jpg" alt=""/></a>
-					</div>
-					<div class="shop-loop-thumbnail shop-loop-back-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328alt.jpg" alt=""/></a>
-					</div>
-				</div>
-			</div>
-			<figcaption>
-				<div class="shop-loop-product-info">
-					<div class="info-meta clearfix">
-						<div class="star-rating">
-							<span style="width:0%"></span>
-						</div>
-						<div class="loop-add-to-wishlist">
-							<div class="yith-wcwl-add-to-wishlist">
-								<div class="yith-wcwl-add-button">
-									<a href="#" class="add_to_wishlist">
-										Add to Wishlist
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="info-content-wrap">
-						<h3 class="product_title">
-							<a href="shop-detail-1.html">Hans Wegner Two Seat Sofa</a>
-						</h3>
-
-						<div class="info-price">
-																						<span class="price">
-																							<del><span class="amount">£20.50</span>
-																							</del>
-																							<ins><span class="amount">£19.00</span>
-																							</ins>
-																						</span>
-						</div>
-						<div class="loop-action">
-							<div class="loop-add-to-cart">
-								<a href="#" class="add_to_cart_button">
-									Add to cart
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</figcaption>
-		</figure>
-	</div>
-</li>
-<li class="product product-no-border style-2">
-	<div class="product-container">
-		<figure>
-			<div class="product-wrap">
-				<div class="product-images">
-					<span class="onsale">Sale!</span>
-
-					<div class="shop-loop-thumbnail shop-loop-front-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328.jpg" alt=""/></a>
-					</div>
-					<div class="shop-loop-thumbnail shop-loop-back-thumbnail">
-						<a href="shop-detail-1.html"><img width="450" height="450"
-						                                  src="images/products/product_328x328alt.jpg" alt=""/></a>
-					</div>
-				</div>
-			</div>
-			<figcaption>
-				<div class="shop-loop-product-info">
-					<div class="info-meta clearfix">
-						<div class="star-rating">
-							<span style="width:0%"></span>
-						</div>
-						<div class="loop-add-to-wishlist">
-							<div class="yith-wcwl-add-to-wishlist">
-								<div class="yith-wcwl-add-button">
-									<a href="#" class="add_to_wishlist">
-										Add to Wishlist
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="info-content-wrap">
-						<h3 class="product_title">
-							<a href="shop-detail-1.html">Hans Wegner Desk</a>
-						</h3>
-
-						<div class="info-price">
-																						<span class="price">
-																							<del><span class="amount">£20.50</span>
-																							</del>
-																							<ins><span class="amount">£19.00</span>
-																							</ins>
-																						</span>
-						</div>
-						<div class="loop-action">
-							<div class="loop-add-to-cart">
-								<a href="#" class="add_to_cart_button">
-									Add to cart
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</figcaption>
-		</figure>
-	</div>
-</li>
-</ul>
+        ?>
 </div>
 </div>
 </div>
-</div>
-</div>
+</div><?
+
+    /*
+    ?>
 <div class="woo-instagram">
 	<h3 class="heading-center-custom">
 		<span>Instashop</span>
@@ -734,7 +510,9 @@ $isAdmin = $user->IsAdmin();
 			</div>
 		</div>
 	</div>
-</div>
+</div><?*/
+
+    ?>
 </div>
 </div>
 </div>

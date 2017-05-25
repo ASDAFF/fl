@@ -427,15 +427,25 @@ var Cart = {
 			Cart.minicart.html(resp.MINI);
 	},
 	format: function(n) {
-		var s = '';
-		var x = 1000;
-		while (n >= x) {
-			var part = n % x;
-			s = ' ' + part + s;
-			n = (n - part) / x;
-		}
-		s = n + s;
-		return s;
+		return Cart.number_format(n, 0, '.', ' ');
+	},
+	number_format: function (number, decimals, dec_point, thousands_sep) {
+		var i, j, kw, kd, km;
+		if (isNaN(decimals = Math.abs(decimals)))
+			decimals = 2;
+
+		i = parseInt(number = (+number || 0).toFixed(decimals)) + "";
+
+		if ((j = i.length) > 3)
+			j = j % 3;
+		else
+			j = 0;
+
+		km = (j ? i.substr(0, j) + thousands_sep : "");
+		kw = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands_sep);
+		kd = (decimals ? dec_point + Math.abs(number - i).toFixed(decimals).replace(/-/, 0).slice(2) : "");
+
+		return km + kw + kd;
 	}
 };
 
