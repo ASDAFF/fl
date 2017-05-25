@@ -7,6 +7,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Напольные покрытия\"");
 
 ?>
+<!-- test new-->
 <div class="container">
     <div class="row row-fluid pt-6 pb-6">
         <div class="text-center col-sm-3">
