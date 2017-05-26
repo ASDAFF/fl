@@ -158,9 +158,9 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 										<i class="elegant_icon_bag"></i><span>0</span>
 									</a>
 									<a class="navbar-brand" href="/">
-										<img class="logo" alt="WOOW" src="/images/logo.png">
-										<img class="logo-fixed" alt="WOOW" src="/images/logo-fixed.png">
-										<img class="logo-mobile" alt="WOOW" src="/images/logo-mobile.png">
+										<img class="logo" alt="" src="/images/logo.png">
+										<img class="logo-fixed" alt="" src="/images/logo.png">
+										<img class="logo-mobile" alt="" src="/images/logo.png">
 									</a>
 								</div><?
 
