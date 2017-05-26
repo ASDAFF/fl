@@ -65,7 +65,7 @@ $cart = \Local\Sale\Cart::getCart();
 					<span class="amount js-total"><?= $sum ?></span> руб.
 				</td>
 				<td class="product-remove hidden-xs">
-					<a href="#" class="remove" title="Remove this item">&times;</a>
+					<a href="#" class="remove" title="Удалить">&times;</a>
 				</td>
 			</tr><?
 		}

@@ -42,12 +42,14 @@ class Cart
 
 		$basket = new \CSaleBasket();
 		$basket->Init();
-		if ($orderId)
+		if ($orderId && $orderId != 'NULL')
 			$filter = [
 				'ORDER_ID' => $orderId,
 			];
 		else
 			$filter = [
+				'DELAY' => 'N',
+				'ORDER_ID' => 'NULL',
 				'FUSER_ID' => $basket->GetBasketUserID(),
 			];
 		$rsCart = $basket->GetList([], $filter);

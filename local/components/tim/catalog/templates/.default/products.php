@@ -94,6 +94,8 @@ else
 				$pPrice = number_format($item['PRICE_P'], 0, '', ' ');
 				$pPrice = ' (' . $pPrice . ' руб.)';
 			}
+			$wishCartId = \Local\Sale\Wish::getCartId($item['ID']);
+			$wlAdded = $wishCartId ? ' added' : '';
 
 			?>
 			<li class="product product-no-border style-2 col-md-3 col-sm-6">
@@ -133,7 +135,8 @@ else
 								<div class="loop-add-to-wishlist">
 									<div class="yith-wcwl-add-to-wishlist">
 										<div class="yith-wcwl-add-button">
-											<a href="#" class="add_to_wishlist">
+											<a href="#" class="add_to_wishlist<?= $wlAdded ?>"
+                                               data-id="<?= $item['ID'] ?>" data-cid="<?= $wishCartId ?>">
 												Добавить в избранное
 											</a>
 										</div>

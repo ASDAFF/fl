@@ -105,6 +105,12 @@ class Filter
 			'MULTI' => true,
 		];
 		$return[] = [
+			'NAME' => 'Класс защиты',
+			'TYPE' => 'protection',
+			'ITEMS' => Protection::getGroup(),
+			'MULTI' => true,
+		];
+		$return[] = [
 			'NAME' => 'Производитель',
 			'TYPE' => 'brand',
 			'BC' => true,

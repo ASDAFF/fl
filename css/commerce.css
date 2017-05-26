@@ -2330,6 +2330,13 @@ p.demo_store {
 .commerce ul.products li.product .yith-wcwl-add-to-wishlist .add_to_wishlist:hover {
   color: #0088cc;
 }
+.commerce ul.products li.product .yith-wcwl-add-to-wishlist .add_to_wishlist.added {
+  color: #0088cc;
+  font-size: 1.3em;
+}
+.commerce ul.products li.product .yith-wcwl-add-to-wishlist .add_to_wishlist.added:hover {
+  color: #7e7e7e;
+}
 .commerce ul.products li.product .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistaddedbrowse span.feedback,
 .commerce ul.products li.product .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistexistsbrowse span.feedback {
   display: none;

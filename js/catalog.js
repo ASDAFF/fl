@@ -450,6 +450,70 @@ var Cart = {
 };
 
 /**
+ * Избранное
+ */
+var Wish = {
+	init: function ($) {
+		$(document).on('click', '.add_to_wishlist', this.toggle);
+		$(document).on('click', '.remove_from_wishlist', this.remove);
+		$(document).on('click', '.wishlist_table .add_to_cart_button', this.add);
+	},
+	toggle: function() {
+		var a = jQuery(this);
+		var id = a.data('id');
+		var cid = a.data('cid');
+		var added = a.hasClass('added');
+		var action = added ? 'remove' : 'add';
+		jQuery.post('/ajax/wish.php', {
+			action: action,
+			id: id,
+			cid: cid
+		}, function(resp) {
+			if (resp.IN)
+				a.addClass('added');
+			else
+				a.removeClass('added');
+			if (resp.ID)
+				a.data('cid', resp.ID);
+		});
+
+		return false;
+	},
+	remove: function() {
+		var a = jQuery(this);
+		var tr = a.closest('tr');
+		var cid = tr.data('id');
+		jQuery.post('/ajax/wish.php', {
+			action: 'remove',
+			cid: cid
+		}, function(resp) {
+			if (!resp.IN)
+				tr.remove();
+			// TODO: проверка на пустой лист
+		});
+
+		return false;
+	},
+	add: function() {
+		var a = jQuery(this);
+		var tr = a.closest('tr');
+		var cid = tr.data('id');
+		jQuery.post('/ajax/wish.php', {
+			action: 'cart',
+			cid: cid
+		}, function(resp) {
+			if (!resp.IN)
+				tr.remove();
+			// TODO: проверка на пустой лист
+
+			Cart.afterAjax(resp);
+		});
+
+		return false;
+	}
+};
+
+/**
  * Старт
  */
 
@@ -458,6 +522,7 @@ var Cart = {
 		Filters.init($);
 		Detail.init($);
 		Cart.init($);
+		Wish.init($);
 	});
 })(jQuery);
 

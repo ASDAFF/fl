@@ -63,6 +63,7 @@ class Offer
 			    'PROPERTY_ARTICLE',
 			    'PROPERTY_DIM',
 			    'PROPERTY_COATING',
+			    'PROPERTY_PROTECTION',
 			    'PROPERTY_PRICE',
 			    'PROPERTY_PRICE_P',
 			    'PROPERTY_L',
@@ -90,6 +91,7 @@ class Offer
 				    'COUNTRY' => $item['PROPERTY_COUNTRY_VALUE'],
 				    'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 				    'COLOR' => $item['PROPERTY_COLOR_VALUE'],
+				    'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
 				    'UNIT' => intval($item['PROPERTY_UNIT_VALUE']),
 				    'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
 				    'PRICE_P' => intval($item['PROPERTY_PRICE_P_VALUE']),
@@ -200,6 +202,7 @@ class Offer
 				$return['BRAND'][$offer['BRAND']]++;
 				$return['COUNTRY'][$offer['COUNTRY']]++;
 				$return['WOOD'][$offer['WOOD']]++;
+				$return['PROTECTION'][$offer['PROTECTION']]++;
 
 
 
@@ -256,6 +259,7 @@ class Offer
 			'PROPERTY_COUNTRY',
 			'PROPERTY_WOOD',
 			'PROPERTY_COLOR',
+			'PROPERTY_PROTECTION',
 			'PROPERTY_PRICE',
 			'PROPERTY_PRICE_P',
 			'PROPERTY_PRODUCT',
@@ -294,6 +298,7 @@ class Offer
 				'COUNTRY' => intval($item['PROPERTY_COUNTRY_VALUE']),
 				'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),
 				'COLOR' => intval($item['PROPERTY_COLOR_VALUE']),
+				'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
 			];
 			if ($type > 0)
 			{
@@ -391,6 +396,10 @@ class Offer
 				elseif ($k == 'WOOD')
 				{
 					$bitrixFilter['PROPERTY_WOOD'] = $v;
+				}
+				elseif ($k == 'PROTECTION')
+				{
+					$bitrixFilter['PROPERTY_PROTECTION'] = $v;
 				}
 				elseif ($k == 'ID')
 				{

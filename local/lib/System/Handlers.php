@@ -3,6 +3,7 @@ namespace Local\System;
 use Local\Catalog\Offer;
 use Local\Catalog\Product;
 use Local\Sale\Cart;
+use Local\Sale\Wish;
 
 /**
  * Class Handlers Обработчики событий
@@ -67,6 +68,7 @@ class Handlers
 	public static function afterUserLogout()
 	{
 		Cart::updateSessionCartSummary();
+		Wish::updateSession();
 	}
 
 	/**
@@ -75,6 +77,7 @@ class Handlers
 	public static function afterUserLogin()
 	{
 		Cart::updateSessionCartSummary();
+		Wish::updateSession();
 	}
 
 }

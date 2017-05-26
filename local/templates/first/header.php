@@ -90,7 +90,7 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 <div class="offcanvas open">
 	<div class="offcanvas-wrap">
 		<div class="offcanvas-user clearfix">
-			<a class="offcanvas-user-wishlist-link" href="wishlist.html">
+			<a class="offcanvas-user-wishlist-link" href="/personal/wishlist/">
 				<i class="fa fa-heart-o"></i> Избранное
 			</a>
 			<a class="offcanvas-user-account-link" href="/personal/">
@@ -187,7 +187,7 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 										</div>
 									</div>
 									<div class="navbar-wishlist">
-										<a class="wishlist" href="wishlist.html">
+										<a class="wishlist" href="/personal/wishlist/">
 											<i class="fa fa-heart-o"></i>
 										</a>
 									</div>
