@@ -5,6 +5,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
 
+$user = new \CUser();
+$isAdmin = $user->IsAdmin();
+
 $offer = $arParams['OFFER'];
 
 $sectionId = $offer['SECTION'];
@@ -37,6 +40,13 @@ if (!count($items['ITEMS']))
                     $img1 = $file->GetFileArray($item['PREVIEW_PICTURE']);
                     $img2 = $file->GetFileArray($item['DETAIL_PICTURE']);
                     $rating = $item['RATING'] ? $item['RATING'] : 60;
+					$price = number_format($item['PRICE'], 0, '', ' ');
+					$pPrice = '';
+					if ($isAdmin && $item['PRICE_P'])
+					{
+						$pPrice = number_format($item['PRICE_P'], 0, '', ' ');
+						$pPrice = ' (' . $pPrice . ' руб.)';
+					}
 
                     ?>
                     <li class="product product-no-border style-2">

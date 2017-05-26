@@ -15,7 +15,10 @@ if (!$isCatalog)
 }
 
 ?>
-<footer id="footer" class="footer">
+<footer id="footer" class="footer"><?
+
+    /*
+    ?>
 	<div class="footer-newsletter">
 		<div class="container">
 			<div class="footer-newsletter-wrap">
@@ -29,7 +32,9 @@ if (!$isCatalog)
 				</form>
 			</div>
 		</div>
-	</div>
+    </div><?*/
+
+    ?>
 	<div class="footer-featured">
 		<div class="container">
 			<div class="row">
@@ -60,121 +65,11 @@ if (!$isCatalog)
 	<div class="footer-widget">
 		<div class="container">
 			<div class="footer-widget-wrap">
-				<div class="row">
-					<div class="footer-widget-col col-md-3 col-sm-6">
-						<div class="widget widget_text">
-							<div class="textwidget">
-								<ul class="address">
-									<li>
-										<i class="fa fa-home"></i>
-										<h4>Адрес:</h4>
-										<p>г. Москва, ул. Малый Лёвшинский пер., д. 10</p>
-									</li>
-									<li>
-										<i class="fa fa-mobile"></i>
-										<h4>Телефон:</h4>
-										<p>+7 (495) 532 79 74, +7 (929) 932 42 30</p>
-									</li>
-									<li>
-										<i class="fa fa-envelope"></i>
-										<h4>Email:</h4>
-										<p><a href="mailto:email@domain.com">info@veles-parket.ru</a></p>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="footer-widget-col col-md-3 col-sm-6">
-						<div class="widget widget_nav_menu">
-							<h3 class="widget-title">
-								<span>Информация</span>
-							</h3>
-							<div class="menu-infomation-container">
-								<ul class="menu">
-									<li><a href="/about/">О компании</a></li>
-									<li><a href="/about/contacts/">Контакты</a></li>
-									<li><a href="/about/delivery/">Доставка</a></li>
-									<li><a href="/about/guaranty/">Гарантия</a></li>
-									<li><a href="/about/howto/">Как купить?</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div class="footer-widget-col col-md-3 col-sm-6">
-						<div class="widget widget_nav_menu">
-							<h3 class="widget-title">
-								<span>Другие покрытия</span>
-							</h3>
-							<div class="menu-customer-care-container">
-								<ul class="menu">
-									<li><a href="#">Террасная доска</a></li>
-									<li><a href="#">Штучный паркет</a></li>
-									<li><a href="#">Модульный паркет</a></li>
-									<li><a href="#">Пробковые полы</a></li>
-									<li><a href="#">Виниловые полы</a></li>
-									<li><a href="#">Кожаные полы</a></li>
-									<li><a href="#">Ламинат</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					<div class="footer-widget-col col-md-3 col-sm-6">
-						<div class="widget widget_nav_menu">
-							<h3 class="widget-title">
-								<span>Деревянные полы</span>
-							</h3>
-							<div class="menu-customer-care-container">
-								<ul class="menu">
-									<li><a href="/cat/engineer/">Инженерная доска</a></li>
-									<li><a href="#">Массивная доска</a></li>
-									<li><a href="#">Паркетная доска</a></li>
-									
-								</ul>
-								<!--
-								<h3 class="widget-title">
-									<span>payment Menthod</span>
-								</h3>
-								<div class="payment">
-									<a href="#"><i class="fa fa-cc-mastercard"></i></a>
-									<a href="#"><i class="fa fa-cc-visa"></i></a>
-									<a href="#"><i class="fa fa-cc-paypal"></i></a>
-									<a href="#"><i class="fa fa-cc-discover"></i></a>
-									<a href="#"><i class="fa fa-credit-card"></i></a>
-									<a href="#"><i class="fa fa-cc-amex"></i></a>
-								</div>
-								 -->
-							</div>
-						</div>
-					</div>
-					
-					<!-- <div class="footer-widget-col col-md-3 col-sm-6">
-						<div class="widget widget_text">
-							<h3 class="widget-title">
-								<span>open house</span>
-							</h3>
-							<div class="textwidget">
-								<ul class="open-time">
-									<li><span>Mon - Fri:</span><span>8am - 5pm</span> </li>
-									<li><span>Sat:</span><span>8am - 11am</span> </li>
-									<li><span>Sun: </span><span>Closed</span></li>
-								</ul>
-								<h3 class="widget-title">
-									<span>payment Menthod</span>
-								</h3>
-								<div class="payment">
-									<a href="#"><i class="fa fa-cc-mastercard"></i></a>
-									<a href="#"><i class="fa fa-cc-visa"></i></a>
-									<a href="#"><i class="fa fa-cc-paypal"></i></a>
-									<a href="#"><i class="fa fa-cc-discover"></i></a>
-									<a href="#"><i class="fa fa-credit-card"></i></a>
-									<a href="#"><i class="fa fa-cc-amex"></i></a>
-								</div>
-							</div>
-						</div>
-					</div> -->
+				<div class="row"><?
+
+					$APPLICATION->IncludeComponent('tim:empty', 'bot_menu');
+
+					?>
 				</div>
 			</div>
 		</div>
