@@ -118,7 +118,7 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 				<div class="col-sm-7 col-left-topbar">
 					<div class="right-topbar">
 						<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a>
-						<span class="elTop-adress"> г. Москва, ул. Малый Лёвшинский пер., д. 10</span>
+						<span class="elTop-adress"></span>
 					</div>
 				</div>
 				<div class="col-sm-1 col-right-topbar">
