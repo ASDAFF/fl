@@ -50,7 +50,7 @@ if (!$isCatalog)
 				<div class="footer-featured-col col-md-4 col-sm-6">
 					<i class="fa fa-clock-o"></i>
 					<h4 class="footer-featured-title">
-						2 года <br> Гарантия от производителя
+						<br> Гарантия от производителя
 					</h4>
 					
 				</div>
@@ -180,7 +180,7 @@ if (!$isCatalog)
 		</div>
 	</div>
 	<div class="footer-copyright text-center">
-		© 2015 WOOW - Responsive Commerce Theme
+        © 2017 <a href="http://lema.agency/">Разработано в Lema.Agency</a>
 	</div>
 </footer>
 </div>
