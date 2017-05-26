@@ -122,7 +122,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
                     <div class="special-product-wrap">
                         <div class="special-product-image">
                             <a href="#">
-                                <img width="470" height="470" src="images/thumb_470x470.jpg" alt="special_product"/>
+                                <img width="470" height="470" src="images/elIndex-ban-470.jpg" alt="special_product"/>
                             </a>
                         </div>
                     </div>
