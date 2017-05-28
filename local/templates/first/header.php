@@ -8,6 +8,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 $isCatalog = defined('CATALOG_PAGES') && CATALOG_PAGES === true;
 $isIndex = defined('INDEX_PAGE') && INDEX_PAGE === true;
 $isCart = defined('CART_PAGE') && CART_PAGE === true;
+$isAuthorized = $USER->IsAuthorized();
 
 ?><!doctype html>
 <html xml:lang="<?= LANGUAGE_ID ?>" lang="<?= LANGUAGE_ID ?>">
@@ -92,10 +93,20 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 		<div class="offcanvas-user clearfix">
 			<a class="offcanvas-user-wishlist-link" href="/personal/wishlist/">
 				<i class="fa fa-heart-o"></i> Избранное
-			</a>
-			<a class="offcanvas-user-account-link" href="/personal/">
-				<i class="fa fa-user"></i> Войти
-			</a>
+			</a><?
+            if ($isAuthorized)
+            {
+                ?>
+                <a class="offcanvas-user-account-link" href="/personal/"><i class="fa fa-user"></i> Личный кабинет</a>
+                <a class="offcanvas-user-account-link" href="/?logout=yes"><i class="fa fa-user"></i> Выйти</a><?
+            }
+            else
+            {
+                ?>
+                <a class="offcanvas-user-account-link" href="/login/"><i class="fa fa-user"></i> Вход</a>
+                <a class="offcanvas-user-account-link" href="/login/?register=yes"><i class="fa fa-user"></i> Регистрация</a><?
+            }
+            ?>
 		</div><?
 
 		$APPLICATION->IncludeComponent('tim:empty', 'main_menu', ['TYPE' => 'offcanvas']);
@@ -115,17 +126,27 @@ $isCart = defined('CART_PAGE') && CART_PAGE === true;
 						Более 7 000 напольных покрытий в ассортименте.
 					</div>
 				</div>
-				<div class="col-sm-7 col-left-topbar">
+				<div class="col-sm-5 col-left-topbar">
 					<div class="right-topbar">
 						<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a>
 						<span class="elTop-adress"></span>
 					</div>
 				</div>
-				<div class="col-sm-1 col-right-topbar">
+				<div class="col-sm-3 col-right-topbar">
 					<div class="right-topbar">
 						<div class="user-login">
-							<ul class="nav top-nav">
-								<li><a data-rel="loginModal" href="#"> Войти </a></li>
+							<ul class="nav top-nav"><?
+								if ($isAuthorized)
+								{
+									?>
+                                    <li><a href="/personal/"><i class="fa fa-user"></i> Личный кабинет</a><?
+								}
+								else
+								{
+									?>
+                                    <li><a data-rel="loginModal" href="/personal/"><i class="fa fa-user"></i> Вход</a><?
+								}
+                                ?>
 							</ul>
 						</div>
 					</div>

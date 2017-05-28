@@ -317,6 +317,47 @@
 					$('#userlostpasswordModal').modal('show');
 				}
 			});
+			$(document).on('submit','#userloginModalForm',function(e){
+				var form = $(this);
+				var log = form.find('.user-modal-result');
+				log.empty();
+				$.post('/ajax/user_login.php', form.serialize(), function(resp) {
+					if (resp.TYPE == 'ERROR')
+						log.html('<div class="error-response">' + resp.MESSAGE + '</div>');
+					else
+						location.reload();
+				});
+				return false;
+			});
+			$(document).on('submit','#userregisterModalForm',function(e){
+				var form = $(this);
+				var log = form.find('.user-modal-result');
+				log.empty();
+				$.post('/ajax/user_register.php', form.serialize(), function(resp) {
+					if (resp.TYPE == 'ERROR')
+						log.html('<div class="error-response">' + resp.MESSAGE + '</div>');
+					else if (resp.TYPE == 'OK')
+					{
+						log.html('<div class="success-response">' + resp.MESSAGE + '</div>');
+						setTimeout(function() {
+							location.reload();
+						}, 2000);
+					}
+				});
+				return false;
+			});
+			$(document).on('submit','#userlostpasswordModalForm',function(e){
+				var form = $(this);
+				var log = form.find('.user-modal-result');
+				log.empty();
+				$.post('/ajax/user_pwd.php', form.serialize(), function(resp) {
+					if (resp.TYPE == 'ERROR')
+						log.html('<div class="error-response">' + resp.MESSAGE + '</div>');
+					else if (resp.TYPE == 'OK')
+						log.html('<div class="success-response">' + resp.MESSAGE + '</div>');
+				});
+				return false;
+			});
 		},
 		ajaxSearchInit: function(){
 			$(document).on('click','.navbar-search-button',function(e){

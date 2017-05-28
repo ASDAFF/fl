@@ -83,43 +83,44 @@ if (!$isCatalog)
 <div class="modal fade user-login-modal" id="userloginModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form id="userloginModalForm">
+			<form id="userloginModalForm" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						<span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span>
 					</button>
-					<h4 class="modal-title">Login</h4>
+					<h4 class="modal-title">Войти</h4>
 				</div>
 				<div class="modal-body">
 					<div class="user-login-facebook">
 						<button class="btn-login-facebook" type="button">
-							<i class="fa fa-facebook"></i>Sign in with Facebook
+							<i class="fa fa-facebook"></i> Войти с помощью facebook
 						</button>
 					</div>
-					<div class="user-login-or"><span>or</span></div>
+					<div class="user-login-or"><span>или</span></div>
 					<div class="form-group">
-						<label>Username</label>
-						<input type="text" id="username" name="log" required class="form-control" value="" placeholder="Username">
+						<label>Email</label>
+						<input type="text" id="username" name="login" required class="form-control" value="" placeholder="Введите Email">
 					</div>
 					<div class="form-group">
-						<label for="password">Password</label>
-						<input type="password" id="password" required value="" name="pwd" class="form-control" placeholder="Password">
+						<label for="password">Пароль</label>
+						<input type="password" id="password" required value="" name="pwd" class="form-control" placeholder="Введите пароль">
 					</div>
 					<div class="checkbox clearfix">
 						<label class="form-flat-checkbox pull-left">
-							<input type="checkbox" name="rememberme" id="rememberme" value="forever">
-							<i></i>&nbsp;Remember Me
+							<input type="checkbox" name="rememberme" id="rememberme">
+							<i></i>&nbsp;Запомнить меня
 						</label>
-								<span class="lostpassword-modal-link pull-right">
-									<a href="#lostpasswordModal" data-rel="lostpasswordModal">Lost your password?</a>
-								</span>
+                        <span class="lostpassword-modal-link pull-right">
+                            <a href="#lostpasswordModal" data-rel="lostpasswordModal">Забыли пароль?</a>
+                        </span>
 					</div>
 				</div>
 				<div class="modal-footer">
-							<span class="user-login-modal-register pull-left">
-								<a data-rel="registerModal" href="#">Not a Member yet?</a>
-							</span>
-					<button type="submit" class="btn btn-default btn-outline">Sign in</button>
+                    <div class="user-modal-result"></div>
+                    <span class="user-login-modal-register pull-left">
+                        <a data-rel="registerModal" href="#">Регистрация</a>
+                    </span>
+					<button type="submit" class="btn btn-default btn-outline">Войти</button>
 				</div>
 			</form>
 		</div>
@@ -131,39 +132,36 @@ if (!$isCatalog)
 			<form id="userregisterModalForm">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						<span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span>
 					</button>
-					<h4 class="modal-title">Register account</h4>
+					<h4 class="modal-title">Регистрация</h4>
 				</div>
 				<div class="modal-body">
 					<div class="user-login-facebook">
 						<button class="btn-login-facebook" type="button">
-							<i class="fa fa-facebook"></i>Sign in with Facebook
+							<i class="fa fa-facebook"></i> Войти с помощью facebook
 						</button>
 					</div>
-					<div class="user-login-or"><span>or</span></div>
-					<div class="form-group">
-						<label>Username</label>
-						<input type="text" name="user_login" required class="form-control" value="" placeholder="Username">
-					</div>
+					<div class="user-login-or"><span>или</span></div>
 					<div class="form-group">
 						<label for="user_email">Email</label>
-						<input type="email" id="user_email" name="user_email" required class="form-control" value="" placeholder="Email">
+						<input type="email" id="user_email" name="user_email" required class="form-control" value="" placeholder="Введите Email">
 					</div>
 					<div class="form-group">
-						<label for="user_password">Password</label>
-						<input type="password" id="user_password" required value="" name="user_password" class="form-control" placeholder="Password">
+						<label for="user_password">Пароль</label>
+						<input type="password" id="user_password" required value="" name="user_password" class="form-control" placeholder="Введите пароль">
 					</div>
 					<div class="form-group">
-						<label for="user_password">Retype password</label>
-						<input type="password" id="cuser_password" required value="" name="cuser_password" class="form-control" placeholder="Retype password">
+						<label for="user_password">Пароль повторно</label>
+						<input type="password" id="cuser_password" required value="" name="cuser_password" class="form-control" placeholder="Повторите пароль">
 					</div>
 				</div>
 				<div class="modal-footer">
-							<span class="user-login-modal-link pull-left">
-								<a data-rel="loginModal" href="#loginModal">Already have an account?</a>
-							</span>
-					<button type="submit" class="btn btn-default btn-outline">Register</button>
+                    <div class="user-modal-result"></div>
+                    <span class="user-login-modal-link pull-left">
+                        <a data-rel="loginModal" href="#loginModal">Уже есть аккаунт?</a>
+                    </span>
+					<button type="submit" class="btn btn-default btn-outline">Регистрация</button>
 				</div>
 			</form>
 		</div>
@@ -175,21 +173,22 @@ if (!$isCatalog)
 			<form id="userlostpasswordModalForm">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						<span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span>
 					</button>
-					<h4 class="modal-title">Forgot Password</h4>
+					<h4 class="modal-title">Восстановление пароля</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>Username or E-mail:</label>
-						<input type="text" name="user_login" required class="form-control" value="" placeholder="Username or E-mail">
+						<label>Email:</label>
+						<input type="text" name="user_login" required class="form-control" value="" placeholder="Введите Email">
 					</div>
 				</div>
 				<div class="modal-footer">
-							<span class="user-login-modal-link pull-left">
-								<a data-rel="loginModal" href="#loginModal">Already have an account?</a>
-							</span>
-					<button type="submit" class="btn btn-default btn-outline">Sign in</button>
+                    <div class="user-modal-result"></div>
+                    <span class="user-login-modal-link pull-left">
+                        <a data-rel="loginModal" href="#loginModal">Войти</a>
+                    </span>
+					<button type="submit" class="btn btn-default btn-outline">Восстановить пароль</button>
 				</div>
 			</form>
 		</div>
