@@ -52,7 +52,7 @@ $cart = \Local\Sale\Cart::getCart();
 								<a href="<?= $offer['DETAIL_PAGE_URL'] ?>"><?= $offer['NAME'] ?></a>
 							</div>
 							<div class="cart-product-quantity-price">
-								<?= $item['QUANTITY'] ?> x <span class="amount"><?= $price ?> руб.</span>
+								<?= $item['CNT'] ?> x <span class="amount"><?= $price ?> руб.</span>
 							</div>
 						</div>
 						<span class="remove" data-id="<?= $item['ID'] ?>" title="Удалить">&times;</span>

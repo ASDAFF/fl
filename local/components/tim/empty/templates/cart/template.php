@@ -40,45 +40,57 @@ $cart = \Local\Sale\Cart::getCart();
 						$offer = \Local\Catalog\Offer::getById($item['OFFER']);
 						$img = $file->GetFileArray($offer['PREVIEW_PICTURE']);
 						$price = number_format($item['PRICE'], 0, '', ' ');
-						$sum = number_format($item['PRICE'] * $item['QUANTITY'], 0, '', ' ');
+						$sum = number_format($item['PRICE'] * $item['QNT'], 0, '', ' ');
+						$unit = \Local\Catalog\Unit::getById($offer['UNIT']);
+						$forUnit = '';
+						$labelUnit = '';
+						if ($unit['SHOW'])
+						{
+							$forUnit = '/' . $unit['NAME'];
+							$labelUnit = $unit['NAME'];
+						}
+                        $qnt = '';
+					    if ($offer['INPACK'] != 1)
+					        $qnt = $item['QNT'];
 						?>
-                    <tr class="cart_item" data-id="<?= $item['ID'] ?>">
-                        <td class="product-thumbnail hidden-xs">
-                            <a href="<?= $offer['DETAIL_PAGE_URL'] ?>">
-                                <img width="<?= $img['WIDTH'] ?>" height="<?= $img['HEIGHT'] ?>"
-                                     src="<?= $img['SRC'] ?>" alt="<?= $offer['NAME'] ?>"/>
-                            </a>
-                        </td>
-                        <td class="product-name">
-                            <a href="<?= $offer['DETAIL_PAGE_URL'] ?>"><?= $offer['NAME'] ?></a><?
+                        <tr class="cart_item" data-id="<?= $item['ID'] ?>">
+                            <td class="product-thumbnail hidden-xs">
+                                <a href="<?= $offer['DETAIL_PAGE_URL'] ?>">
+                                    <img width="<?= $img['WIDTH'] ?>" height="<?= $img['HEIGHT'] ?>"
+                                         src="<?= $img['SRC'] ?>" alt="<?= $offer['NAME'] ?>"/>
+                                </a>
+                            </td>
+                            <td class="product-name">
+                                <a href="<?= $offer['DETAIL_PAGE_URL'] ?>"><?= $offer['NAME'] ?></a><?
 
-							/*
-							?>
-							<dl class="variation">
-								<dt class="variation-Color">Color:</dt>
-								<dd class="variation-Color"><p>Green</p></dd>
-								<dt class="variation-Size">Size:</dt>
-								<dd class="variation-Size"><p>Extra Large</p></dd>
-							</dl><?*/
+                                /*
+                                ?>
+                                <dl class="variation">
+                                    <dt class="variation-Color">Color:</dt>
+                                    <dd class="variation-Color"><p>Green</p></dd>
+                                    <dt class="variation-Size">Size:</dt>
+                                    <dd class="variation-Size"><p>Extra Large</p></dd>
+                                </dl><?*/
 
-							?>
-                        </td>
-                        <td class="product-price text-center">
-                            <span class="amount"><?= $price ?> руб.</span>
-                        </td>
-                        <td class="product-quantity text-center">
-                            <div class="quantity">
-                                <input type="number" step="1" min="0" name="qunatity" data-price="<?= $item['PRICE'] ?>"
-                                       value="<?= $item['QUANTITY'] ?>" title="Qty" class="input-text qty text"
-                                       size="4"/>
-                            </div>
-                        </td>
-                        <td class="product-subtotal hidden-xs text-center">
-                            <span class="amount js-total"><?= $sum ?></span> руб.
-                        </td>
-                        <td class="product-remove hidden-xs">
-                            <a href="#" class="remove" title="Удалить">&times;</a>
-                        </td>
+                                ?>
+                            </td>
+                            <td class="product-price text-center">
+                                <span class="amount"><?= $price ?> руб.<?= $forUnit ?></span>
+                            </td>
+                            <td class="product-quantity text-center">
+                                <div class="quantity">
+                                    <input type="number" step="1" min="0" name="qunatity" data-price="<?= $item['PRICE'] ?>"
+                                           value="<?= $item['CNT'] ?>" title="Qty" class="input-text qty text"
+                                           size="4"/>
+                                    <span class="amount js-qnt" data-inpack="<?= $offer['INPACK'] ?>"><?= $qnt ?></span> <?= $labelUnit ?>
+                                </div>
+                            </td>
+                            <td class="product-subtotal hidden-xs text-center">
+                                <span class="amount js-total"><?= $sum ?></span> руб.
+                            </td>
+                            <td class="product-remove hidden-xs">
+                                <a href="#" class="remove" title="Удалить">&times;</a>
+                            </td>
                         </tr><?
 					}
 
@@ -120,7 +132,7 @@ $cart = \Local\Sale\Cart::getCart();
                 </tr>
                 <tr class="order-total">
                     <th>Итого</th>
-                    <td><strong><span class="amount js-cart-total"><?= $total ?></span> руб.</strong></td>
+                    <td><strong><span class="amount js-cart-total"><?= $total ?></span></strong> руб.</td>
                 </tr>
             </table>
             <div class="wc-proceed-to-checkout">

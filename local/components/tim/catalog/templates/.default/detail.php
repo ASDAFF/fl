@@ -226,8 +226,17 @@ $isAdmin = $user->IsAdmin();
 
 						?>
 					</div>
-				</form>
-				<p><a href="#"><strong>Добавить в избранное</strong></a></p>
+                </form><?
+
+				$wishCartId = \Local\Sale\Wish::getCartId($offer['ID']);
+				$wlAdded = $wishCartId ? ' added' : '';
+				$text = $wishCartId ? 'Удалить из избранного' : 'Добавить в избранное';
+                ?>
+				<p><a class="detail_wl<?= $wlAdded ?>" href="#"
+                      data-id="<?= $offer['ID'] ?>" data-cid="<?= $wishCartId ?>"><strong><?= $text ?></strong></a></p><?
+
+                /*
+                ?>
 				<div class="share-links">
 					<div class="share-icons">
 						<span class="facebook-share">
@@ -251,7 +260,9 @@ $isAdmin = $user->IsAdmin();
 							</a>
 						</span>
 					</div>
-				</div>
+                </div><?*/
+
+                ?>
 			</div>
 		</div>
 	</div>

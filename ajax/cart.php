@@ -19,7 +19,7 @@ elseif ($_REQUEST['action'] == 'remove')
 // Количество
 elseif ($_REQUEST['action'] == 'cnt')
 {
-	$res = \Local\Sale\Cart::update($_REQUEST['id'], ['QUANTITY' => $_REQUEST['cnt']]);
+	$res = \Local\Sale\Cart::updateCnt($_REQUEST['id'], $_REQUEST['cnt']);
 	$result['SUCCESS'] = $res ? 1 : 0;
 }
 

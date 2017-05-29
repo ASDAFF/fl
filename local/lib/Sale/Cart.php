@@ -58,17 +58,19 @@ class Cart
 		{
 			$id = intval($item['ID']);
 			$price = intval($item['PRICE']);
-			$quantity = intval($item['QUANTITY']);
+			$cnt = intval($item['PRODUCT_PRICE_ID']);
+			$qnt = floatval($item['QUANTITY']);
 			$return['ITEMS'][$id] = [
 				'ID' => $id,
 				'PRICE' => $price,
-				'QUANTITY' => $quantity,
+				'CNT' => $cnt,
+				'QNT' => $qnt,
 				'OFFER' => $item['PRODUCT_ID'],
 			];
 
 			$return['COUNT']++;
-			$return['QUANTITY'] += $quantity;
-			$return['PRICE'] += $price * $quantity;
+			$return['QUANTITY'] += $cnt;
+			$return['PRICE'] += $price * $qnt;
 
 			$ids[] = $id;
 		}
@@ -151,6 +153,9 @@ class Cart
 		if ($cnt < 1)
 			$cnt = 1;
 
+		$inpack = $offer['INPACK'];
+		$qnt = $cnt * $inpack;
+
 		Loader::IncludeModule('sale');
 
 		$props = [];
@@ -178,8 +183,9 @@ class Cart
 		$fields = [
 			'PRODUCT_ID' => $offerId,
 			'PRICE' => $offer['PRICE'],
+			'PRODUCT_PRICE_ID' => $cnt,
+			'QUANTITY' => $qnt,
 			'CURRENCY' => 'RUB',
-			'QUANTITY' => $cnt,
 			'LID' => SITE_ID,
 			'DELAY' => 'N',
 			'CAN_BUY' => 'Y',
@@ -225,16 +231,30 @@ class Cart
 	/**
 	 * Изменение
 	 * @param $cartId
-	 * @param $update
+	 * @param $cnt
 	 * @return bool
 	 * @throws \Bitrix\Main\LoaderException
 	 */
-	public static function update($cartId, $update)
+	public static function updateCnt($cartId, $cnt)
 	{
 		Loader::IncludeModule('sale');
 
 		$basket = new \CSaleBasket();
-		$return = $basket->Update($cartId, $update);
+		$item = $basket->GetByID($cartId);
+		if (!$item)
+			return false;
+
+		$offer = Offer::getById($item['PRODUCT_ID']);
+		if (!$offer)
+			return false;
+
+		$inpack = $offer['INPACK'];
+		$qnt = $cnt * $inpack;
+
+		$return = $basket->Update($cartId, [
+			'PRODUCT_PRICE_ID' => $cnt,
+			'QUANTITY' => $qnt,
+		]);
 
 		if ($return)
 		{

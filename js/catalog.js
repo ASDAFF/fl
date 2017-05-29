@@ -376,9 +376,12 @@ var Cart = {
 		this.cnt = $('#js-cart-count');
 		this.minicart = $('#minicart-cont');
 		this.cart = $('#cart');
+		this.summaryPrice = $('.js-cart-price');
+		this.summaryTotal = $('.js-cart-total');
 
 		this.minicart.on('click', '.remove', this.removeMini);
 		this.cart.on('input', '.qty', this.qtyInput);
+		this.cart.on('click', '.remove', this.removeClick);
 	},
 	removeMini: function() {
 		var id = jQuery(this).data('id');
@@ -389,16 +392,27 @@ var Cart = {
 		var tr = input.closest('tr');
 		var id = tr.data('id');
 		var total = tr.find('.js-total');
+		var qnt = tr.find('.js-qnt');
 
 		var price = input.data('price');
+		var inpack = qnt.data('inpack');
 		var cnt = input.val();
 		if (cnt < 1) {
 			cnt = 1;
 		}
 
-		total.html(Cart.format(price * cnt));
+		total.html(Cart.format(price * cnt * inpack));
+		qnt.html(Math.round(cnt * inpack * 1000) / 1000);
 
 		Cart.updateCount(id, cnt);
+	},
+	removeClick: function() {
+		var a = jQuery(this);
+		var tr = a.closest('tr');
+		var id = tr.data('id');
+		Cart.remove(id);
+		tr.remove();
+		// TODO: проверка на пустой лист
 	},
 	add: function(id, cnt) {
 		jQuery.post('/ajax/cart.php', {
@@ -421,8 +435,12 @@ var Cart = {
 		}, Cart.afterAjax);
 	},
 	afterAjax: function(resp) {
-		if (resp.CART)
+		if (resp.CART) {
 			Cart.cnt.text(resp.CART.COUNT);
+			var price = Cart.format(resp.CART.PRICE);
+			Cart.summaryPrice.html(price);
+			Cart.summaryTotal.html(price);
+		}
 		if (resp.MINI)
 			Cart.minicart.html(resp.MINI);
 	},
@@ -457,6 +475,7 @@ var Wish = {
 		$(document).on('click', '.add_to_wishlist', this.toggle);
 		$(document).on('click', '.remove_from_wishlist', this.remove);
 		$(document).on('click', '.wishlist_table .add_to_cart_button', this.add);
+		$(document).on('click', '.detail_wl', this.toggleDetail);
 	},
 	toggle: function() {
 		var a = jQuery(this);
@@ -473,6 +492,27 @@ var Wish = {
 				a.addClass('added');
 			else
 				a.removeClass('added');
+			if (resp.ID)
+				a.data('cid', resp.ID);
+		});
+
+		return false;
+	},
+	toggleDetail: function() {
+		var a = jQuery(this);
+		var id = a.data('id');
+		var cid = a.data('cid');
+		var added = a.hasClass('added');
+		var action = added ? 'remove' : 'add';
+		jQuery.post('/ajax/wish.php', {
+			action: action,
+			id: id,
+			cid: cid
+		}, function(resp) {
+			if (resp.IN)
+				a.addClass('added').children().text('Удалить из избранного');
+			else
+				a.removeClass('added').children().text('Добавить в избранное');
 			if (resp.ID)
 				a.data('cid', resp.ID);
 		});

@@ -4452,11 +4452,11 @@ textarea.commerce.widget_product_search .search-field {
 }
 .commerce .cart-collaterals .cart_totals table .order-total {
   font-size: 1.2857142857142858em;
-  text-transform: uppercase;
 }
 .commerce .cart-collaterals .cart_totals table .order-total th,
 .commerce .cart-collaterals .cart_totals table .order-total .amount {
   font-weight: normal;
+  text-transform: uppercase;
 }
 .commerce .cart-collaterals .cart_totals .discount td {
   color: #000000;
