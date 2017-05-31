@@ -32,7 +32,6 @@ var Filters = {
 		$('.s-filter a').on('click', this.categoryClick);
 		$('.f-color li').on('click', this.colorClick);
 		$('.f-other a').on('click', this.checkboxClick);
-		this.ajaxCont.on('click', '.add_to_cart_button', this.addToCart);
 		this.ajaxCont.on('click', '.cur-f a', this.urlClick);
 		this.ajaxCont.on('click', '.paginate a', this.urlClick);
 		this.ajaxCont.on('change', '#sort', this.sortChange);
@@ -190,15 +189,6 @@ var Filters = {
 		Filters.size = select.val();
 		Filters.updateProducts();
 	},
-	updateCb: function(input) {
-		var li = input.closest('li');
-		var checked = input.prop('checked');
-		if (checked)
-			li.addClass('checked');
-		else
-			li.removeClass('checked');
-		Filters.updateProducts();
-	},
 	updateProducts: function() {
 		var url = Filters.catalogPath;
 		Filters.groups.each(function() {
@@ -288,10 +278,26 @@ var Filters = {
 							li.addClass('chosen');
 						else
 							li.removeClass('chosen');
+						if (cnt)
+							li.removeClass('hidden');
+						else
+							li.addClass('hidden');
 						li.children('small').text(cnt);
 					}
 				}
 			}
+
+			Filters.panel.children('.widget_layered_nav').each(function() {
+				var group = jQuery(this);
+				var ul = group.children('.f-other');
+				if (ul.length) {
+					var l = ul.find('li:not(.hidden)').length;
+					if (l)
+						group.removeClass('hidden');
+					else
+						group.addClass('hidden');
+				}
+			});
 
 			document.title = resp.TITLE;
 			if (setHistory)
@@ -306,14 +312,6 @@ var Filters = {
 			return true;
 
 		Filters.loadProducts(url, true);
-		return false;
-	},
-	addToCart: function() {
-		var a = jQuery(this);
-		var id = a.data('id');
-		if (id)
-			Cart.add(id, 1);
-
 		return false;
 	}
 };
@@ -378,10 +376,19 @@ var Cart = {
 		this.cart = $('#cart');
 		this.summaryPrice = $('.js-cart-price');
 		this.summaryTotal = $('.js-cart-total');
+		$(document).on('click', '.add_to_cart_button', this.addToCart);
 
 		this.minicart.on('click', '.remove', this.removeMini);
 		this.cart.on('input', '.qty', this.qtyInput);
 		this.cart.on('click', '.remove', this.removeClick);
+	},
+	addToCart: function() {
+		var a = jQuery(this);
+		var id = a.data('id');
+		if (id)
+			Cart.add(id, 1);
+
+		return false;
 	},
 	removeMini: function() {
 		var id = jQuery(this).data('id');

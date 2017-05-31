@@ -99,18 +99,6 @@ class Filter
 		    'MULTI' => true,
 		];
 		$return[] = [
-			'NAME' => 'Цвет',
-			'TYPE' => 'color',
-			'ITEMS' => Color::getGroup(),
-			'MULTI' => true,
-		];
-		$return[] = [
-			'NAME' => 'Класс защиты',
-			'TYPE' => 'protection',
-			'ITEMS' => Protection::getGroup(),
-			'MULTI' => true,
-		];
-		$return[] = [
 			'NAME' => 'Производитель',
 			'TYPE' => 'brand',
 			'BC' => true,
@@ -118,15 +106,27 @@ class Filter
 			'MULTI' => true,
 		];
 		$return[] = [
-			'NAME' => 'Страна',
-			'TYPE' => 'country',
-			'ITEMS' => Country::getGroup(),
-			'MULTI' => true,
-		];
-		$return[] = [
 			'NAME' => 'Порода дерева',
 			'TYPE' => 'country',
 			'ITEMS' => Wood::getGroup(),
+			'MULTI' => true,
+		];
+		$return[] = [
+			'NAME' => 'Цвет',
+			'TYPE' => 'color',
+			'ITEMS' => Color::getGroup(),
+			'MULTI' => true,
+		];
+		/*$return[] = [
+			'NAME' => 'Класс защиты',
+			'TYPE' => 'protection',
+			'ITEMS' => Protection::getGroup(),
+			'MULTI' => true,
+		];*/
+		$return[] = [
+			'NAME' => 'Страна',
+			'TYPE' => 'country',
+			'ITEMS' => Country::getGroup(),
 			'MULTI' => true,
 		];
 		/*$flags = Flags::getAll();

@@ -115,10 +115,11 @@ function printSection($section, $items)
 				$widget = 'widget_layered_nav';
 				if ($group['TYPE'] == 'price')
 					$widget = 'widget_price_filter';
+				$whidden = $group['CNT'] ? '' : ' hidden';
 				$i++;
 
 				?>
-				<div class="widget <?= $widget ?>">
+				<div class="widget <?= $widget ?><?= $whidden ?>">
 					<h4 class="widget-title"><span><?= $group['NAME'] ?></span></h4><?
 
 					if ($group['TYPE'] == 'category')
@@ -155,9 +156,10 @@ function printSection($section, $items)
 							if (!$item['ALL_CNT'])
 								continue;
 
-							$checked = $item['CHECKED'] ? ' class="chosen"' : '';
+							$checked = $item['CHECKED'] ? 'chosen ' : '';
+							$hidden = $item['CNT'] ? '' : 'hidden ';
 							$bg = 'background:#' . $code;
-							?><li<?= $checked ?> data-code="<?= $code ?>"><b style="<?= $bg ?>;"></b></li><?
+							?><li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>"><b style="<?= $bg ?>;"></b></li><?
 						}
 						?>
 						</ul><?
@@ -171,9 +173,10 @@ function printSection($section, $items)
 							if (!$item['ALL_CNT'])
 								continue;
 
-							$checked = $item['CHECKED'] ? ' class="chosen"' : '';
+							$checked = $item['CHECKED'] ? 'chosen ' : '';
+							$hidden = $item['CNT'] ? '' : 'hidden ';
 							?>
-							<li<?= $checked ?> data-code="<?= $code ?>">
+							<li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>">
 								<a href="<?= CATALOG_PATH ?><?= $code ?>/"><?= $item['NAME'] ?></a>
 								<small class="count"><?= $item['CNT'] ?></small>
 							</li><?
