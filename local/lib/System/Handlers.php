@@ -28,6 +28,8 @@ class Handlers
 				array(__NAMESPACE__ . '\Handlers', 'afterUserLogout'));
 			AddEventHandler('main', 'OnAfterUserLogin',
 				array(__NAMESPACE__ . '\Handlers', 'afterUserLogin'));
+			AddEventHandler('search', 'BeforeIndex',
+				array(__NAMESPACE__ . '\Handlers', 'beforeSearchIndex'));
 		}
 	}
 
@@ -78,6 +80,19 @@ class Handlers
 	{
 		Cart::updateSessionCartSummary();
 		Wish::updateSession();
+	}
+
+	/**
+	 * Формируем поисковый контент
+	 * @param $arFields
+	 * @return mixed
+	 */
+	public static function beforeSearchIndex($arFields)
+	{
+		if ($arFields['MODULE_ID'] == 'iblock' && $arFields['PARAM2'] == Offer::IBLOCK_ID)
+			$arFields = Offer::beforeSearchIndex($arFields);
+
+		return $arFields;
 	}
 
 }

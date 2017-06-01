@@ -272,6 +272,7 @@ class Offer
 				'PROPERTY_UNIT',
 				'PROPERTY_INPACK',
 				'PROPERTY_COATING',
+				'PROPERTY_DIM',
 				'PROPERTY_JSON',
 			]);
 		}
@@ -313,6 +314,7 @@ class Offer
 				$fields['UNIT'] = intval($item['PROPERTY_UNIT_VALUE']);
 				$fields['INPACK'] = floatval($item['PROPERTY_INPACK_VALUE']);
 				$fields['COATING'] = $item['PROPERTY_COATING_VALUE'];
+				$fields['DIM'] = $item['PROPERTY_DIM_VALUE'];
 				$fields['PROPS'] = json_decode($item['~PROPERTY_JSON_VALUE'], true);
 			}
 
@@ -639,6 +641,46 @@ class Offer
 			if ($product)
 				self::correctProductFields($id, $offer, $product);
 		}
+	}
+
+
+	/**
+	 * Формирует поисковый контент для предложения
+	 * @param $arFields
+	 * @return mixed
+	 */
+	public static function beforeSearchIndex($arFields)
+	{
+		$offerId = intval($arFields['ITEM_ID']);
+		if ($offerId && array_key_exists('BODY', $arFields))
+		{
+			$offer = self::getById($offerId);
+			if ($offer)
+			{
+				$title = '';
+				$text = '';
+
+				$sections = Section::getChain($offer['SECTION']);
+				foreach ($sections as $i => $section)
+					if ($i)
+						$title .= $section['NAME'] . ' ';
+				$brand = Brand::getById($offer['BRAND']);
+				$title .= $brand['NAME'] . ' ';
+				$country = Country::getById($offer['COUNTRY']);
+				$text .= $country['NAME'] . ' ';
+				$wood = Wood::getById($offer['WOOD']);
+				$text .= $wood['NAME'] . ' ';
+				$text .= $offer['ARTICLE'] . ' ';
+				$coating = Coating::getById($offer['COATING']);
+				$text .= $coating['NAME'] . ' ';
+				$text .= $offer['DIM'] . ' ';
+
+				$arFields['TITLE'] = $title;
+				$arFields['BODY'] = $text;
+			}
+		}
+
+		return $arFields;
 	}
 
 }

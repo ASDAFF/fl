@@ -168,6 +168,14 @@ $isAdmin = $user->IsAdmin();
 						<a href="<?= $wood['DETAIL_PAGE_URL'] ?>"><?= $wood['NAME'] ?></a>
 					</span><?
 
+					if ($offer['DIM'])
+					{
+						?>
+                        <span class="meta-dim">
+                            Размеры:
+							<b><?= $offer['DIM'] ?></b>
+                        </span><?
+					}
 					if ($offer['ARTICLE'])
 					{
 						?>

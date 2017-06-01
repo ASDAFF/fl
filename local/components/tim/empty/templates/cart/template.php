@@ -47,7 +47,8 @@ $cart = \Local\Sale\Cart::getCart();
 						if ($unit['SHOW'])
 						{
 							$forUnit = '/' . $unit['NAME'];
-							$labelUnit = $unit['NAME'];
+							if ($offer['INPACK'] != 1)
+							    $labelUnit = $unit['NAME'];
 						}
                         $qnt = '';
 					    if ($offer['INPACK'] != 1)
@@ -80,7 +81,7 @@ $cart = \Local\Sale\Cart::getCart();
                             <td class="product-quantity text-center">
                                 <div class="quantity">
                                     <input type="number" step="1" min="0" name="qunatity" data-price="<?= $item['PRICE'] ?>"
-                                           value="<?= $item['CNT'] ?>" title="Qty" class="input-text qty text"
+                                           value="<?= $item['CNT'] ?>" title="Количество упаковок" class="input-text qty text"
                                            size="4"/>
                                     <span class="amount js-qnt" data-inpack="<?= $offer['INPACK'] ?>"><?= $qnt ?></span> <?= $labelUnit ?>
                                 </div>
