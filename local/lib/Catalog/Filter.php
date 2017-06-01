@@ -334,7 +334,6 @@ class Filter
 	 */
 	public static function getProductsByFilters()
 	{
-		debugmessage(self::$FILTER_BY_KEY);
 		self::$DATA_BY_KEY = [];
 		foreach (self::$FILTER_BY_KEY as $key => $filter)
 			self::$DATA_BY_KEY[$key] = Offer::getDataByFilter($filter);
