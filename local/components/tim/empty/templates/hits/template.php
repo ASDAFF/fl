@@ -15,7 +15,7 @@ $navParams = array(
 	'iNumPage' => 1,
 	'nPageSize' => 12,
 );
-$items = \Local\Catalog\Offer::get(1, [], ['PROPERTY_RATING' => 'desc'], $navParams);
+$items = \Local\Catalog\Offer::get(1, ['HIT' => true], ['PROPERTY_RATING' => 'desc'], $navParams);
 
 if (!count($items['ITEMS']))
     return;

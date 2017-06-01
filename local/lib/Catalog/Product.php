@@ -161,10 +161,18 @@ class Product
 			], false, false, [
 				'ID',
 				'IBLOCK_ID',
+				'PROPERTY_BRAND',
+				'PROPERTY_COUNTRY',
+				'PROPERTY_WOOD',
+				'PROPERTY_COLOR',
 				'PROPERTY_PICTURES',
 			]);
 			if ($item = $rsItems->Fetch())
 				$return = [
+					'BRAND' => intval($item['PROPERTY_BRAND_VALUE']),
+					'COUNTRY' => intval($item['PROPERTY_COUNTRY_VALUE']),
+					'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),
+					'COLOR' => intval($item['PROPERTY_COLOR_VALUE']),
 					'PICTURES' => $item['PROPERTY_PICTURES_VALUE'],
 				];
 

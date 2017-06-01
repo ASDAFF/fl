@@ -98,6 +98,12 @@ class Filter
 		    'ITEMS' => Section::getGroup(),
 		    'MULTI' => true,
 		];
+		$flags = Flags::getAll();
+		foreach ($flags as $name => $items)
+			$return[] = array(
+				'NAME' => $name,
+				'ITEMS' => $items,
+			);
 		$return[] = [
 			'NAME' => 'Производитель',
 			'TYPE' => 'brand',
@@ -129,18 +135,6 @@ class Filter
 			'ITEMS' => Country::getGroup(),
 			'MULTI' => true,
 		];
-		/*$flags = Flags::getAll();
-		foreach ($flags as $name => $items)
-			$return[] = array(
-				'NAME' => $name,
-				'ITEMS' => $items,
-			);
-		$return[] = array(
-			'NAME' => 'Профили лечения',
-			'TYPE' => 'profile',
-			'BC' => true,
-			'ITEMS' => Profiles::getGroup(),
-		);*/
 
 
 		return $return;
@@ -340,6 +334,7 @@ class Filter
 	 */
 	public static function getProductsByFilters()
 	{
+		debugmessage(self::$FILTER_BY_KEY);
 		self::$DATA_BY_KEY = [];
 		foreach (self::$FILTER_BY_KEY as $key => $filter)
 			self::$DATA_BY_KEY[$key] = Offer::getDataByFilter($filter);

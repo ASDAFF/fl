@@ -59,6 +59,8 @@ class Offer
 			    'PROPERTY_COUNTRY',
 			    'PROPERTY_UNIT',
 			    'PROPERTY_SECTION',
+			    'PROPERTY_BRAND',
+			    'PROPERTY_WOOD',
 			    'PROPERTY_COLOR',
 			    'PROPERTY_ARTICLE',
 			    'PROPERTY_DIM',
@@ -88,6 +90,8 @@ class Offer
 					'DETAIL_PICTURE' => $item['DETAIL_PICTURE'],
 				    'PRODUCT' => intval($item['PROPERTY_PRODUCT_VALUE']),
 				    'SECTION' => intval($item['PROPERTY_SECTION_VALUE']),
+				    'BRAND' => intval($item['PROPERTY_BRAND_VALUE']),
+				    'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),
 				    'COUNTRY' => $item['PROPERTY_COUNTRY_VALUE'],
 				    'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 				    'COLOR' => $item['PROPERTY_COLOR_VALUE'],
@@ -204,32 +208,16 @@ class Offer
 				$return['WOOD'][$offer['WOOD']]++;
 				$return['PROTECTION'][$offer['PROTECTION']]++;
 
-
-
-				/*foreach (Flags::getCodes() as $code)
+				foreach (Flags::getCodes() as $code)
 				{
-					if ($product[$code])
+					if ($offer['FLAGS'][$code])
 					{
 						if (!isset($return[$code]))
 							$return[$code] = 0;
 						$return[$code]++;
 					}
-				}*/
-			}
-
-			/*if ($filter['ID'])
-			{
-				$ids = [];
-				foreach ($return['IDS'] as $id)
-					$ids[$id] = true;
-				$res = [];
-				foreach ($filter['ID'] as $id)
-				{
-					if ($ids[$id])
-						$res[] = $id;
 				}
-				$return['IDS'] = $res;
-			}*/
+			}
 
 			$extCache->endDataCache($return);
 		}
@@ -264,6 +252,9 @@ class Offer
 			'PROPERTY_PRICE_P',
 			'PROPERTY_PRODUCT',
 		];
+		$flagsSelect = Flags::getForSelect();
+		$select = array_merge($select, $flagsSelect);
+		$codes = Flags::getCodes();
 
 		if ($type > 0)
 		{
@@ -300,6 +291,9 @@ class Offer
 				'COLOR' => intval($item['PROPERTY_COLOR_VALUE']),
 				'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
 			];
+			foreach ($codes as $code)
+				$fields['FLAGS'][$code] = intval($item['PROPERTY_' . $code . '_VALUE']);
+
 			if ($type > 0)
 			{
 				$section = Section::getById($sectionId);
@@ -373,7 +367,7 @@ class Offer
 				'ACTIVE' => 'Y',
 				'!PROPERTY_PRODUCT' => false,
 			];
-
+			$codes = Flags::getCodes();
 			foreach ($filter as $k => $v)
 			{
 				if ($k == 'CATEGORY')
@@ -411,6 +405,12 @@ class Offer
 						$bitrixFilter['>=PROPERTY_PRICE'] = $v['FROM'];
 					if (isset($v['TO']))
 						$bitrixFilter['<=PROPERTY_PRICE'] = $v['TO'];
+				}
+				else
+				{
+					foreach ($codes as $code)
+						if ($k == $code)
+							$bitrixFilter['=PROPERTY_' . $code] = 1;
 				}
 			}
 
