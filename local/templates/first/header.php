@@ -126,13 +126,14 @@ $isAuthorized = $USER->IsAuthorized();
 						Более 7 000 напольных покрытий в ассортименте.
 					</div>
 				</div>
-				<div class="col-sm-5 col-left-topbar">
+				<div class="col-sm-7 col-left-topbar">
 					<div class="right-topbar">
 						<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a>
+                        <a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
 						<span class="elTop-adress"></span>
 					</div>
 				</div>
-				<div class="col-sm-3 col-right-topbar">
+				<div class="col-sm-1 col-right-topbar">
 					<div class="right-topbar">
 						<div class="user-login">
 							<ul class="nav top-nav"><?
