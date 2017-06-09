@@ -192,6 +192,14 @@ $isAdmin = $user->IsAdmin();
 							<b><?= $offer['COATING'] ?></b>
 						</span><?
 					}
+					if ($offer['FLAGS']['WATER'])
+					{
+						?>
+                        <span class="meta-coating">
+                            Влагостойкость:
+							<b>Да</b>
+                        </span><?
+					}
 					foreach ($offer['PROPS'] as $k => $v)
 					{
 						?>
