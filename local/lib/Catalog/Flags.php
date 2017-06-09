@@ -30,6 +30,13 @@ class Flags
 				'MAP' => true,
 			),
 		),
+		'Свойства' => array(
+			'water' => array(
+				'CODE' => 'WATER',
+				'NAME' => 'Влагостойкость',
+				'MAP' => true,
+			),
+		),
 	);
 
 	/**
