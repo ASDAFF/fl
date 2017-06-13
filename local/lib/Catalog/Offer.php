@@ -1,6 +1,7 @@
 <?
 namespace Local\Catalog;
 use Local\System\ExtCache;
+use Local\System\User;
 
 /**
  * Class Offer Торговые предложения
@@ -262,6 +263,8 @@ class Offer
 				'PREVIEW_PICTURE',
 				'DETAIL_PICTURE',
 				'PROPERTY_RATING',
+				'PROPERTY_UNIT',
+				'PROPERTY_INPACK',
 			]);
 		}
 		if ($type > 1)
@@ -269,8 +272,6 @@ class Offer
 			$select = array_merge($select, [
 				'DETAIL_TEXT',
 				'PROPERTY_ARTICLE',
-				'PROPERTY_UNIT',
-				'PROPERTY_INPACK',
 				'PROPERTY_COATING',
 				'PROPERTY_DIM',
 				'PROPERTY_JSON',
@@ -304,6 +305,8 @@ class Offer
 				$fields['PRICE_P'] = intval($item['PROPERTY_PRICE_P_VALUE']);
 				$fields['PRODUCT'] = intval($item['PROPERTY_PRODUCT_VALUE']);
 				$fields['RATING'] = intval($item['PROPERTY_RATING_VALUE']);
+				$fields['UNIT'] = intval($item['PROPERTY_UNIT_VALUE']);
+				$fields['INPACK'] = floatval($item['PROPERTY_INPACK_VALUE']);
 				$fields['PREVIEW_PICTURE'] = $item['PREVIEW_PICTURE'];
 				$fields['DETAIL_PICTURE'] = $item['DETAIL_PICTURE'];
 			}
@@ -311,8 +314,6 @@ class Offer
 			{
 				$fields['DETAIL_TEXT'] = $item['~DETAIL_TEXT'];
 				$fields['ARTICLE'] = $item['PROPERTY_ARTICLE_VALUE'];
-				$fields['UNIT'] = intval($item['PROPERTY_UNIT_VALUE']);
-				$fields['INPACK'] = floatval($item['PROPERTY_INPACK_VALUE']);
 				$fields['COATING'] = $item['PROPERTY_COATING_VALUE'];
 				$fields['DIM'] = $item['PROPERTY_DIM_VALUE'];
 				$fields['PROPS'] = json_decode($item['~PROPERTY_JSON_VALUE'], true);
@@ -643,7 +644,6 @@ class Offer
 		}
 	}
 
-
 	/**
 	 * Формирует поисковый контент для предложения
 	 * @param $arFields
@@ -681,6 +681,95 @@ class Offer
 		}
 
 		return $arFields;
+	}
+
+	public static function printQuickPopup($offer)
+	{
+		$img = \CFile::GetFileArray($offer['PREVIEW_PICTURE']);
+		$price = number_format($offer['PRICE'], 0, '', ' ');
+		$unit = Unit::getById($offer['UNIT']);
+		$forUnit = '';
+		$labelUnit = '';
+		if ($unit['SHOW'])
+		{
+			$forUnit = '/' . $unit['NAME'];
+			if ($offer['INPACK'] != 1)
+				$labelUnit = $unit['NAME'];
+		}
+		$qnt = '';
+		if ($offer['INPACK'] != 1)
+			$qnt = $offer['INPACK'];
+
+		$order_name = '';
+		$order_phone = '';
+		$user = User::getCurrentUser();
+		if ($user)
+		{
+			$order_name = $user['NAME'];
+			$order_phone = $user['PHONE'];
+		}
+
+		?>
+		<div class="engFormPopup zwhite-popup" id="elFormOneClick_<?= $offer['ID'] ?>">
+			<form class="oneclick-form">
+				<input type="hidden" name="id" value="<?= $offer['ID'] ?>">
+				<div class="elOrderPopup-pole">
+					<div class="it-block">
+						<div class="it-title">Имя*</div>
+						<input name="order_name" type="text" placeholder="Ваше Имя" value="<?= $order_name ?>" required title="Ваше Имя">
+					</div>
+					<div class="it-block">
+						<div class="it-title">Телефон*</div>
+						<input name="order_phone" type="text" placeholder="Ваш телефон" value="<?= $order_phone ?>" required title="Ваш телефон">
+					</div>
+				</div>
+				<div class="commerce">
+					<table id="cart" class="table shop_table cart">
+						<thead>
+						<tr>
+							<th class="product-thumbnail hidden-xs">&nbsp;</th>
+							<th class="product-name">Название</th>
+							<th class="product-price text-center">Цена</th>
+							<th class="product-quantity text-center">Количество</th>
+							<th class="product-subtotal text-center hidden-xs">Сумма</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr class="cart_item" data-id="18">
+							<td class="product-thumbnail hidden-xs">
+								<img width="<?= $img['WIDTH'] ?>" height="<?= $img['HEIGHT'] ?>"
+									 src="<?= $img['SRC'] ?>" alt="<?= $offer['NAME'] ?>"/>
+							</td>
+							<td class="product-name">
+								<?= $offer['NAME'] ?>
+							</td>
+							<td class="product-price text-center">
+								<span class="amount"><?= $price ?> руб.<?= $forUnit ?></span>
+							</td>
+							<td class="product-quantity text-center">
+								<div class="quantity">
+									<input type="number" step="1" min="0" name="quantity" data-price="<?= $offer['PRICE'] ?>"
+										   value="1" title="Количество упаковок" class="input-text qty text"
+										   size="4"/>
+									<span class="amount js-qnt" data-inpack="<?= $offer['INPACK'] ?>"><?= $qnt ?></span> <?= $labelUnit ?>
+								</div>
+							</td>
+							<td class="product-subtotal hidden-xs text-center">
+								<span class="amount js-total"><?= $price ?></span> руб.
+							</td>
+						</tr>
+					</table>
+					<div class="cart-collaterals">
+						<div class="cart_totals">
+							<div class="wc-proceed-to-checkout">
+								<button type="submit" class="checkout-button button alt wc-forward rounded">Оформить заказ</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<?
 	}
 
 }

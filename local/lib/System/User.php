@@ -86,7 +86,7 @@ class User
 	 * @param $phone
 	 * @param $address
 	 */
-	public static function update($name, $phone, $address)
+	public static function update($name, $phone, $address = '')
 	{
 		if (self::$user === false)
 			return;
@@ -117,6 +117,28 @@ class User
 		$u = self::getBitrixUser();
 		$rs = $u->GetList($by, $order, array(
 			'=EMAIL' => $email,
+		));
+		if ($item = $rs->Fetch())
+		{
+			$_SESSION['LOCAL_USER']['ID'] = $item['ID'];
+			$user = self::getCurrentUser(true);
+		}
+
+		return $user;
+	}
+
+	/**
+	 * Возвращает пользователя по телефону
+	 * @param $phone
+	 * @return array|bool
+	 */
+	public static function getByPhone($phone)
+	{
+		$user = array();
+
+		$u = self::getBitrixUser();
+		$rs = $u->GetList($by, $order, array(
+			'=PERSONAL_PHONE' => $phone,
 		));
 		if ($item = $rs->Fetch())
 		{
@@ -163,6 +185,40 @@ class User
 				$user = self::register($name, $email);
 				if ($user)
 					self::update($name, $phone, $address);
+			}
+		}
+
+		return $user;
+	}
+
+	/**
+	 * Проверка пользователя перед созданием заказа в один клик
+	 * @param $name
+	 * @param $phone
+	 * @return array|bool
+	 */
+	public static function checkQuickOrder($name, $phone)
+	{
+		$name = htmlspecialchars(trim($name));
+		$phone = htmlspecialchars(trim($phone));
+
+		$user = self::getCurrentUser();
+		if ($user)
+		{
+			// Если пользователь авторизован - скорректируем поля профиля
+			self::update($name, $phone);
+		}
+		else
+		{
+			// Если не авторизован - пробуем найти по email
+			$user = self::getByPhone($phone);
+			if (!$user)
+			{
+				// если не найден по email - регистрируем
+				$email = $phone . '@veles-parket.ru';
+				$user = self::register($name, $email);
+				if ($user)
+					self::update($name, $phone);
 			}
 		}
 

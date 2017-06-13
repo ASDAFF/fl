@@ -475,6 +475,40 @@ var Cart = {
 };
 
 /**
+ * Купить в один клик
+ */
+var Quick = {
+	init: function($) {
+		$(document).on('input', '.oneclick-form .qty', this.qtyInput);
+		$(document).on('submit', '.oneclick-form', this.submit);
+	},
+	qtyInput: function() {
+		var input = jQuery(this);
+		var tr = input.closest('tr');
+		var total = tr.find('.js-total');
+		var qnt = tr.find('.js-qnt');
+
+		var price = input.data('price');
+		var inpack = qnt.data('inpack');
+		var cnt = input.val();
+		if (cnt < 1) {
+			cnt = 1;
+		}
+
+		total.html(Cart.format(price * cnt * inpack));
+		qnt.html(Math.round(cnt * inpack * 1000) / 1000);
+	},
+	submit: function () {
+		var form = jQuery(this);
+		jQuery.post('/ajax/quick.php', form.serialize(), function(resp) {
+			if (resp.ID)
+				window.location = '/personal/order/?id=' + resp.ID;
+		});
+		return false;
+	}
+};
+
+/**
  * Избранное
  */
 var Wish = {
@@ -561,6 +595,29 @@ var Wish = {
 };
 
 /**
+ * Обратный звонок
+ */
+var Call = {
+	init: function ($) {
+		this.form = $('#elFormPhone form');
+		this.form.on('submit', this.submit);
+	},
+	submit: function() {
+		var form = jQuery(this);
+		var result = form.find('.result');
+		jQuery.post('/ajax/call.php', form.serialize(), function(resp) {
+			if (resp.id)
+			{
+				result.html('<p>Заявка принята. Мы вам скоро перезвоним</p>');
+			}
+			else
+				result.html(resp.errors);
+		});
+		return false;
+	}
+};
+
+/**
  * Старт
  */
 
@@ -569,7 +626,9 @@ var Wish = {
 		Filters.init($);
 		Detail.init($);
 		Cart.init($);
+		Quick.init($);
 		Wish.init($);
+		Call.init($);
 	});
 })(jQuery);
 

@@ -86,3 +86,5 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
         </div>
     </div>
 </div><?
+
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");

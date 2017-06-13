@@ -200,15 +200,15 @@ if (!$isCatalog)
 
 	?>
 </div>
-    <a href="#elFormPhone" class="elPhoneBtn popup-inline" data-rel="magnific-popup-link">
-        <div class="circlephone" style="transform-origin: center;"></div>
-        <div class="circle-fill" style="transform-origin: center;"></div>
-        <div class="img-circle" style="transform-origin: center;">
-            <div class="img-circleblock" style="transform-origin: center;"></div>
-        </div>
-    </a>
-    <div class="engFormPopup zwhite-popup" id="elFormPhone">
-       <form>
+<a href="#elFormPhone" class="elPhoneBtn popup-inline" data-rel="magnific-popup-link">
+    <div class="circlephone" style="transform-origin: center;"></div>
+    <div class="circle-fill" style="transform-origin: center;"></div>
+    <div class="img-circle" style="transform-origin: center;">
+        <div class="img-circleblock" style="transform-origin: center;"></div>
+    </div>
+</a>
+<div class="engFormPopup zwhite-popup" id="elFormPhone">
+    <form>
         <div class="elOrderPopup-pole">
             <div class="it-block">
                 <div class="it-title">Имя*</div>
@@ -219,11 +219,12 @@ if (!$isCatalog)
                 <input name="PHONE" type="text" placeholder="Ваш телефон" value="" required="" title="Ваш телефон">
             </div>
         </div>
+        <div class="result"></div>
         <div class="elFormPhone-btn">
-           <button>Заказать звонок</button>
+            <button type="submit">Заказать звонок</button>
         </div>
-       </form>
-    </div>
+    </form>
+</div>
 </body>
 </html><?
 

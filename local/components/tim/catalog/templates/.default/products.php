@@ -160,7 +160,7 @@ else
 											В корзину
 										</a>
                                         <a class="popup-inline" href="#elFormOneClick_<?=$item['ID'] ?>"
-                                           class="add_to_cart_button" data-id="<?=$item['ID'] ?>" data-rel="magnific-popup-link">
+                                           data-id="<?=$item['ID'] ?>" data-rel="magnific-popup-link">
                                             Купить в один клик
                                         </a>
                                         <div class="engFormPopup zwhite-popup" id="elFormOneClick_<?=$item['ID']?>">
