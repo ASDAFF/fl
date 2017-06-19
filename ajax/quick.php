@@ -8,7 +8,7 @@ $user =
 	\Local\System\User::checkQuickOrder($_REQUEST['order_name'], $_REQUEST['order_phone']);
 if ($user['ID'])
 {
-	$orderId = \Local\Sale\Order::createQuick($_REQUEST['id'], $_REQUEST['quantity'], $user);
+	$orderId = \Local\Sale\Order::createQuick($_REQUEST['id'], $_REQUEST['cnt'], $user);
 	$result['ID'] = $orderId;
 }
 

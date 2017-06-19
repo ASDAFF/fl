@@ -79,8 +79,17 @@ $cart = \Local\Sale\Cart::getCart();
                                 <span class="amount"><?= $price ?> руб.<?= $forUnit ?></span>
                             </td>
                             <td class="product-quantity text-center">
-                                <div class="quantity">
-                                    <input type="number" step="1" min="0" name="qunatity" data-price="<?= $item['PRICE'] ?>"
+                                <div class="quantity"><?
+
+									if ($unit['SHOW'])
+									{
+										?>
+                                        <input type="number" step="1" min="0" name="qnt"
+                                               value="<?= floor($item['QNT']) ?>" title="Количество, <?= $labelUnit ?>"
+                                               class="input-text qty text" size="4" data-price="<?= $item['PRICE'] ?>"/><?
+									}
+
+									?><input type="number" step="1" min="0" name="cnt" data-price="<?= $item['PRICE'] ?>"
                                            value="<?= $item['CNT'] ?>" title="Количество упаковок" class="input-text qty text"
                                            size="4"/>
                                     <span class="amount js-qnt" data-inpack="<?= $offer['INPACK'] ?>"><?= $qnt ?></span> <?= $labelUnit ?>

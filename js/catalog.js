@@ -246,6 +246,23 @@ var Filters = {
 			'mode': 'ajax'
 		}, function (resp) {
 			Filters.ajaxCont.html(resp.HTML);
+
+			jQuery('.popup-inline').magnificPopup({
+				type: 'inline',
+
+				fixedContentPos: false,
+				fixedBgPos: true,
+
+				overflowY: 'auto',
+
+				closeBtnInside: true,
+				preloader: false,
+
+				midClick: true,
+				removalDelay: 300,
+				mainClass: 'my-mfp-zoom-in'
+			});
+
 			Filters.bcCont.html(resp.BC);
 			Filters.h1Cont.html(resp.H1);
 			Filters.searchInput.val(resp.SEARCH);
@@ -332,21 +349,35 @@ var Detail = {
 		this.form.on('submit', this.addToCart);
 
 		this.total = this.product.find('#js-total');
-		this.qty = this.product.find('.qty');
+		this.qty = this.product.find('#qty');
+		this.cnt = this.product.find('#cnt');
 		if (this.total.length) {
 			this.quantity = this.product.find('#js-qty');
 			this.price = this.total.data('price');
 			this.inpack = this.quantity.data('inpack');
 
 			this.qty.on('input', this.qtyChange);
+			this.cnt.on('input', this.cntChange);
 		}
 	},
 	qtyChange: function() {
-		var input = jQuery(this);
-		var cnt = input.val();
+		var qty = Detail.qty.val();
+		if (qty < 1)
+			qty = 1;
+		qty = parseInt(qty, 10);
+
+		var cnt = Math.ceil(qty / Detail.inpack);
+		Detail.cnt.val(cnt);
+		Detail.summary(cnt);
+	},
+	cntChange: function() {
+		var cnt = Detail.cnt.val();
 		if (cnt < 1)
 			cnt = 1;
 		cnt = parseInt(cnt, 10);
+		Detail.summary(cnt);
+	},
+	summary: function(cnt) {
 		var total = Math.round(cnt * Detail.inpack * Detail.price);
 		Detail.total.text(Cart.format(total));
 		var quantity = Math.round(Detail.inpack * cnt * 1000) / 1000;
@@ -356,7 +387,7 @@ var Detail = {
 
 		var id = Detail.form.data('id');
 		if (id) {
-			var cnt = Detail.qty.val();
+			var cnt = Detail.cnt.val();
 			if (cnt < 1)
 				cnt = 1;
 			Cart.add(id, cnt);
@@ -399,17 +430,29 @@ var Cart = {
 		var tr = input.closest('tr');
 		var id = tr.data('id');
 		var total = tr.find('.js-total');
-		var qnt = tr.find('.js-qnt');
-
+		var totalCnt = tr.find('.js-qnt');
+		var name = input.attr('name');
+		var inpack = totalCnt.data('inpack');
 		var price = input.data('price');
-		var inpack = qnt.data('inpack');
-		var cnt = input.val();
-		if (cnt < 1) {
-			cnt = 1;
+		var cnt = 0;
+		if (name === 'qnt') {
+			var qnt = input.val();
+			if (qnt < 1)
+				qnt = 1;
+			qnt = parseInt(qnt, 10);
+			cnt = Math.ceil(qnt / inpack);
+			var cntInput = input.siblings('input');
+			cntInput.val(cnt);
+		}
+		else if (name === 'cnt') {
+			cnt = input.val();
+			if (cnt < 1)
+				cnt = 1;
+			cnt = parseInt(cnt, 10);
 		}
 
 		total.html(Cart.format(price * cnt * inpack));
-		qnt.html(Math.round(cnt * inpack * 1000) / 1000);
+		totalCnt.html(Math.round(cnt * inpack * 1000) / 1000);
 
 		Cart.updateCount(id, cnt);
 	},
@@ -486,17 +529,29 @@ var Quick = {
 		var input = jQuery(this);
 		var tr = input.closest('tr');
 		var total = tr.find('.js-total');
-		var qnt = tr.find('.js-qnt');
-
+		var totalCnt = tr.find('.js-qnt');
+		var name = input.attr('name');
+		var inpack = totalCnt.data('inpack');
 		var price = input.data('price');
-		var inpack = qnt.data('inpack');
-		var cnt = input.val();
-		if (cnt < 1) {
-			cnt = 1;
+		var cnt = 0;
+		if (name === 'qnt') {
+			var qnt = input.val();
+			if (qnt < 1)
+				qnt = 1;
+			qnt = parseInt(qnt, 10);
+			cnt = Math.ceil(qnt / inpack);
+			var cntInput = input.siblings('input');
+			cntInput.val(cnt);
+		}
+		else if (name === 'cnt') {
+			cnt = input.val();
+			if (cnt < 1)
+				cnt = 1;
+			cnt = parseInt(cnt, 10);
 		}
 
 		total.html(Cart.format(price * cnt * inpack));
-		qnt.html(Math.round(cnt * inpack * 1000) / 1000);
+		totalCnt.html(Math.round(cnt * inpack * 1000) / 1000);
 	},
 	submit: function () {
 		var form = jQuery(this);

@@ -747,8 +747,18 @@ class Offer
 								<span class="amount"><?= $price ?> руб.<?= $forUnit ?></span>
 							</td>
 							<td class="product-quantity text-center">
-								<div class="quantity">
-									<input type="number" step="1" min="0" name="quantity" data-price="<?= $offer['PRICE'] ?>"
+								<div class="quantity"><?
+
+									if ($unit['SHOW'])
+									{
+										?>
+                                        <input type="number" step="1" min="0" name="qnt"
+                                               value="<?= floor($offer['INPACK']) ?>" title="Количество, <?= $labelUnit ?>"
+                                               class="input-text qty text" size="4" data-price="<?= $offer['PRICE'] ?>"/><?
+									}
+
+									?>
+									<input type="number" step="1" min="0" name="cnt" data-price="<?= $offer['PRICE'] ?>"
 										   value="1" title="Количество упаковок" class="input-text qty text"
 										   size="4"/>
 									<span class="amount js-qnt" data-inpack="<?= $offer['INPACK'] ?>"><?= $qnt ?></span> <?= $labelUnit ?>

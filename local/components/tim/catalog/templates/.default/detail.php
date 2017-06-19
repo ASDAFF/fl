@@ -212,14 +212,29 @@ $isAdmin = $user->IsAdmin();
 					?>
 				</div>
 				<div class="clear"></div>
-				<form class="cart" data-id="<?= $offer['ID'] ?>">
-					<div class="add-to-cart-table">
-						<div class="quantity">
-							<input type="number" step="1" min="1" name="quantity" value="1" title="Количество"
-							       class="input-text qty text" size="4"/>
-						</div>
-						<button type="submit" class="button">В корзину</button>
-					</div>
+                <form class="cart" data-id="<?= $offer['ID'] ?>"><?
+
+					if ($offer['INPACK'] != 1)
+					{
+						?>
+                        <div class="add-to-cart-table">
+                            Сколько <?= $unit['NAME'] ?> вам нужно
+                            <div class="quantity">
+                                <input type="number" step="1" min="1" name="qty" value="<?= floor($offer['INPACK']) ?>"
+                                       title="Количество<?= $labelUnit ?>" id="qty"
+                                       class="input-text qty text" size="4"/>
+                            </div>
+                        </div><?
+					}
+
+					?>
+                    <div class="add-to-cart-table">
+                        или сразу можно ввести количество упаковок
+                        <div class="quantity">
+                            <input type="number" step="1" min="1" name="cnt" value="1" title="Количество"
+                                   class="input-text qty text" size="4" id="cnt" />
+                        </div>
+                    </div>
 					<div class="product_meta"><?
 
 						if ($offer['INPACK'] != 1)
@@ -242,6 +257,9 @@ $isAdmin = $user->IsAdmin();
 
 						?>
 					</div>
+                    <div class="add-to-cart-table">
+                        <button type="submit" class="button">В корзину</button>
+                    </div>
                 </form><?
 
 				$wishCartId = \Local\Sale\Wish::getCartId($offer['ID']);
