@@ -415,9 +415,17 @@ var Cart = {
 	},
 	addToCart: function() {
 		var a = jQuery(this);
+		if (a.data('added') === '1') {
+			window.location = '/personal/cart/';
+			return false;
+		}
+
 		var id = a.data('id');
 		if (id)
 			Cart.add(id, 1);
+		a.text('Корзина');
+		a.attr('title', 'Перейти в корзину');
+		a.data('added', '1');
 
 		return false;
 	},
