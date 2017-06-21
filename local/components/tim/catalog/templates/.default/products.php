@@ -77,10 +77,10 @@ else
 {
 
 	?>
-	<div class="shop-loop grid">
-	<ul class="products"><?
+	<div class="shop-loop grid"><?
 
 		$file = new \CFile();
+		$collections = [];
 		foreach ($offers as $id => $item)
 		{
 			$img1 = $file->GetFileArray($item['PREVIEW_PICTURE']);
@@ -96,6 +96,23 @@ else
 			}
 			$wishCartId = \Local\Sale\Wish::getCartId($item['ID']);
 			$wlAdded = $wishCartId ? ' added' : '';
+
+			$collectionId = $item['COLLECTION'];
+			if (!$collections[$collectionId])
+            {
+                if ($collections)
+				{
+					?>
+                    </ul><?
+				}
+                $collection = \Local\Catalog\Collection::getById($collectionId);
+				$collections[$collectionId] = $collection['NAME'];
+				$brand = \Local\Catalog\Brand::getById($item['BRAND']);
+
+				?>
+                <h3 class="collection">Коллекция "<?= $collection['NAME'] ?>" (<?= $brand['NAME'] ?>)</h3>
+                <ul class="products"><?
+            }
 
 			?>
 			<li class="product product-no-border style-2 col-md-3 col-sm-6">
@@ -177,8 +194,13 @@ else
 			</li><?
 		}
 
-		?>
-	</ul>
+		if ($collections)
+        {
+            ?>
+            </ul><?
+        }
+
+        ?>
 	</div><?
 }
 

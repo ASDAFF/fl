@@ -154,11 +154,24 @@ $isAdmin = $user->IsAdmin();
 					$brand = \Local\Catalog\Brand::getById($offer['BRAND']);
 					$country = \Local\Catalog\Country::getById($offer['COUNTRY']);
 					$wood = \Local\Catalog\Wood::getById($offer['WOOD']);
+					$collection = \Local\Catalog\Collection::getById($offer['COLLECTION']);
+
 					?>
 					<span class="meta-brand">
 						Производитель:
 						<a href="<?= $brand['DETAIL_PAGE_URL'] ?>"><?= $brand['NAME'] ?></a>
-					</span>
+					</span><?
+
+					if ($offer['COLLECTION'])
+					{
+					    ?>
+                        <span class="meta-collection">
+                            Коллекция:
+                            <b><?= $collection['NAME'] ?></b>
+                        </span><?
+					}
+
+					?>
 					<span class="meta-country">
 						Страна:
 						<b><?= $country['NAME'] ?></b>

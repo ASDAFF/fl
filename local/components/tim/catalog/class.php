@@ -125,6 +125,8 @@ class TimCatalog extends \CBitrixComponent
 			if (!$empty)
 			{
 				$this->filter = Filter::getData($this->searchIds, $this->searchQuery, $this->urlParams);
+				// TODO: DEBUG
+				$this->sort['QUERY'] = ['PROPERTY_COLLECTION' => 'DESC'];
 				$this->offers = Offer::get(1, $this->filter['PRODUCTS_FILTER'], $this->sort['QUERY'],
 					$this->navParams);
 			}
