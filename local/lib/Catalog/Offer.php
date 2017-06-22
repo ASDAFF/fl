@@ -346,7 +346,7 @@ class Offer
 	 * @param array|bool $refreshCache
 	 * @return array
 	 */
-	public static function get($type, $filter, $sort = ['PROPERTY_PRICE' => 'asc'], $nav = false,
+	public static function get($type, $filter, $sort = ['PROPERTY_COLLECTION' => 'desc'], $nav = false,
 	                           $refreshCache = false)
 	{
 		$extCache = new ExtCache(

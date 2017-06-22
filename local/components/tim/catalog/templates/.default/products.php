@@ -5,6 +5,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 /** @var array $arParams */
 /** @var array $arResult */
 /** @var array $offers */
+/** @var array $filter */
 /** @global CMain $APPLICATION */
 /** @var Local\Catalog\TimCatalog $component */
 
@@ -97,21 +98,33 @@ else
 			$wishCartId = \Local\Sale\Wish::getCartId($item['ID']);
 			$wlAdded = $wishCartId ? ' added' : '';
 
-			$collectionId = $item['COLLECTION'];
-			if (!$collections[$collectionId])
+			if ($component->sort['KEY'] == 'collection')
             {
-                if ($collections)
-				{
-					?>
-                    </ul><?
-				}
-                $collection = \Local\Catalog\Collection::getById($collectionId);
-				$collections[$collectionId] = $collection['NAME'];
-				$brand = \Local\Catalog\Brand::getById($item['BRAND']);
+                $collectionId = $item['COLLECTION'];
+                if (!$collections[$collectionId])
+                {
+                    if ($collections)
+                    {
+                        ?>
+                        </ul><?
+                    }
+                    $collection = \Local\Catalog\Collection::getById($collectionId);
+                    $collections[$collectionId] = $collection['NAME'];
+                    $brand = \Local\Catalog\Brand::getById($item['BRAND']);
 
-				?>
-                <h3 class="collection">Коллекция "<?= $collection['NAME'] ?>" (<?= $brand['NAME'] ?>)</h3>
-                <ul class="products"><?
+                    ?>
+                    <h3 class="collection">Коллекция "<?= $collection['NAME'] ?>" (<?= $brand['NAME'] ?>)</h3>
+                    <ul class="products"><?
+                }
+	        }
+	        else
+            {
+                if (!$collections)
+                {
+	                $collections = true;
+                    ?>
+                    <ul class="products"><?
+                }
             }
 
 			?>

@@ -17,6 +17,11 @@ class TimCatalog extends \CBitrixComponent
 			'FIELD' => 'SEARCH',
 			'NAME' => 'По релевантности',
 		),
+		'collection' => array(
+			'ORDER_DEFAULT' => 'desc',
+			'FIELD' => 'PROPERTY_COLLECTION',
+			'NAME' => 'Группировать по коллекциям',
+		),
 		'price' => array(
 			'ORDER_DEFAULT' => 'asc',
 			'FIELD' => 'PROPERTY_PRICE',
@@ -49,7 +54,7 @@ class TimCatalog extends \CBitrixComponent
 	/**
 	 * @var array текущая сортировка
 	 */
-	private $sort;
+	public $sort;
 
 	/**
 	 * @var array параметры постранички
@@ -125,8 +130,6 @@ class TimCatalog extends \CBitrixComponent
 			if (!$empty)
 			{
 				$this->filter = Filter::getData($this->searchIds, $this->searchQuery, $this->urlParams);
-				// TODO: DEBUG
-				$this->sort['QUERY'] = ['PROPERTY_COLLECTION' => 'DESC'];
 				$this->offers = Offer::get(1, $this->filter['PRODUCTS_FILTER'], $this->sort['QUERY'],
 					$this->navParams);
 			}
