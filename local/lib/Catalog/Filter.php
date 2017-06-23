@@ -191,6 +191,20 @@ class Filter
 				unset($item);
 			}
 
+			// выбранные элементы наверх
+			if ($group['MAX'])
+			{
+				$items1 = [];
+				$items2 = [];
+				foreach ($group['ITEMS'] as $code => $item)
+					if ($item['CHECKED'])
+						$items1[$code] = $item;
+					else
+						$items2[$code] = $item;
+				$group['ITEMS'] = array_merge($items1, $items2);
+			}
+
+
 			if ($group['TYPE'] == 'category')
 				self::setChildrenChecked($group['TREE'], $group['ITEMS']);
 
