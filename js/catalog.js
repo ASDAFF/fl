@@ -37,7 +37,8 @@ var Filters = {
 		this.ajaxCont.on('change', '#sort', this.sortChange);
 		this.ajaxCont.on('change', '#size', this.sizeChange);
 		this.bcCont.on('click', 'a', this.urlClick);
-		this.groups.find('.title').click(this.toggleGroup);
+		this.groups.find('.widget-title').click(this.toggleGroup);
+		this.groups.find('.show-all span').click(this.toggleAdd);
 		this.searchForm.submit(this.searchSubmit);
 
 
@@ -101,23 +102,23 @@ var Filters = {
 	},
 	toggleGroup: function () {
 		var gr = jQuery(this).parent();
-		var dropmenu = gr.children('.profiles');
-		if (gr.hasClass('closed')) {
-			gr.removeClass('closed');
-			dropmenu.stop().fadeIn('slow', 'linear');
-		}
-		else {
-			gr.addClass('closed')
-			dropmenu.stop().fadeOut('slow', 'linear');
-		}
+		gr.toggleClass('closed');
 		var val = '';
 		Filters.groups.each(function() {
 			var s = jQuery(this).hasClass('closed') ? 1 : 0;
 			val += s + ',';
 		});
+		console.log(val);
 		var d = new Date();
 		d.setTime(d.getTime() + 8640000000);
 		document.cookie = "filter_groups=" + val + "; path=/; expires=" + d.toUTCString();
+	},
+	toggleAdd: function () {
+		var span = jQuery(this);
+		var div = span.parent();
+		var ul = div.siblings('.additional');
+		ul.removeClass('hidden');
+		div.remove();
 	},
 	categoryClick: function() {
 		var a = jQuery(this);

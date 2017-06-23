@@ -110,12 +110,14 @@ class Filter
 			'BC' => true,
 			'ITEMS' => Brand::getGroup(),
 			'MULTI' => true,
+			'MAX' => 6,
 		];
 		$return[] = [
 			'NAME' => 'Порода дерева',
 			'TYPE' => 'country',
 			'ITEMS' => Wood::getGroup(),
 			'MULTI' => true,
+			'MAX' => 6,
 		];
 		$return[] = [
 			'NAME' => 'Цвет',
@@ -134,6 +136,7 @@ class Filter
 			'TYPE' => 'country',
 			'ITEMS' => Country::getGroup(),
 			'MULTI' => true,
+			'MAX' => 6,
 		];
 
 

@@ -6551,3 +6551,44 @@ textarea.commerce form .form-row textarea {
 .elFormPhone-btn button:hover {
   background: #209fcc;
 }
+
+.show-all {
+
+}
+.show-all span {
+   color: #7a3031;
+   border-bottom: 1px dashed #7a3031;
+   cursor: pointer;
+}
+.show-all span:hover {
+  border-bottom: none;
+}
+
+#filters-panel .widget {
+  margin-bottom: 20px;
+}
+#filters-panel .widget .widget-content {
+  padding-bottom: 20px;
+}
+#filters-panel .widget.closed .widget-content {
+  display: none;
+}
+#filters-panel .widget-title {
+  background: #7a3031;
+  color: #fff;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 0 0 20px 0;
+  cursor: pointer;
+}
+#filters-panel .widget-title:after {
+  display: none;
+}
+#filters-panel .widget-title .fa {
+  float: right;
+  margin: 7px;
+}
+#filters-panel .widget.closed .widget-title .fa.fa-angle-down:before {
+  content: "\f105";
+}

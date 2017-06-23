@@ -46,7 +46,7 @@ class Brand
 			$extCache->startDataCache();
 
 			$iblockElement = new \CIBlockElement();
-			$rsItems = $iblockElement->GetList(['NAME' => 'asc'], [
+			$rsItems = $iblockElement->GetList(['SORT' => 'asc', 'NAME' => 'asc'], [
 				'IBLOCK_ID' => self::IBLOCK_ID,
 			    'ACTIVE' => 'Y',
 			], false, false, [

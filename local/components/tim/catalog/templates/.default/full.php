@@ -89,28 +89,32 @@ function printSection($section, $items)
 		<div class="main-sidebar" id="filters-panel">
 
 			<input type="hidden" name="catalog_path" value="<?= CATALOG_PATH ?>">
-			<input type="hidden" name="separator" value="<?= $filter['SEPARATOR'] ?>">
+            <input type="hidden" name="separator" value="<?= $filter['SEPARATOR'] ?>"><?
 
-			<div class="widget commerce widget_product_search">
-				<h4 class="widget-title">
-					<span>Поиск</span>
-				</h4>
-				<form class="commerce-product-search" id="filter-search">
-					<label class="screen-reader-text" for="s">Поиск:</label>
-					<input type="search" class="search-field rounded" placeholder="Поиск по товарам&hellip;"
-					       name="q" value="<?= $component->searchQuery ?>" />
-					<input type="submit" value="Искать"/>
-				</form>
-			</div><?
-
-			$closed = [0, 1, 1, 1, 1, 0];
+			$closed = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1];
 			if (isset($_COOKIE['filter_groups']))
 				$closed = explode(',', $_COOKIE['filter_groups']);
 
-			$i = 0;
+			$class = $closed[0] ? ' closed' : '';
+            ?>
+			<div class="widget commerce widget_product_search<?= $class ?>">
+				<h4 class="widget-title">
+					<span>Поиск</span>
+                    <i class="fa fa-angle-down"></i>
+				</h4>
+                <div class="widget-content">
+                    <form class="commerce-product-search" id="filter-search">
+                        <label class="screen-reader-text" for="s">Поиск:</label>
+                        <input type="search" class="search-field rounded" placeholder="Поиск по товарам&hellip;"
+                               name="q" value="<?= $component->searchQuery ?>" />
+                        <input type="submit" value="Искать"/>
+                    </form>
+                </div>
+			</div><?
+
+			$i = 1;
 			foreach ($filter['GROUPS'] as $group)
 			{
-				$style = $closed[$i] ? '' : ' style="display:block;"';
 				$class = $closed[$i] ? ' closed' : '';
 				$widget = 'widget_layered_nav';
 				if ($group['TYPE'] == 'price')
@@ -119,8 +123,12 @@ function printSection($section, $items)
 				$i++;
 
 				?>
-				<div class="widget <?= $widget ?><?= $whidden ?>">
-					<h4 class="widget-title"><span><?= $group['NAME'] ?></span></h4><?
+				<div class="widget <?= $widget ?><?= $whidden ?><?= $class ?>">
+                <h4 class="widget-title">
+                    <span><?= $group['NAME'] ?></span>
+                    <i class="fa fa-angle-down"></i>
+                </h4>
+                <div class="widget-content"><?
 
 					if ($group['TYPE'] == 'category')
 					{
@@ -168,6 +176,8 @@ function printSection($section, $items)
 					{
 						?>
 						<ul class="f-other"><?
+                        $j = 0;
+                        $max = false;
 						foreach ($group['ITEMS'] as $code => $item)
 						{
 							if (!$item['ALL_CNT'])
@@ -175,6 +185,17 @@ function printSection($section, $items)
 
 							$checked = $item['CHECKED'] ? 'chosen ' : '';
 							$hidden = $item['CNT'] ? '' : 'hidden ';
+
+							$j++;
+							if ($group['MAX'] && !$max && $j > $group['MAX'] && !$checked)
+                            {
+								$max = true;
+								?>
+                                </ul>
+                                <ul class="f-other additional hidden">
+                                <?
+                            }
+
 							?>
 							<li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>">
 								<a href="<?= CATALOG_PATH ?><?= $code ?>/"><?= $item['NAME'] ?></a>
@@ -183,6 +204,12 @@ function printSection($section, $items)
 						}
 						?>
 						</ul><?
+
+                        if ($max)
+                        {
+                            ?>
+                            <div class="show-all"><span>Показать все</span></div><?
+                        }
 
 
 						/*?>
@@ -213,6 +240,7 @@ function printSection($section, $items)
 					}
 
 					?>
+				</div>
 				</div><?
 			}
 
@@ -267,101 +295,6 @@ function printSection($section, $items)
 	</div>
 	</div>
 </div><?
-
-if (false)
-{
-	?>
-	<div class="el-search-select engBox-body" id="el-search-select">
-		<div id="filters-panel">
-			<?
-
-			$closed = [
-				0,
-				1,
-				1,
-				1,
-				1,
-				0
-			];
-			if (isset($_COOKIE['filter_groups']))
-				$closed = explode(',', $_COOKIE['filter_groups']);
-
-			$i = 0;
-			foreach ($filter['GROUPS'] as $group)
-			{
-				$style = $closed[$i] ? '' : ' style="display:block;"';
-				$class = $closed[$i] ? ' closed' : '';
-				?>
-			<div class="filter-group<?= $class ?>">
-				<div class="title"><?= $group['NAME'] ?><s></s></div>
-				<fieldset<?= $style ?>><?
-
-					if ($group['TYPE'] == 'category')
-					{
-						printSection($group['TREE'], $group['ITEMS']);
-					}
-					elseif ($group['TYPE'] == 'price')
-					{
-						$max = ceil($group['MAX'] / 100) * 100;
-						$from = $group['FROM'] ? $group['FROM'] : 0;
-						$to = $group['TO'] ? $group['TO'] : $max;
-						?>
-						<div class="price-group">
-						<div id="price-slider" data-from="<?= $from ?>" data-to="<?= $to ?>"
-						     data-max="<?= $max ?>"></div>
-						</div><?
-					}
-					else
-					{
-						foreach ($group['ITEMS'] as $code => $item)
-						{
-							$style = $item['ALL_CNT'] ? '' : ' style="display:none;"';
-							$class = '';
-							if (!$item['CNT'] && $item['CHECKED'])
-								$class = ' class="checked disabled"';
-							elseif ($item['CHECKED'])
-								$class = ' class="checked"';
-							elseif (!$item['CNT'])
-								$class = ' class="disabled"';
-							$checked = $item['CHECKED'] ? ' checked' : '';
-							$disabled = $item['CNT'] ? '' : ' disabled';
-
-							?>
-							<b></b><label>
-							<input class="el-search-dop-input" type="checkbox"
-							       name="<?= $code ?>"<?= $checked ?><?= $disabled ?> />
-							<?= $item['NAME'] ?> (<i><?= $item['CNT'] ?></i>)
-						</label>
-						<?
-						}
-					}
-
-					?>
-				</fieldset>
-				</div><?
-
-				$i++;
-			}
-			?>
-		</div><?
-
-		?>
-
-
-	</div>
-	<div id="catalog-list"><?
-
-		//=========================================================
-		include('products.php');
-		//=========================================================
-
-		?>
-	</div>
-	<br/>
-	<hr/>
-	<br/>
-<?
-}
 
 foreach ($filter['BC'] as $i => $item)
     $APPLICATION->AddChainItem($item['NAME'], $item['HREF']);
