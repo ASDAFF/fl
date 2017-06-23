@@ -1273,6 +1273,8 @@ Theme Name: WooW
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
+
+  background: #725648;
 }
 .client-slider {
   padding-top: 45px;
@@ -1488,3 +1490,6 @@ Theme Name: WooW
 		width: 15%;
 	}
 }
+
+.custom_heading {    background: #e5c063;    font-size: 40px;
+  color: #313033; padding: 5px 10px ; display: inline-block; }

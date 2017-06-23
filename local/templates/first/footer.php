@@ -41,21 +41,21 @@ if (!$isCatalog)
 				<div class="footer-featured-col col-md-4 col-sm-6">
 					<i class="fa fa-money"></i>
 					<h4 class="footer-featured-title">
-						100% <br> только сертифицированный продукт
+						100% только сертифицированный продукт
 					</h4>
 					<!-- free return standard order in 30 days -->
 				</div>
 				<div class="footer-featured-col col-md-4 col-sm-6">
 					<i class="fa fa-globe"></i>
 					<h4 class="footer-featured-title">
-						Более 7000 <br> наименований
+						Более 7000 наименований
 					</h4>
 					<!-- free ship for payment over $100 -->
 				</div>
 				<div class="footer-featured-col col-md-4 col-sm-6">
 					<i class="fa fa-clock-o"></i>
 					<h4 class="footer-featured-title">
-						<br> Гарантия от производителя
+						Гарантия от производителя
 					</h4>
 					
 				</div>

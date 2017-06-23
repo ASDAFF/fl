@@ -121,40 +121,55 @@ $isAuthorized = $USER->IsAuthorized();
 	<div class="topbar">
 		<div class="container topbar-wap">
 			<div class="row">
-				<div class="col-sm-4 col-left-topbar">
-					<div class="left-topbar">
-						Более 7 000 напольных покрытий в ассортименте.
-					</div>
-				</div>
-				<div class="col-sm-7 col-left-topbar">
-					<div class="right-topbar">
-						<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a>
-                        <a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
-						<span class="elTop-adress"></span>
-					</div>
-				</div>
-				<div class="col-sm-1 col-right-topbar">
-					<div class="right-topbar">
-						<div class="user-login">
-							<ul class="nav top-nav"><?
-								if ($isAuthorized)
-								{
-									?>
-                                    <li><a href="/personal/"><i class="fa fa-user"></i> Личный кабинет</a><?
-								}
-								else
-								{
-									?>
-                                    <li><a data-rel="loginModal" href="/personal/"><i class="fa fa-user"></i> Вход</a><?
-								}
+                <div class="col-sm-8">
+                    <div class="elTop-menu">
+                        <a href="/about/contacts/">Контакты</a>
+                        <a href="/about/delivery/">Доставка</a>
+                        <a href="/about/guaranty/">Гарантия</a>
+                        <a href="/about/howto/">Как купить</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="user-login">
+                        <ul class="nav top-nav"><?
+                            if ($isAuthorized)
+                            {
+                            ?>
+                            <li><a href="/personal/"><i class="fa fa-user"></i> Личный кабинет</a><?
+                                }
+                                else
+                                {
                                 ?>
-							</ul>
-						</div>
-					</div>
-				</div>
+                            <li><a data-rel="loginModal" href="/personal/"><i class="fa fa-user"></i> Вход</a><?
+                                }
+                                ?>
+                        </ul>
+                    </div>
+                </div>
 			</div>
 		</div>
-	</div><?
+	</div>
+    <div class="container">
+        <div class="elTop-blocks">
+        <div class="block">
+            <img class="logo" alt="" src="/images/logo.png">
+        </div>
+        <div class="block">
+            Быстро доставляем заказы по всей России
+        </div>
+        <div class="block">
+            Более 7000 образцов от 100 производителей
+        </div>
+        <div class="block">
+            Бесплатная доставка от 50м<small>2</small>
+        </div>
+        <div class="block">
+            <a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
+            <span class="elTop-phone-text">Бесплатный звонок</span>
+        </div>
+    </div>
+    </div>
+    <?
 
 	if (!$isCart)
 	{
@@ -180,7 +195,7 @@ $isAuthorized = $USER->IsAuthorized();
 										<i class="elegant_icon_bag"></i><span>0</span>
 									</a>
 									<a class="navbar-brand" href="/">
-										<img class="logo" alt="" src="/images/logo.png">
+<!--										<img class="logo" alt="" src="/images/logo.png">-->
 										<img class="logo-fixed" alt="" src="/images/logo.png">
 										<img class="logo-mobile" alt="" src="/images/logo.png">
 									</a>
