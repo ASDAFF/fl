@@ -61,9 +61,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
 <div class="container-full">
     <div class="row row-fluid custom-bg-2 mb-5">
         <div class="container">
-            <div class="col-sm-7 pt-12">
+            <div class="col-sm-7 pt-7">
                 <h2 class="custom_heading white mt-0">Доставка</h2>
-                <p class="white">
+                <p class="white elIndexBlock-dost-text">
                     Доставка осуществляется по Москве и Московской области в удобное и согласованное с клиентом
                     время.<br>
                     В города России отгрузка осуществляется через любые транспортные компании, осуществляющие
@@ -77,7 +77,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
                 <div class="special-product">
                     <div class="special-product-wrap">
                         <div class="special-product-image">
-                            <a href="#"> <img width="470" alt="special_product" src="images/elIndex-ban-470.jpg"
+                            <a href="#"> <img class="elIndexBlock-dost-img" width="470" alt="special_product" src="images/elIndex-ban-470.jpg"
                                               height="470"> </a>
                         </div>
                     </div>

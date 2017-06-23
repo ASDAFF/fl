@@ -31,9 +31,11 @@ else
 		$user =
 			\Local\System\User::checkOrder($_REQUEST['order_name'], $_REQUEST['order_email'], $_REQUEST['order_phone'],
 				$_REQUEST['order_address']);
+				debugmessage($user);
 		if ($user['ID'])
 		{
 			$orderId = \Local\Sale\Order::create($cart, $user);
+			debugmessage($user);
 			if ($orderId)
 				LocalRedirect('/personal/order/?id=' . $orderId);
 		}
