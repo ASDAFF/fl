@@ -307,7 +307,7 @@ var Filters = {
 
 			Filters.panel.children('.widget_layered_nav').each(function() {
 				var group = jQuery(this);
-				var ul = group.children('.f-other');
+				var ul = group.find('.f-other');
 				if (ul.length) {
 					var l = ul.find('li:not(.hidden)').length;
 					if (l)

@@ -124,6 +124,7 @@ class Filter
 			'TYPE' => 'color',
 			'ITEMS' => Color::getGroup(),
 			'MULTI' => true,
+			'MAX' => 16,
 		];
 		/*$return[] = [
 			'NAME' => 'Класс защиты',
@@ -191,20 +192,6 @@ class Filter
 				unset($item);
 			}
 
-			// выбранные элементы наверх
-			if ($group['MAX'])
-			{
-				$items1 = [];
-				$items2 = [];
-				foreach ($group['ITEMS'] as $code => $item)
-					if ($item['CHECKED'])
-						$items1[$code] = $item;
-					else
-						$items2[$code] = $item;
-				$group['ITEMS'] = array_merge($items1, $items2);
-			}
-
-
 			if ($group['TYPE'] == 'category')
 				self::setChildrenChecked($group['TREE'], $group['ITEMS']);
 
@@ -240,9 +227,6 @@ class Filter
 
 	/**
 	 * Формирует фильтры для каждого свойства, чтобы отсеять варианты с учетом пользовательских фильтров
-	 * К примеру, пользователь выбрал город Пятигорск и отдых с детьми
-	 * В итоге для городов у нас должен сформироваться фильтр только по "отдыху с детьми", для галочек -
-	 * только по Пятигорску, а для всех остальных свойств - фильтр и по городу и по "отдыху с детьми"
 	 * @param array $searchIds
 	 */
 	public static function getUserFilter($searchIds = [])
@@ -393,11 +377,36 @@ class Filter
 					$cntGroup += $item['CNT'];
 				}
 				unset($item);
+
+				// выбранные элементы наверх
+				if ($group['MAX'])
+				{
+					$items1 = [];
+					$items2 = [];
+					foreach ($group['ITEMS'] as $code => $item)
+						if ($item['CHECKED'])
+							$items1[$code] = $item;
+						else
+							$items2[$code] = $item;
+
+					uasort($items2, 'self::cntCmp');
+
+					$group['ITEMS'] = [];
+					foreach ($items1 as $code => $item)
+						$group['ITEMS'][$code] = $item;
+					foreach ($items2 as $code => $item)
+						$group['ITEMS'][$code] = $item;
+				}
 			}
 
 			$group['CNT'] = $cntGroup;
 		}
 		unset($group);
+	}
+
+	public static function cntCmp($a, $b)
+	{
+		return $b['CNT'] - $a['CNT'];
 	}
 
 	/**

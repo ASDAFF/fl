@@ -5128,9 +5128,7 @@ textarea.commerce form .form-row textarea {
 .commerce .widget_layered_nav ul li:after {
   clear: both;
 }
-.commerce .widget_layered_nav ul li:last-child {
-  border: none;
-}
+
 .commerce .widget_layered_nav ul li > a,
 .commerce .widget_layered_nav ul li > span {
   padding: 1px 0;

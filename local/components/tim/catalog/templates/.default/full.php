@@ -159,6 +159,8 @@ function printSection($section, $items)
 					{
 						?>
 						<ul class="f-color"><?
+						$j = 0;
+						$max = false;
 						foreach ($group['ITEMS'] as $code => $item)
 						{
 							if (!$item['ALL_CNT'])
@@ -167,10 +169,27 @@ function printSection($section, $items)
 							$checked = $item['CHECKED'] ? 'chosen ' : '';
 							$hidden = $item['CNT'] ? '' : 'hidden ';
 							$bg = 'background:#' . $code;
+
+							$j++;
+							if ($group['MAX'] && !$max && $j > $group['MAX'] && !$checked)
+							{
+								$max = true;
+								?>
+                                </ul>
+                                <ul class="f-color additional hidden">
+								<?
+							}
+
 							?><li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>"><b style="<?= $bg ?>;"></b></li><?
 						}
 						?>
 						</ul><?
+
+						if ($max)
+						{
+							?>
+                            <div class="show-all"><span>Показать все</span></div><?
+						}
 					}
 					else
 					{
