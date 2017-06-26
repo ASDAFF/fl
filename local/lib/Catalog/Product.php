@@ -169,6 +169,7 @@ class Product
 			]);
 			if ($item = $rsItems->Fetch())
 				$return = [
+					'ID' => intval($item['ID']),
 					'BRAND' => intval($item['PROPERTY_BRAND_VALUE']),
 					'COUNTRY' => intval($item['PROPERTY_COUNTRY_VALUE']),
 					'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),

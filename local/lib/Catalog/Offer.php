@@ -278,6 +278,7 @@ class Offer
 				'PROPERTY_COATING',
 				'PROPERTY_DIM',
 				'PROPERTY_JSON',
+				'PROPERTY_PHOTOS',
 			]);
 		}
 
@@ -321,6 +322,7 @@ class Offer
 				$fields['COATING'] = $item['PROPERTY_COATING_VALUE'];
 				$fields['DIM'] = $item['PROPERTY_DIM_VALUE'];
 				$fields['PROPS'] = json_decode($item['~PROPERTY_JSON_VALUE'], true);
+				$fields['PHOTOS'] = $item['PROPERTY_PHOTOS_VALUE'];
 			}
 
 			$return['ITEMS'][$id] = $fields;
@@ -381,6 +383,10 @@ class Offer
 				{
 					$v = Section::getChildrenFilter($v);
 					$bitrixFilter['PROPERTY_SECTION'] = $v;
+				}
+                elseif ($k == 'PRODUCT')
+				{
+					$bitrixFilter['PROPERTY_PRODUCT'] = $v;
 				}
 				elseif ($k == 'COLOR')
 				{

@@ -68,7 +68,9 @@ $isAdmin = $user->IsAdmin();
 						<div class="caroufredsel-wrap">
 							<ul class="caroufredsel-items"><?
 
-								$images = $offer['PRODUCT']['PICTURES'];
+                                $images = $offer['PHOTOS'];
+                                if (!$images)
+								    $images = $offer['PRODUCT']['PICTURES'];
 								$file = new \CFile();
 								foreach ($images as $img)
 								{
@@ -474,16 +476,65 @@ $isAdmin = $user->IsAdmin();
 
     ?>
 <div class="container">
-<div class="row">
-    <div class="col-sm-12"><?
+    <div class="row">
+        <div class="col-sm-12"><?
 
-		$APPLICATION->IncludeComponent('tim:empty', 'similar', [
-			'OFFER' => $offer,
-		]);
+			$productId = $offer['PRODUCT']['ID'];
+            $filter = [
+                'PRODUCT' => $productId,
+            ];
+            $items = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc']);
+            if (isset($items['ITEMS'][$offer['ID']]))
+                unset($items['ITEMS'][$offer['ID']]);
+            if (count($items['ITEMS']))
+                $APPLICATION->IncludeComponent('tim:empty', 'similar', [
+                    'ITEMS' => $items['ITEMS'],
+                    'TITLE' => 'Другие предожения',
+                ]);
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12"><?
 
-        ?>
-</div>
-</div>
+			$sectionId = $offer['SECTION'];
+			$navParams = array(
+				'iNumPage' => 1,
+				'nPageSize' => 13,
+			);
+
+			$items = [];
+			$ex = false;
+			while ($sectionId)
+			{
+
+				$filter = [
+					'CATEGORY' => [$sectionId],
+                    'COLOR' => $offer['COLOR'],
+				];
+				$items = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
+				if (isset($items['ITEMS'][$offer['ID']]))
+					unset($items['ITEMS'][$offer['ID']]);
+				if (count($items['ITEMS']))
+				{
+					$ex = true;
+					break;
+				}
+
+				$section = \Local\Catalog\Section::getById($sectionId);
+				$sectionId = $section['PARENT'];
+			}
+
+			if ($ex)
+				$APPLICATION->IncludeComponent('tim:empty', 'similar', [
+					'ITEMS' => $items['ITEMS'],
+					'TITLE' => 'Похожие товары',
+					'COUNT' => 12,
+				]);
+
+			?>
+        </div>
+    </div>
 </div>
 </div><?
 

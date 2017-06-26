@@ -8,51 +8,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $user = new \CUser();
 $isAdmin = $user->IsAdmin();
 
-$offer = $arParams['OFFER'];
-
-$sectionId = $offer['SECTION'];
-$navParams = array(
-	'iNumPage' => 1,
-	'nPageSize' => 5,
-);
-
-$items = [];
-$ex = false;
-while ($sectionId)
-{
-
-	$filter = [
-	    'CATEGORY' => [$sectionId],
-    ];
-	$items = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
-	$min = isset($items['ITEMS'][$offer['ID']]) ? 1 : 0;
-	if (count($items['ITEMS']) > $min)
-    {
-        $ex = true;
-		break;
-	}
-
-	$section = \Local\Catalog\Section::getById($sectionId);
-	$sectionId = $section['PARENT'];
-}
-
-if (!$ex)
-    return;
-
 ?>
 <div class="related products">
     <div class="related-title">
-        <h3><span>Похожие товары</span></h3>
+        <h3><span><?= $arParams['TITLE'] ?></span></h3>
     </div>
     <ul class="products columns-4" data-columns="4"><?
 
 		$file = new \CFile();
 		$cnt = 0;
-        foreach ($items['ITEMS'] as $item)
+        foreach ($arParams['ITEMS'] as $item)
         {
-            if ($item['ID'] == $offer['ID'])
-                break;
-
 			$img1 = $file->GetFileArray($item['PREVIEW_PICTURE']);
 			$img2 = $file->GetFileArray($item['DETAIL_PICTURE']);
 			$rating = $item['RATING'] ? $item['RATING'] : 60;
@@ -134,7 +100,7 @@ if (!$ex)
             </li><?
 
             $cnt++;
-            if ($cnt == 4)
+            if ($cnt == $arParams['COUNT'])
                 break;
         }
 
