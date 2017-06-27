@@ -244,5 +244,103 @@ if ($cnt)
 ?><p><b>Итого: <?= $cnt ?></b></p>
     <hr><?
 
+$cnt = 0;
+?><h2>Не заполнен производитель</h2>
+    <div id="b10" style="display:none;"><?
+foreach ($offers['ITEMS'] as $offer)
+{
+	if (!$offer['BRAND'])
+	{
+		?><a href="/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=catalog&ID=<?= $offer['ID'] ?>&lang=ru"
+             target="_blank"><?= $offer['NAME'] ?></a><br/><?
+		$cnt++;
+	}
+}
+?>
+    </div><?
+if ($cnt)
+{
+	?>
+    <p>
+        <button onclick="document.getElementById('b10').style.display='block';">Показать</button>
+    </p><?
+}
+?><p><b>Итого: <?= $cnt ?></b></p>
+    <hr><?
+
+$cnt = 0;
+?><h2>Не заполнена страна</h2>
+    <div id="b11" style="display:none;"><?
+foreach ($offers['ITEMS'] as $offer)
+{
+	if (!$offer['COUNTRY'])
+	{
+		?><a href="/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=catalog&ID=<?= $offer['ID'] ?>&lang=ru"
+             target="_blank"><?= $offer['NAME'] ?></a><br/><?
+		$cnt++;
+	}
+}
+?>
+    </div><?
+if ($cnt)
+{
+	?>
+    <p>
+        <button onclick="document.getElementById('b11').style.display='block';">Показать</button>
+    </p><?
+}
+?><p><b>Итого: <?= $cnt ?></b></p>
+    <hr><?
+
+$cnt = 0;
+?><h2>Не заполнена порода дерева</h2>
+    <div id="b12" style="display:none;"><?
+foreach ($offers['ITEMS'] as $offer)
+{
+    if (in_array($offer['SECTION'], [4,5,6,7,8,9,45,46,47,48]))
+        if (!$offer['WOOD'])
+        {
+            ?><a href="/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=catalog&ID=<?= $offer['ID'] ?>&lang=ru"
+                 target="_blank"><?= $offer['NAME'] ?></a><br/><?
+            $cnt++;
+        }
+}
+?>
+    </div><?
+if ($cnt)
+{
+	?>
+    <p>
+        <button onclick="document.getElementById('b12').style.display='block';">Показать</button>
+    </p><?
+}
+?><p><b>Итого: <?= $cnt ?></b></p>
+    <hr><?
+
+$cnt = 0;
+?><h2>Не заполнен цвет</h2>
+    <div id="b13" style="display:none;"><?
+foreach ($offers['ITEMS'] as $offer)
+{
+	if (in_array($offer['SECTION'], [4,5,6,7,8,9,10,12,13,14,15,16,43,44,45,46,47,48]))
+        if (!$offer['COLOR'])
+        {
+            ?><a href="/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=5&type=catalog&ID=<?= $offer['ID'] ?>&lang=ru"
+                 target="_blank"><?= $offer['NAME'] ?></a><br/><?
+            $cnt++;
+        }
+}
+?>
+    </div><?
+if ($cnt)
+{
+	?>
+    <p>
+        <button onclick="document.getElementById('b13').style.display='block';">Показать</button>
+    </p><?
+}
+?><p><b>Итого: <?= $cnt ?></b></p>
+    <hr><?
+
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
