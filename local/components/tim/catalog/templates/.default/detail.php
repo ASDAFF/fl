@@ -69,8 +69,6 @@ $isAdmin = $user->IsAdmin();
 							<ul class="caroufredsel-items"><?
 
                                 $images = $offer['PHOTOS'];
-                                if (!$images)
-								    $images = $offer['PRODUCT']['PICTURES'];
 								$file = new \CFile();
 								foreach ($images as $img)
 								{
@@ -479,57 +477,53 @@ $isAdmin = $user->IsAdmin();
     <div class="row">
         <div class="col-sm-12"><?
 
-			$productId = $offer['PRODUCT']['ID'];
-            $filter = [
-                'PRODUCT' => $productId,
-            ];
-            $items = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc']);
-            if (isset($items['ITEMS'][$offer['ID']]))
-                unset($items['ITEMS'][$offer['ID']]);
-            if (count($items['ITEMS']))
-                $APPLICATION->IncludeComponent('tim:empty', 'similar', [
-                    'ITEMS' => $items['ITEMS'],
-                    'TITLE' => 'Другие предожения',
-                ]);
-            ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12"><?
+            $cntNeed = 12;
 
-			$sectionId = $offer['SECTION'];
-			$navParams = array(
-				'iNumPage' => 1,
-				'nPageSize' => 13,
-			);
+            $sectionId = $offer['SECTION'];
+            $navParams = ['iNumPage' => 1, 'nPageSize' => 13];
+			$initFilter = [
+				'COLOR' => $offer['COLOR'],
+				'BRAND' => $offer['BRAND'],
+				'WOOD' => $offer['WOOD'],
+			];
+			$filter = $initFilter;
 
-			$items = [];
-			$ex = false;
-			while ($sectionId)
-			{
+            $items = [];
+            $cnt = 0;
+            while ($sectionId)
+            {
+				$filter['CATEGORY'] = [$sectionId];
+                $tmp = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
+                foreach ($tmp['ITEMS'] as $id => $item)
+                    if ($id != $offer['ID'] && !$items[$id])
+						$items[$id] = $item;
 
-				$filter = [
-					'CATEGORY' => [$sectionId],
-                    'COLOR' => $offer['COLOR'],
-				];
-				$items = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
-				if (isset($items['ITEMS'][$offer['ID']]))
-					unset($items['ITEMS'][$offer['ID']]);
-				if (count($items['ITEMS']))
+				$cnt = count($items);
+				if ($cnt >= $cntNeed)
+                    break;
+
+				if ($filter['BRAND'] && $filter['WOOD'])
+				    unset($filter['BRAND']);
+				elseif ($filter['WOOD'])
 				{
-					$ex = true;
-					break;
+					$filter['BRAND'] = $offer['BRAND'];
+					unset($filter['WOOD']);
 				}
+                elseif ($filter['BRAND'])
+					unset($filter['BRAND']);
+                else
+				{
+					$filter = $initFilter;
+					$section = \Local\Catalog\Section::getById($sectionId);
+					$sectionId = $section['PARENT'];
+				}
+            }
 
-				$section = \Local\Catalog\Section::getById($sectionId);
-				$sectionId = $section['PARENT'];
-			}
-
-			if ($ex)
+			if ($cnt)
 				$APPLICATION->IncludeComponent('tim:empty', 'similar', [
-					'ITEMS' => $items['ITEMS'],
+					'ITEMS' => $items,
 					'TITLE' => 'Похожие товары',
-					'COUNT' => 12,
+					'COUNT' => $cntNeed,
 				]);
 
 			?>

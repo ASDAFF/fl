@@ -20,10 +20,6 @@ class Handlers
 			$added = true;
 			AddEventHandler('iblock', 'OnIBlockPropertyBuildList',
 				[__NAMESPACE__ . '\Handlers', 'addYesNo']);
-			AddEventHandler('iblock', 'OnAfterIBlockElementUpdate',
-				[__NAMESPACE__ . '\Handlers', 'afterElementUpdate']);
-			AddEventHandler('iblock', 'OnAfterIBlockElementAdd',
-				[__NAMESPACE__ . '\Handlers', 'afterElementAdd']);
 			AddEventHandler('main', 'OnAfterUserLogout',
 				array(__NAMESPACE__ . '\Handlers', 'afterUserLogout'));
 			AddEventHandler('main', 'OnAfterUserLogin',
@@ -40,28 +36,6 @@ class Handlers
 	public static function addYesNo()
 	{
 		return UserTypeNYesNo::GetUserTypeDescription();
-	}
-
-	/**
-	 * обработчик добавления элемента
-	 * @param $arFields
-	 */
-	public static function afterElementAdd($arFields)
-	{
-		if ($arFields['IBLOCK_ID'] == Offer::IBLOCK_ID)
-			Offer::afterUpdate($arFields['ID']);
-	}
-
-	/**
-	 * обработчик изменения элемента
-	 * @param $arFields
-	 */
-	public static function afterElementUpdate($arFields)
-	{
-		if ($arFields['IBLOCK_ID'] == Product::IBLOCK_ID)
-			Product::correctOfferFields($arFields['ID']);
-		elseif ($arFields['IBLOCK_ID'] == Offer::IBLOCK_ID)
-			Offer::afterUpdate($arFields['ID']);
 	}
 
 	/**

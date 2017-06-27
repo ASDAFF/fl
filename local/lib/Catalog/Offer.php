@@ -56,7 +56,6 @@ class Offer
 				'DETAIL_PICTURE',
 				'PREVIEW_TEXT',
 				'DETAIL_TEXT',
-			    'PROPERTY_PRODUCT',
 			    'PROPERTY_COUNTRY',
 			    'PROPERTY_UNIT',
 			    'PROPERTY_COLLECTION',
@@ -90,7 +89,6 @@ class Offer
 					'CODE' => $item['CODE'],
 					'PREVIEW_PICTURE' => $item['PREVIEW_PICTURE'],
 					'DETAIL_PICTURE' => $item['DETAIL_PICTURE'],
-				    'PRODUCT' => intval($item['PROPERTY_PRODUCT_VALUE']),
 				    'SECTION' => intval($item['PROPERTY_SECTION_VALUE']),
 				    'BRAND' => intval($item['PROPERTY_BRAND_VALUE']),
 				    'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),
@@ -254,7 +252,6 @@ class Offer
 			'PROPERTY_PROTECTION',
 			'PROPERTY_PRICE',
 			'PROPERTY_PRICE_P',
-			'PROPERTY_PRODUCT',
 		];
 		$flagsSelect = Flags::getForSelect();
 		$select = array_merge($select, $flagsSelect);
@@ -308,7 +305,6 @@ class Offer
 				$fields['ID'] = $id;
 				$fields['NAME'] = $item['NAME'];
 				$fields['PRICE_P'] = intval($item['PROPERTY_PRICE_P_VALUE']);
-				$fields['PRODUCT'] = intval($item['PROPERTY_PRODUCT_VALUE']);
 				$fields['RATING'] = intval($item['PROPERTY_RATING_VALUE']);
 				$fields['UNIT'] = intval($item['PROPERTY_UNIT_VALUE']);
 				$fields['INPACK'] = floatval($item['PROPERTY_INPACK_VALUE']);
@@ -374,7 +370,6 @@ class Offer
 			$bitrixFilter = [
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				'ACTIVE' => 'Y',
-				'!PROPERTY_PRODUCT' => false,
 			];
 			$codes = Flags::getCodes();
 			foreach ($filter as $k => $v)
@@ -383,10 +378,6 @@ class Offer
 				{
 					$v = Section::getChildrenFilter($v);
 					$bitrixFilter['PROPERTY_SECTION'] = $v;
-				}
-                elseif ($k == 'PRODUCT')
-				{
-					$bitrixFilter['PROPERTY_PRODUCT'] = $v;
 				}
 				elseif ($k == 'COLOR')
 				{
@@ -447,9 +438,9 @@ class Offer
 			// Восстановление сортировки
 			if ($manualSort)
 			{
-				$productIds = $filter['ID'];
+				$ids = $filter['ID'];
 				$items = [];
-				foreach ($productIds as $id)
+				foreach ($ids as $id)
 				{
 					if ($return['ITEMS'][$id])
 						$items[$id] = $return['ITEMS'][$id];
@@ -576,7 +567,6 @@ class Offer
 			if ($res['ITEMS'][$id])
 			{
 				$return = $res['ITEMS'][$id];
-				$return['PRODUCT'] = Product::getById($return['PRODUCT']);
 				$extCache->endDataCache($return);
 			}
 			else
@@ -594,64 +584,6 @@ class Offer
 	public static function viewedCounters($offerId)
 	{
 		\CIBlockElement::CounterInc($offerId);
-	}
-
-	/**
-	 * Корректирует значения свойств, предложения зависящих от товара
-	 * @param $id
-	 * @param $offer
-	 * @param $product
-	 */
-	public static function correctProductFields($id, $offer, $product)
-	{
-		$update = [];
-		if ($offer['BRAND'] != $product['BRAND'])
-			$update['BRAND'] = $product['BRAND'];
-		if ($offer['COUNTRY'] != $product['COUNTRY'])
-			$update['COUNTRY'] = $product['COUNTRY'];
-		if ($offer['WOOD'] != $product['WOOD'])
-			$update['WOOD'] = $product['WOOD'];
-		if ($offer['COLOR'] != $product['COLOR'])
-			$update['COLOR'] = $product['COLOR'];
-
-		if ($update)
-		{
-			$iblockElement = new \CIBlockElement();
-			$iblockElement->SetPropertyValuesEx($id, Offer::IBLOCK_ID, $update);
-		}
-	}
-
-	/**
-	 * Возвращает предложения для заданного товара
-	 * @param $productId
-	 * @return array
-	 */
-	public static function getByProduct($productId)
-	{
-		$res = self::getOffers(0, [
-			'IBLOCK_ID' => self::IBLOCK_ID,
-			'=PROPERTY_PRODUCT' => $productId,
-		]);
-		return $res['ITEMS'];
-	}
-
-	/**
-	 * Обработчик изменения элемента - нужно обновить поля товара
-	 * @param $id
-	 */
-	public static function afterUpdate($id)
-	{
-		$res = self::getOffers(2, [
-			'ID' => $id,
-			'IBLOCK_ID' => self::IBLOCK_ID
-		]);
-		$offer = $res['ITEMS'][$id];
-		if ($offer)
-		{
-			$product = Product::getById($offer['PRODUCT']);
-			if ($product)
-				self::correctProductFields($id, $offer, $product);
-		}
 	}
 
 	/**
@@ -693,6 +625,10 @@ class Offer
 		return $arFields;
 	}
 
+	/**
+     * Выводит попап быстрой покупки
+	 * @param $offer
+	 */
 	public static function printQuickPopup($offer)
 	{
 		$img = \CFile::GetFileArray($offer['PREVIEW_PICTURE']);

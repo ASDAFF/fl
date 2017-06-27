@@ -184,21 +184,6 @@ class Product
 	}
 
 	/**
-	 * Корректирует значения свойств предложений, зависящих от товара
-	 * @param $productId
-	 */
-	public static function correctOfferFields($productId)
-	{
-		$product = self::getById($productId);
-		if ($product)
-		{
-			$offers = Offer::getByProduct($productId);
-			foreach ($offers as $id => $offer)
-				Offer::correctProductFields($id, $offer, $product);
-		}
-	}
-
-	/**
 	 * Очищает кеш каталога
 	 */
 	public static function clearCatalogCache()
