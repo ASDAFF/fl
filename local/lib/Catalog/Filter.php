@@ -126,12 +126,6 @@ class Filter
 			'MULTI' => true,
 			'MAX' => 16,
 		];
-		/*$return[] = [
-			'NAME' => 'Класс защиты',
-			'TYPE' => 'protection',
-			'ITEMS' => Protection::getGroup(),
-			'MULTI' => true,
-		];*/
 		$return[] = [
 			'NAME' => 'Страна',
 			'TYPE' => 'country',
@@ -626,6 +620,27 @@ class Filter
 			if (!$itemsCnt)
 				continue;
 
+			if ($group['TYPE'] == 'category')
+			{
+				if ($itemsCnt == 1)
+					$name = $lastItem['NAME'];
+			}
+
+			if ($group['TYPE'] == 'brand')
+			{
+				if ($itemsCnt == 1)
+					$suffix .= ' ' . $lastItem['NAME'];
+			}
+			if ($group['TYPE'] == 'country')
+			{
+				if ($itemsCnt == 1)
+					$suffix .= ' ' . $lastItem['NAME'];
+			}
+			if ($group['TYPE'] == 'wood')
+			{
+				if ($itemsCnt == 1)
+					$suffix .= ' ' . $lastItem['NAME'];
+			}
 
 		}
 

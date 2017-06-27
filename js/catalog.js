@@ -268,10 +268,10 @@ var Filters = {
 			Filters.h1Cont.html(resp.H1);
 			Filters.searchInput.val(resp.SEARCH);
 			for (var i in resp.FILTERS) {
-				if (i == 'PRICE') {
+				if (i === 'PRICE') {
 					Filters.priceCorrect(resp.FILTERS[i]);
 				}
-				else if (i == 'CATEGORY') {
+				else if (i === 'CATEGORY') {
 					for (var j in resp.FILTERS[i]) {
 						var cnt = resp.FILTERS[i][j][0];
 						var checked = resp.FILTERS[i][j][1];
@@ -307,13 +307,44 @@ var Filters = {
 
 			Filters.panel.children('.widget_layered_nav').each(function() {
 				var group = jQuery(this);
-				var ul = group.find('.f-other');
+				var ul = group.find('.p-main');
 				if (ul.length) {
-					var l = ul.find('li:not(.hidden)').length;
-					if (l)
+					var ula = group.find('.additional');
+					var li = ul.find('li:not(.hidden)');
+					var lia = ula.find('li:not(.hidden)');
+					var max = ul.data('max');
+					var showall = group.find('.show-all');
+					if (li.length + lia.length > 0)
 						group.removeClass('hidden');
 					else
 						group.addClass('hidden');
+
+					if (max) {
+						var x = max - li.length;
+						if (x > 0) {
+							lia.each(function () {
+								if (x === 0)
+									return false;
+								jQuery(this).appendTo(ul);
+								x--;
+							});
+							if (!ula.find('li:not(.hidden)').length)
+								showall.hide();
+						}
+						else if (x < 0)
+						{
+							while (x < 0) {
+								var tmp = ul.find('li:not(.hidden):last');
+								if (tmp.length)
+									tmp.prependTo(ula);
+								else
+									break;
+								x++;
+							}
+							if (showall.length)
+								showall.show();
+						}
+					}
 				}
 			});
 

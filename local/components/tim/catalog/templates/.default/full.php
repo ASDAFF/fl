@@ -158,7 +158,7 @@ function printSection($section, $items)
 					elseif ($group['TYPE'] == 'color')
 					{
 						?>
-						<ul class="f-color"><?
+						<ul class="f-color p-main" data-max="<?= $group['MAX'] ?>"><?
 						$j = 0;
 						$max = false;
 						foreach ($group['ITEMS'] as $code => $item)
@@ -180,7 +180,8 @@ function printSection($section, $items)
 								<?
 							}
 
-							?><li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>"><b style="<?= $bg ?>;"></b></li><?
+							?>
+                            <li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>"><b style="<?= $bg ?>;"></b></li><?
 						}
 						?>
 						</ul><?
@@ -194,7 +195,7 @@ function printSection($section, $items)
 					else
 					{
 						?>
-						<ul class="f-other"><?
+						<ul class="f-other p-main" data-max="<?= $group['MAX'] ?>"><?
                         $j = 0;
                         $max = false;
 						foreach ($group['ITEMS'] as $code => $item)

@@ -5084,7 +5084,7 @@ textarea.commerce form .form-row textarea {
     border: 1px solid #e5e5e5;
     border-radius: 3px;
     transition: all 0.3s ease 0s;
-    margin: 2px;
+    margin: 2px 1px;
 }
 .cur-f .color {
     display: inline-block;
