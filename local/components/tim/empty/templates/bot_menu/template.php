@@ -23,7 +23,7 @@ $sections = \Local\Catalog\Section::getAll();
                 <li>
                     <i class="fa fa-envelope"></i>
                     <h4>Email:</h4>
-                    <p><a href="mailto:email@domain.com">info@veles-parket.ru</a></p>
+                    <p><a href="mailto:info@veleslife.ru">info@veleslife.ru</a></p>
                 </li>
             </ul>
         </div>

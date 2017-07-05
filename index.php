@@ -16,7 +16,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
         </div>
         <div class="col-sm-6">
             <div class="box-ft box-ft-5">
-                <img src="/images/banner.jpg">
+                <img src="/images/banner.jpg" alt="banner.jpq">
             </div>
         </div>
         <div class="col-sm-3">

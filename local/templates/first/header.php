@@ -21,7 +21,6 @@ $isAuthorized = $USER->IsAuthorized();
         })(window,document,'script','dataLayer','GTM-KZSDKVK');</script>
     <!-- End Google Tag Manager -->
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 	<title><? $APPLICATION->ShowTitle() ?></title>
 	<link rel="shortcut icon" href="/favicon.png"><?
@@ -38,10 +37,13 @@ $isAuthorized = $USER->IsAuthorized();
 	$assets->addCss('https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=cyrillic');
 	$assets->addCss('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&amp;subset=cyrillic');
 	$assets->addCss('/css/elegant-icon.css');
+    $assets->addCss('/css/cs-select.css');
+    $assets->addCss('/css/cs-skin-elastic.css');
 	$assets->addCss('/css/style.css');
 	$assets->addCss('/css/commerce.css');
 	$assets->addCss('/css/custom.css');
 	$assets->addCss('/css/magnific-popup.css');
+
 
 	$assets->addJs('/js/jquery.js');
 	$assets->addJs('/js/jquery-migrate.min.js');
@@ -70,6 +72,8 @@ $isAuthorized = $USER->IsAuthorized();
 	$assets->addJs('/js/slider.min.js');
 	$assets->addJs('/js/jquery-ui-touch-punch.min.js');
 	$assets->addJs('/js/catalog.js');
+    $assets->addJs('/js/engine-select-classie.js');
+    $assets->addJs('/js/engine-select-selectFx.js');
 
 	?>
 </head>
@@ -121,7 +125,7 @@ $isAuthorized = $USER->IsAuthorized();
 	<div class="topbar">
 		<div class="container topbar-wap">
 			<div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-8 col-lg-8 col-md-6">
                     <div class="elTop-menu">
                         <a href="/about/contacts/">Контакты</a>
                         <a href="/about/delivery/">Доставка</a>
@@ -129,8 +133,16 @@ $isAuthorized = $USER->IsAuthorized();
                         <a href="/about/howto/">Как купить</a>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-2 col-lg-2 col-md-3">
+                    <div class="mag-inf">
+                        Режим работы:<br>
+                        ежедневно с 7:30 до 22:00
+                    </div>
+                </div>
+                <div class="col-sm-2 col-lg-2 col-md-3">
                     <div class="user-login">
+
+
                         <ul class="nav top-nav"><?
                             if ($isAuthorized)
                             {
@@ -152,7 +164,9 @@ $isAuthorized = $USER->IsAuthorized();
     <div class="container">
         <div class="elTop-blocks">
         <div class="block">
-            <img class="logo" alt="" src="/images/logo.png">
+            <a href="/">
+                <img class="logo" alt="" src="/images/logo.png">
+            </a>
         </div>
         <div class="block">
             Быстро доставляем заказы по всей России
@@ -164,8 +178,10 @@ $isAuthorized = $USER->IsAuthorized();
             Бесплатная доставка от 50м<small>2</small>
         </div>
         <div class="block">
-            <a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
-            <span class="elTop-phone-text">Бесплатный звонок</span>
+            <a href="tel:+79299324230" class="elTop-phone-number">+7 (495) 532 79 74</a>
+            <a href="#elFormPhone" class="popup-inline">
+                <span class="elTop-phone-text">Бесплатный звонок</span>
+            </a>
         </div>
     </div>
     </div>

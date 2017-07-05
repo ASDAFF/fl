@@ -49,7 +49,7 @@ class Offer
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList([], [
 				'IBLOCK_ID' => self::IBLOCK_ID,
-			    'ACTIVE' => 'Y',
+				//'ACTIVE' => 'Y',
 			], false, false, [
 				'ID', 'NAME', 'CODE',
 				'PREVIEW_PICTURE',
@@ -673,7 +673,7 @@ class Offer
 					</div>
 				</div>
 				<div class="commerce">
-					<table id="cart" class="table shop_table cart">
+					<table  class="table shop_table cart">
 						<thead>
 						<tr>
 							<th class="product-thumbnail hidden-xs">&nbsp;</th>

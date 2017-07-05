@@ -962,10 +962,21 @@
 	};
 	$(document).ready(function(){
 		DH.init();
+        // Выбор размера
+        [].slice.call(
+            document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
+            new SelectFx(el,{
+                onChange: function(val) {
+                    console.log('val', val); //callback for value change
+                }
+            });
+        } );
+        // --- end ---
 	});
 	$(document).on('dh-change-layout',function(){
 		setTimeout(function(){
 			DH.init();
 		},500);
 	});
+
 })(jQuery);

@@ -115,6 +115,9 @@ elseif ($arParams['TYPE'] == 'primary')
 	?>
 	<nav class="collapse navbar-collapse primary-navbar-collapse">
 		<ul class="nav navbar-nav primary-nav">
+
+    <?if(isset($_GET['test'])):?>
+            <!--  Старые стили оставил для возврата   -->
 			<li><a href="/"><span class="underline">Главная</span></a></li>
 			<li class="menu-item-has-children megamenu megamenu-fullwidth dropdown">
 				<a href="<?= CATALOG_PATH ?>" class="dropdown-hover">
@@ -219,7 +222,63 @@ elseif ($arParams['TYPE'] == 'primary')
 					<li><a href="/about/howto/">Как купить</a></li>
 				</ul>
 			</li>
+        <?else:?>
+            <li class="menu-item-has-children ">
+                <a href="/about/">
+                    <span class="underline">Акции</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/about/">
+                    <span class="underline">Новинки</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/cat/laminate/">
+                    <span class="underline">Ламинат</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/cat/parquet/">
+                    <span class="underline">Паркетная доска</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/cat/massive/">
+                    <span class="underline">Массивная доска</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/cat/engineer/">
+                    <span class="underline">Инженерная доска</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children megamenu megamenu-fullwidth dropdown">
+                <a href="/" class="dropdown-hover">
+                    <span class="underline">Еще</span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="mega-col-6">
+                        <h3 class="megamenu-title">Деревянные полы<span class="caret"></span></h3>
+                        <ul class="dropdown-menu">
+                            <li><a href="/cat/piece/">Штучный паркет</a></li>
+                            <li><a href="/cat/modular/">Модульный паркет</a></li>
+                            <li><a href="/cat/terrace/">Террасная доска</a></li>
+                        </ul>
+                    </li>
+                    <li class="mega-col-6">
+                        <h3 class="megamenu-title">Сопутствующие товары<span class="caret"></span></h3>
+                        <ul class="dropdown-menu">
+                            <li><a href="/cat/plinth/">Плинтусы, порожки</a></li>
+                            <li><a href="/cat/glue/">Клей</a></li>
+                            <li><a href="/cat/oil/">Масла, лаки</a></li>
+                            <li><a href="/cat/other/">Разное</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
 		</ul>
+        <?endif;?>
 	</nav><?
 }
 ?>

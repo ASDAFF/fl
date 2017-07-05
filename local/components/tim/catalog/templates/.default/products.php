@@ -21,7 +21,7 @@ $isAdmin = $user->IsAdmin();
 		<div class="commerce-ordering-select">
 			<label class="hide" for="sort">Сортировка:</label>
 			<div class="form-flat-select">
-				<select id="sort" name="sort" class="orderby"><?
+				<select id="sort" name="sort" class="orderby cs-select cs-skin-elastic"><?
 
 					foreach ($component->sortParams as $key => $sort)
 					{
@@ -39,18 +39,28 @@ $isAdmin = $user->IsAdmin();
 		<div class="commerce-ordering-select">
 			<label class="hide" for="size">Show:</label>
 			<div class="form-flat-select">
-				<select id="size" name="size" class="per_page"><?
+                <select id="size" name="size" class="cs-select cs-skin-elastic per_page">
+                    <?
+                    foreach ($component->pageSizes as $size)
+                    {
+                        $selected = $size == $component->navParams['nPageSize'] ? ' selected' : '';?>
+                        <option value="<?= $size ?>"<?= $selected ?>><?= $size ?></option><?
+                    }
+                    ?>
+                </select>
 
-					foreach ($component->pageSizes as $size)
-					{
-						$selected = $size == $component->navParams['nPageSize'] ? ' selected' : '';
-
-						?>
-						<option value="<?= $size ?>"<?= $selected ?>><?= $size ?></option><?
-					}
-
-					?>
-				</select>
+<!--				<select id="size" name="size" class="per_page">--><?//
+//
+//					foreach ($component->pageSizes as $size)
+//					{
+//						$selected = $size == $component->navParams['nPageSize'] ? ' selected' : '';
+//
+//						?>
+<!--						<option value="--><?//= $size ?><!--"--><?//= $selected ?><!--><?//= $size ?><!--</option>--><?//
+//					}
+//
+//					?>
+<!--				</select>-->
 				<i class="fa fa-angle-down"></i>
 			</div>
 		</div>

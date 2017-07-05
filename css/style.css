@@ -3348,6 +3348,10 @@ input[type="button"].btn-block {
     transform: translate(0, -50%);
     margin-top: -2px;
 }
+.header-type-classic .primary-nav > li > a:hover {
+    background: #7a3031;
+    color: #fff;
+}
 @media (min-width: 900px) {
     .primary-nav > .megamenu > .dropdown-menu {
         background: #ffffff;
@@ -3523,7 +3527,7 @@ input[type="button"].btn-block {
 }
 @media (min-width: 900px) {
     .header-type-classic .primary-nav > li > a {
-        padding: 0 25px;
+        padding: 0 17px;
         line-height: 55px;
         text-transform: uppercase;
     }
@@ -6613,7 +6617,7 @@ a[data-toggle="tooltip"]:hover {
     }
 }
 .header-type-classic .navbar-default .primary-navbar-collapse {
-    width: 50%;
+    width: 70%; text-align: left;
     float: left;
     padding: 0;
 }
@@ -7022,6 +7026,7 @@ a[data-toggle="tooltip"]:hover {
         background: rgba(0, 0, 0, 0);
         border-color: rgba(255, 255, 255, 0);
         border-width: 0 0 0px 0;
+        background-color: #e7e4d1;
     }
     .header-transparent .navbar-default:not(.navbar-fixed-top).navbar-fixed-top {
         background: #f8f9fb;
@@ -7092,6 +7097,7 @@ a[data-toggle="tooltip"]:hover {
 }
 .heading-container .heading-parallax.bg-shop {
     background-image: url('/i/bg.jpg');
+    background: none!important;
 }
 @media (min-width: 480px) {
     .heading-container .heading-background .heading-wrap {
@@ -10098,15 +10104,14 @@ img.grayscale:hover {
 .elTop-phone-text {    margin-top: 5px;
     font-size: 14px;    font-weight: 800;
     text-align: right;
-    display: block;
-    width: 100%;
-    color: #252525;}
+    display: inline-block;
+    color: #7a3031;
+    border-bottom: 2px solid #7a3031;}
 .elTop-phone-number {font-size: 24px;
     font-weight: 800;
     text-align: right;
     display: block;
     width: 100%;
-    background: #e5c063;
     color: #313033;
     padding: 5px;}
 
@@ -10124,12 +10129,31 @@ img.grayscale:hover {
     top: 7px;}
 
 
-.elTop-menu {text-align: right;}
+.elTop-menu {text-align: left;}
 .elTop-menu a {display: inline-block; padding: 10px 15px;
     font-size: 13px; text-transform: uppercase;
 }
+.elTop-menu a:hover {
+    color: #ffffff;
+    background: #501b1c;
+}
 
-.user-login {padding: 10px 17px 10px 0; text-align: right;}
+
+.user-login { text-align: right;}
+.user-login ul li a {
+    display: inline-block;
+    padding: 10px 17px 9px 17px;
+}
+.user-login ul li a:hover {
+    color: #ffffff;
+    background: #501b1c;
+}
+
+.mag-inf {
+    font-size: 13px;
+    line-height: 17px;
+    padding: 6px;
+}
 
 .elTop-blocks {display: table;width: 100%;}
 .elTop-blocks .block {display: table-cell; position: relative; padding: 0 15px; width: 20%; vertical-align: middle;
@@ -10139,6 +10163,8 @@ img.grayscale:hover {
     background: #a99789;}
 .elTop-blocks .block:first-child:before {display: none;}
 
+.elTop-blocks .block a {display: block; text-align: right;}
+
 @media (max-width: 900px) {
     .elTop-blocks {display: none;}
 }
@@ -10147,3 +10173,22 @@ img.grayscale:hover {
 
 .elIndexBlock-dost-text {font-size: 18px;}
 .elIndexBlock-dost-img {box-shadow: 7px 7px 0 0 #945c57;}
+
+
+div.cs-skin-elastic {
+    font-size: 15px;
+    font-weight: 400;}
+.cs-select span {
+    color: #292929;
+    padding: 4px 25px;
+}
+.cs-skin-elastic > span {border: 1px solid #cccccc;}
+.cs-skin-elastic .cs-options span {
+    padding: 5px 15px 4px 10px; text-align: left;
+}
+.cs-skin-elastic .cs-options span:hover {
+    background: rgba(122, 48, 49, 0.1);
+}
+.cs-skin-elastic > span {padding: 4px 52px 4px 10px;}
+
+.cs-skin-elastic > span::after {content: '\25BE';}
