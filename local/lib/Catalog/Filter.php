@@ -133,6 +133,12 @@ class Filter
 			'MULTI' => true,
 			'MAX' => 6,
 		];
+		$return[] = [
+			'NAME' => 'Класс защиты',
+			'TYPE' => 'protection',
+			'ITEMS' => Protection::getGroup(),
+			'MULTI' => true,
+		];
 
 
 		return $return;

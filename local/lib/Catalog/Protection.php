@@ -41,7 +41,7 @@ class Protection
 			$extCache->startDataCache();
 
 			$iblockElement = new \CIBlockElement();
-			$rsItems = $iblockElement->GetList([], [
+			$rsItems = $iblockElement->GetList(['SORT' => 'asc'], [
 				'IBLOCK_ID' => self::IBLOCK_ID,
 			    'ACTIVE' => 'Y',
 			], false, false, [

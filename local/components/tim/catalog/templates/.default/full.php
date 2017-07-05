@@ -91,7 +91,7 @@ function printSection($section, $items)
 			<input type="hidden" name="catalog_path" value="<?= CATALOG_PATH ?>">
             <input type="hidden" name="separator" value="<?= $filter['SEPARATOR'] ?>"><?
 
-			$closed = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1];
+			$closed = [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 			if (isset($_COOKIE['filter_groups']))
 				$closed = explode(',', $_COOKIE['filter_groups']);
 
