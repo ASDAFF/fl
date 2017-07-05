@@ -68,6 +68,7 @@ class Offer
 			    'PROPERTY_DIM',
 			    'PROPERTY_COATING',
 			    'PROPERTY_PROTECTION',
+			    'PROPERTY_PICTURE_KIND',
 			    'PROPERTY_PRICE',
 			    'PROPERTY_PRICE_P',
 			    'PROPERTY_L',
@@ -98,6 +99,7 @@ class Offer
 					'COLOR' => $item['PROPERTY_COLOR_VALUE'],
 					'ARTICLE' => $item['PROPERTY_ARTICLE_VALUE'],
 				    'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
+				    'PICTURE_KIND' => intval($item['PROPERTY_PICTURE_KIND_VALUE']),
 				    'UNIT' => intval($item['PROPERTY_UNIT_VALUE']),
 				    'COLLECTION' => intval($item['PROPERTY_COLLECTION_VALUE']),
 				    'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
@@ -211,6 +213,7 @@ class Offer
 				$return['COUNTRY'][$offer['COUNTRY']]++;
 				$return['WOOD'][$offer['WOOD']]++;
 				$return['PROTECTION'][$offer['PROTECTION']]++;
+				$return['PICTURE_KIND'][$offer['PICTURE_KIND']]++;
 
 				foreach (Flags::getCodes() as $code)
 				{
@@ -253,6 +256,7 @@ class Offer
 			'PROPERTY_WOOD',
 			'PROPERTY_COLOR',
 			'PROPERTY_PROTECTION',
+			'PROPERTY_PICTURE_KIND',
 			'PROPERTY_PRICE',
 			'PROPERTY_PRICE_P',
 		];
@@ -297,6 +301,7 @@ class Offer
 				'WOOD' => intval($item['PROPERTY_WOOD_VALUE']),
 				'COLOR' => intval($item['PROPERTY_COLOR_VALUE']),
 				'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
+				'PICTURE_KIND' => intval($item['PROPERTY_PICTURE_KIND_VALUE']),
 			];
 			foreach ($codes as $code)
 				$fields['FLAGS'][$code] = intval($item['PROPERTY_' . $code . '_VALUE']);
@@ -401,6 +406,10 @@ class Offer
 				elseif ($k == 'PROTECTION')
 				{
 					$bitrixFilter['PROPERTY_PROTECTION'] = $v;
+				}
+                elseif ($k == 'PICTURE_KIND')
+				{
+					$bitrixFilter['PROPERTY_PICTURE_KIND'] = $v;
 				}
 				elseif ($k == 'ID')
 				{
@@ -602,23 +611,23 @@ class Offer
 			$offer = self::getById($offerId);
 			if ($offer)
 			{
-				$title = '';
-				$text = '';
+				$title = $arFields['TITLE'];
+				$text = $arFields['BODY'];
 
 				$sections = Section::getChain($offer['SECTION']);
 				foreach ($sections as $i => $section)
 					if ($i)
-						$title .= $section['NAME'] . ' ';
+						$title .= $section['NAME'];
 				$brand = Brand::getById($offer['BRAND']);
-				$title .= $brand['NAME'] . ' ';
+				$title .= ' ' . $brand['NAME'];
 				$country = Country::getById($offer['COUNTRY']);
-				$text .= $country['NAME'] . ' ';
+				$text .= ' ' . $country['NAME'];
 				$wood = Wood::getById($offer['WOOD']);
-				$text .= $wood['NAME'] . ' ';
-				$text .= $offer['ARTICLE'] . ' ';
+				$text .= ' ' . $wood['NAME'];
+				$text .= ' ' . $offer['ARTICLE'];
 				$coating = Coating::getById($offer['COATING']);
-				$text .= $coating['NAME'] . ' ';
-				$text .= $offer['DIM'] . ' ';
+				$text .= ' ' . $coating['NAME'];
+				$text .= ' ' . $offer['DIM'];
 
 				$arFields['TITLE'] = $title;
 				$arFields['BODY'] = $text;

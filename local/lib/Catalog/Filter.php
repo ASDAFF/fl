@@ -139,7 +139,12 @@ class Filter
 			'ITEMS' => Protection::getGroup(),
 			'MULTI' => true,
 		];
-
+		$return[] = [
+			'NAME' => 'Вид рисунка',
+			'TYPE' => 'picture',
+			'ITEMS' => Pkind::getGroup(),
+			'MULTI' => true,
+		];
 
 		return $return;
 	}
