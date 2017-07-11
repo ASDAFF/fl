@@ -27,8 +27,8 @@ if (!count($items['ITEMS']))
         <h3 class="el-heading">Хиты</h3>
     </div>
     <div class="caroufredsel-wrap">
-        <div class="commerce columns-4">
-            <ul class="products columns-4" data-columns="4"><?
+        <div class="commerce columns-3">
+            <ul class="products columns-3" data-columns="3"><?
 
                 $file = new \CFile();
                 $cnt = 0;
