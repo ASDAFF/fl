@@ -69,6 +69,7 @@ class Offer
 			    'PROPERTY_COATING',
 			    'PROPERTY_PROTECTION',
 			    'PROPERTY_PICTURE_KIND',
+			    'PROPERTY_PRICE_WO_DISCOUNT',
 			    'PROPERTY_PRICE',
 			    'PROPERTY_PRICE_P',
 			    'PROPERTY_L',
@@ -103,6 +104,7 @@ class Offer
 				    'UNIT' => intval($item['PROPERTY_UNIT_VALUE']),
 				    'COLLECTION' => intval($item['PROPERTY_COLLECTION_VALUE']),
 				    'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
+				    'PRICE_WO_DISCOUNT' => intval($item['PROPERTY_PRICE_WO_DISCOUNT_VALUE']),
 				    'PRICE_P' => intval($item['PROPERTY_PRICE_P_VALUE']),
 				    'PREVIEW_TEXT' => $item['PREVIEW_TEXT'],
 				    'DETAIL_TEXT' => $item['DETAIL_TEXT'],
@@ -258,7 +260,7 @@ class Offer
 			'PROPERTY_PROTECTION',
 			'PROPERTY_PICTURE_KIND',
 			'PROPERTY_PRICE',
-			'PROPERTY_PRICE_P',
+			'PROPERTY_PRICE_WO_DISCOUNT',
 		];
 		$flagsSelect = Flags::getForSelect();
 		$select = array_merge($select, $flagsSelect);
@@ -272,6 +274,7 @@ class Offer
 				'PROPERTY_RATING',
 				'PROPERTY_UNIT',
 				'PROPERTY_INPACK',
+				'PROPERTY_PRICE_P',
 			]);
 		}
 		if ($type > 1)
@@ -295,6 +298,7 @@ class Offer
 			$fields = [
 				'SECTION' => $sectionId,
 				'PRICE' => intval($item['PROPERTY_PRICE_VALUE']),
+				'PRICE_WO_DISCOUNT' => intval($item['PROPERTY_PRICE_WO_DISCOUNT_VALUE']),
 				'BRAND' => intval($item['PROPERTY_BRAND_VALUE']),
 				'COLLECTION' => intval($item['PROPERTY_COLLECTION_VALUE']),
 				'COUNTRY' => intval($item['PROPERTY_COUNTRY_VALUE']),
@@ -596,6 +600,101 @@ class Offer
 	public static function viewedCounters($offerId)
 	{
 		\CIBlockElement::CounterInc($offerId);
+	}
+
+	/**
+	 * Возвращает цену с учетом скидки и описание скидки для заданного товара
+	 * @param $productId
+	 * @param $price
+	 * @return array
+	 */
+	public static function getDiscounts($productId, $price) {
+		$discounts = \CCatalogDiscount::GetDiscount(
+			$productId,
+			self::IBLOCK_ID,
+			array(1),
+			array(2),
+			'N',
+			's1',
+			array()
+		);
+		$discountPrice = \CCatalogProduct::CountPriceWithDiscount(
+			intval($price),
+			'RUB',
+			$discounts
+		);
+		$discountText = '';
+		foreach ($discounts as $tmp)
+		{
+			$discountText = $tmp['NAME'];
+			break;
+		}
+
+		return array(
+			'PRICE' => intval($discountPrice),
+			'TEXT' => $discountText,
+		);
+	}
+
+	/**
+	 * Корректирует цены товаров после изменения скидок в системе
+	 * считается что пользователь принадлежит только группе 2 (все пользователи)
+	 */
+	public static function setSortPriceAllProducts()
+	{
+		$iblockElement = new \CIBlockElement();
+		$clearCache = false;
+		$bitrixFilter = [
+			'IBLOCK_ID' => self::IBLOCK_ID,
+		];
+		$offers = self::getOffers(0, $bitrixFilter);
+		foreach ($offers['ITEMS'] as $offerId => $offer)
+		{
+			$discounts = self::getDiscounts($offerId, $offer['PRICE_WO_DISCOUNT']);
+			if ($offer['PRICE'] != $discounts['PRICE'])
+			{
+				debugmessage($offerId . ': ' . $offer['PRICE'] . ' - ' . $discounts['PRICE']);
+				$iblockElement->SetPropertyValuesEx($offerId, self::IBLOCK_ID, array(
+					'PRICE' => $discounts['PRICE'],
+					//'ACTION' => $discounts['PRICE'] < $item['PRICE_WO_DISCOUNT'] ? 1 : 0,
+					//'ACTION_TEXT' => $discounts['TEXT'],
+				));
+				$clearCache = true;
+			}
+		}
+
+		if ($clearCache)
+		{
+
+		}
+	}
+
+	/**
+	 * Обрабочик изменения цены для заданного элемента (товара или предложения)
+	 * @param $offerId
+	 */
+	public static function priceChange($offerId) {
+	    $offer = self::getById($offerId, true);
+		if ($offer)
+		{
+		    $pr = \CPrice::GetBasePrice($offerId);
+		    if ($pr)
+			{
+				$price = intval($pr['PRICE']);
+				$discounts = self::getDiscounts($offer['ID'], $price);
+				$update = [];
+				if ($offer['PRICE'] != $discounts['PRICE'])
+					$update['PRICE'] = $discounts['PRICE'];
+				if ($offer['PRICE_WO_DISCOUNT'] != $price)
+					$update['PRICE_WO_DISCOUNT'] = $price;
+
+				if ($update)
+				{
+					$iblockElement = new \CIBlockElement();
+					$iblockElement->SetPropertyValuesEx($offer['ID'], self::IBLOCK_ID, $update);
+				}
+			}
+		}
 	}
 
 	/**

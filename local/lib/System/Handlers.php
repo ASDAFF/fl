@@ -20,6 +20,18 @@ class Handlers
 			$added = true;
 			AddEventHandler('iblock', 'OnIBlockPropertyBuildList',
 				[__NAMESPACE__ . '\Handlers', 'addYesNo']);
+			AddEventHandler('catalog', 'OnDiscountAdd',
+				array(__NAMESPACE__ . '\Handlers', 'discountAdd'));
+			AddEventHandler('catalog', 'OnDiscountUpdate',
+				array(__NAMESPACE__ . '\Handlers', 'discountUpdate'));
+			AddEventHandler('catalog', 'OnDiscountDelete',
+				array(__NAMESPACE__ . '\Handlers', 'discountDelete'));
+			AddEventHandler('catalog', 'OnPriceAdd',
+				array(__NAMESPACE__ . '\Handlers', 'priceAdd'));
+			AddEventHandler('catalog', 'OnPriceUpdate',
+				array(__NAMESPACE__ . '\Handlers', 'priceUpdate'));
+			AddEventHandler('iblock', 'OnAfterIBlockElementUpdate',
+				array(__NAMESPACE__ . '\Handlers', 'afterElementUpdate'));
 			AddEventHandler('main', 'OnAfterUserLogout',
 				array(__NAMESPACE__ . '\Handlers', 'afterUserLogout'));
 			AddEventHandler('main', 'OnAfterUserLogin',
@@ -36,6 +48,49 @@ class Handlers
 	public static function addYesNo()
 	{
 		return UserTypeNYesNo::GetUserTypeDescription();
+	}
+
+	/**
+	 * Корректировка цен товаров после добавления, редактирования или удаления скидок
+	 */
+	public static function discountAdd() {
+		Offer::setSortPriceAllProducts();
+	}
+	public static function discountUpdate() {
+		Offer::setSortPriceAllProducts();
+	}
+	public static function discountDelete() {
+		Offer::setSortPriceAllProducts();
+	}
+
+	/**
+	 * Обработчик добавления цены
+	 * @param $ID
+	 * @param $fields
+	 */
+	public static function priceAdd(/** @noinspection PhpUnusedParameterInspection */$ID, $fields) {
+		if ($fields['PRODUCT_ID'])
+			Offer::priceChange($fields['PRODUCT_ID']);
+	}
+
+	/**
+	 * Обрабочик изменения цены
+	 * @param $ID
+	 * @param $fields
+	 */
+	public static function priceUpdate(/** @noinspection PhpUnusedParameterInspection */$ID, $fields) {
+		if ($fields['PRODUCT_ID'])
+			Offer::priceChange($fields['PRODUCT_ID']);
+	}
+
+	/**
+	 * обработчик изменения элемента
+	 * @param $arFields
+	 */
+	public static function afterElementUpdate($arFields) {
+		// нужно обновить цену товара (вдруг ее вручную кто-то поменял)
+		if ($arFields['IBLOCK_ID'] == Offer::IBLOCK_ID)
+			Offer::priceChange($arFields['ID']);
 	}
 
 	/**

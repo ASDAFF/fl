@@ -123,13 +123,6 @@ $isAdmin = $user->IsAdmin();
 				<h1 class="product_title entry-title"><?= $offer['NAME'] ?></h1>
 				<p class="price"><?
 
-					// TODO: старая цена
-					if (false)
-					{
-						?>
-						<del><span class="amount"><?= 1 ?>  руб.</span></del><?
-					}
-
 					$unit = \Local\Catalog\Unit::getById($offer['UNIT']);
 					$forUnit = '';
 					$labelUnit = '';
@@ -140,12 +133,22 @@ $isAdmin = $user->IsAdmin();
 					}
 
 					$price = number_format($offer['PRICE'], 0, '', ' ');
+					$dPrice = '';
+					if ($offer['PRICE_WO_DISCOUNT'] > $offer['PRICE'])
+						$dPrice = number_format($offer['PRICE_WO_DISCOUNT'], 0, '', ' ');
 					$pPrice = '';
 					if ($isAdmin && $offer['PRICE_P'])
 					{
 						$pPrice = number_format($offer['PRICE_P'], 0, '', ' ');
 						$pPrice = ' (' . $pPrice . ' руб.)';
 					}
+
+					if ($dPrice)
+					{
+						?>
+                        <del><span class="amount"><?= $dPrice ?>  руб.</span></del><?
+					}
+
 					?>
 					<ins><span class="amount"><?= $price ?> руб.<?= $forUnit ?><?= $pPrice ?></span></ins>
 				</p>

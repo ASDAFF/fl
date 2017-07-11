@@ -23,6 +23,9 @@ $isAdmin = $user->IsAdmin();
 			$img2 = $file->GetFileArray($item['DETAIL_PICTURE']);
 			$rating = $item['RATING'] ? $item['RATING'] : 60;
 			$price = number_format($item['PRICE'], 0, '', ' ');
+			$dPrice = '';
+			if ($item['PRICE_WO_DISCOUNT'] > $item['PRICE'])
+				$dPrice = number_format($item['PRICE_WO_DISCOUNT'], 0, '', ' ');
 			$pPrice = '';
 			if ($isAdmin && $item['PRICE_P'])
 			{
@@ -80,7 +83,15 @@ $isAdmin = $user->IsAdmin();
                                     </h3>
 
                                     <div class="info-price">
-                                        <span class="price">
+                                        <span class="price"><?
+
+											if ($dPrice)
+											{
+												?>
+                                                <del><span class="amount"><?= $dPrice ?> руб.</span></del><?
+											}
+
+											?>
                                             <span class="amount"><?= $price ?> руб.<?= $pPrice ?></span>
                                         </span>
                                     </div>

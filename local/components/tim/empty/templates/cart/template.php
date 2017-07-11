@@ -40,6 +40,9 @@ $cart = \Local\Sale\Cart::getCart();
 						$offer = \Local\Catalog\Offer::getById($item['OFFER']);
 						$img = $file->GetFileArray($offer['PREVIEW_PICTURE']);
 						$price = number_format($item['PRICE'], 0, '', ' ');
+						$dPrice = '';
+						if ($offer['PRICE_WO_DISCOUNT'] > $item['PRICE'])
+							$dPrice = number_format($offer['PRICE_WO_DISCOUNT'], 0, '', ' ');
 						$sum = number_format($item['PRICE'] * $item['QNT'], 0, '', ' ');
 						$unit = \Local\Catalog\Unit::getById($offer['UNIT']);
 						$forUnit = '';
@@ -75,7 +78,15 @@ $cart = \Local\Sale\Cart::getCart();
 
                                 ?>
                             </td>
-                            <td class="product-price text-center">
+                            <td class="product-price text-center"><?
+
+								if ($dPrice)
+								{
+									?>
+                                    <del><span class="amount"><?= $dPrice ?> руб.<?= $forUnit ?></span></del><br /><?
+								}
+
+								?>
                                 <span class="amount"><?= $price ?> руб.<?= $forUnit ?></span>
                             </td>
                             <td class="product-quantity text-center">
