@@ -1,10 +1,8 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	die();
-
 /** @var CMain $APPLICATION */
 /** @var CUser $USER */
-
 $isCatalog = defined('CATALOG_PAGES') && CATALOG_PAGES === true;
 $isIndex = defined('INDEX_PAGE') && INDEX_PAGE === true;
 $isCart = defined('CART_PAGE') && CART_PAGE === true;
@@ -20,8 +18,11 @@ $isAuthorized = $USER->IsAuthorized();
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-KZSDKVK');</script>
     <!-- End Google Tag Manager -->
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta name="geo.placename" content="Малый Левшинский пер., 10, Москва, Россия, 119034" />
+    <meta name="geo.position" content="55.7417850;37.5903110" />
+    <meta name="geo.region" content="RU-" />
+    <meta name="ICBM" content="55.7417850, 37.5903110" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 	<title><? $APPLICATION->ShowTitle() ?></title>
 	<link rel="shortcut icon" href="/favicon.png"><?
 
@@ -74,6 +75,9 @@ $isAuthorized = $USER->IsAuthorized();
 	$assets->addJs('/js/catalog.js');
     $assets->addJs('/js/engine-select-classie.js');
     $assets->addJs('/js/engine-select-selectFx.js');
+    
+    //ecommerce
+    \WM\Seo\ECommerce::get()->show();
 
 	?>
 </head>
@@ -164,20 +168,24 @@ $isAuthorized = $USER->IsAuthorized();
     <div class="container">
         <div class="elTop-blocks">
         <div class="block">
-            <a href="/">
+            <a <?if ($APPLICATION->GetCurDir()!==SITE_DIR) echo 'href="/"'?>>
                 <img class="logo" alt="" src="/images/logo.png">
             </a>
         </div>
         <div class="block">
-            Быстро доставляем заказы по всей России
+            <div class="icon"><img src="/images/head-block-1.png"></div>
+            <div class="text">Быстро доставляем заказы по всей России</div>
         </div>
         <div class="block">
-            Более 7000 образцов от 100 производителей
+            <div class="icon"><img src="/images/head-block-2.png"></div>
+            <div class="text">Более 7000 образцов от 100 производителей</div>
         </div>
         <div class="block">
-            Бесплатная доставка от 50м<small>2</small>
+            <div class="icon"><img src="/images/head-block-3.png"></div>
+            <div class="text">Бесплатная доставка от 50м<small>2</small></div>
         </div>
         <div class="block">
+			<a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
             <a href="tel:+79299324230" class="elTop-phone-number">+7 (495) 532 79 74</a>
             <a href="#elFormPhone" class="popup-inline">
                 <span class="elTop-phone-text">Бесплатный звонок</span>

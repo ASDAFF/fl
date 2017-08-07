@@ -50,109 +50,144 @@ $isAdmin = $user->IsAdmin();
 <div class="container">
 	<div class="row summary-container">
 		<div class="col-md-7 col-sm-6 entry-image">
-			<div class="single-product-images"><?
+            <div class="single-product-images"><?
 
-				// TODO: акция
-				if (false)
-				{
-					?>
-					<span class="onsale">Акция!</span><?
-				}
+                // TODO: акция
+                if (false)
+                {
+                    ?>
+                    <span class="onsale">Акция!</span><?
+                }
 
-				?>
-				<div class="single-product-images-slider">
-					<div class="caroufredsel product-images-slider"
-					     data-synchronise=".single-product-images-slider-synchronise" data-scrollduration="500"
-					     data-height="variable" data-scroll-fx="none" data-visible="1" data-circular="1"
-					     data-responsive="1">
-						<div class="caroufredsel-wrap">
-							<ul class="caroufredsel-items"><?
+                ?>
+                <div class="single-product-images-slider">
+                    <div class="caroufredsel product-images-slider"
+                         data-synchronise=".single-product-images-slider-synchronise" data-scrollduration="500"
+                         data-height="variable" data-scroll-fx="none" data-visible="1" data-circular="1"
+                         data-responsive="1">
+                        <div class="caroufredsel-wrap">
+                            <ul class="caroufredsel-items"><?
 
                                 $images = $offer['PHOTOS'];
-								$file = new \CFile();
-								foreach ($images as $img)
-								{
-									$resize = $file->ResizeImageGet($img, ['width' => 1000, 'height' => 1000]);
+                                $file = new \CFile();
+                                foreach ($images as $img)
+                                {
+                                    $resize = $file->ResizeImageGet($img, ['width' => 1000, 'height' => 1000]);
 
-									?>
-									<li class="caroufredsel-item">
-										<a href="<?= $resize['src'] ?>"
-										   data-rel="magnific-popup-verticalfit">
-											<img width="600" height="685" src="<?= $resize['src'] ?>" />
-										</a>
-									</li><?
-								}
+                                    ?>
+                                    <li class="caroufredsel-item">
+                                        <a href="<?= $resize['src'] ?>"
+                                           data-rel="magnific-popup-verticalfit">
+                                            <img width="600" height="685" src="<?= $resize['src'] ?>" />
+                                        </a>
+                                    </li><?
+                                }
 
-								?>
-							</ul>
-							<a href="#" class="caroufredsel-prev"></a>
-							<a href="#" class="caroufredsel-next"></a>
-						</div>
-					</div>
-				</div>
-				<div class="single-product-thumbnails">
-					<div class="caroufredsel product-thumbnails-slider" data-visible-min="2" data-visible-max="4"
-					     data-scrollduration="500" data-direction="up" data-height="100%" data-circular="1"
-					     data-responsive="0">
-						<div class="caroufredsel-wrap">
-							<ul class="single-product-images-slider-synchronise caroufredsel-items"><?
+                                ?>
+                            </ul>
+                            <a href="#" class="caroufredsel-prev"></a>
+                            <a href="#" class="caroufredsel-next"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-product-thumbnails">
+                    <div class="caroufredsel product-thumbnails-slider" data-visible-min="2" data-visible-max="4"
+                         data-scrollduration="500" data-direction="up" data-height="100%" data-circular="1"
+                         data-responsive="0">
+                        <div class="caroufredsel-wrap">
+                            <ul class="single-product-images-slider-synchronise caroufredsel-items"><?
 
-								foreach ($images as $img)
-								{
-									$resize = $file->ResizeImageGet($img, ['WIDTH' => 72, 'HEIGHT' => 72]);
+                                foreach ($images as $img)
+                                {
+                                    $resize = $file->ResizeImageGet($img, ['WIDTH' => 72, 'HEIGHT' => 72]);
 
-									?>
-									<li class="caroufredsel-item selected">
-										<div class="thumb">
-											<a href="#" data-rel="0">
-												<img src="<?= $resize['src'] ?>" />
-											</a>
-										</div>
-									</li><?
-								}
+                                    ?>
+                                    <li class="caroufredsel-item selected">
+                                        <div class="thumb">
+                                            <a href="#" data-rel="0">
+                                                <img src="<?= $resize['src'] ?>" />
+                                            </a>
+                                        </div>
+                                    </li><?
+                                }
 
-								?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <? /*
+            <div class="row">
+                <div class="after-slider-list">
+                    <a class="rk-text-underline"><span class="rk-icon add-chat"></span> <span>Чат с экспертом</span></a>
+                    <a class="rk-text-underline"><span class="rk-icon add-auto"></span> <span>Доставка</span></a>
+                    <a class="rk-text-underline"><span class="rk-icon add-phone"></span> <span>Позвоните мне</span></a>
+                    <a class="rk-text-underline"><span class="rk-icon add-money"></span> <span>Оплата</span></a>
+                    <a class="rk-text-underline"><span class="rk-icon add-compare"></span> <span>Сравнить</span></a>
+                    <a class="rk-text-underline"><span class="rk-icon add-services"></span> <span>Услуги</span></a>
+                </div>
+            </div>
+            */
+            ?>
+            <div class="row">
+                <div class="_tabs">
+                    <ul class="_tabs-nav _underlines">
+                        <li><a href="#elIndex-news-1"><span>Описание</span></a></li>
+                        <li><a href="#elIndex-news-2"><span>Отзывы</span></a></li>
+                    </ul>
+                    <div class="_tabs-content css-padding">
+                        <div class="_tab" id="elIndex-news-1">
+                            <div class="_tab_content">
+                                <p>
+                                    Данных нет.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="_tab" id="elIndex-news-2">
+                            <div class="_tab_content">
+                                <p>Данных нет.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="features-menu">
+                    <ul>
+                        <li><a> <i class="icon icon-2">&nbsp;</i> </a>
+                            <div><a>Бесплатная доставка по Москве </a></div>
+                        </li>
+                        <li><a> <i class="icon icon-3">&nbsp;</i> </a>
+                            <div><a>Возврат-обмен товара </a></div>
+                        </li>
+                        <li><a> <i class="icon icon-4">&nbsp; </i> </a>
+                            <div><a>Бесплатное хранение товара </a></div>
+                        </li>
+                        <li><a> <i class="icon icon-5">&nbsp;</i> </a>
+                            <div><a>Расширенная гарантия </a></div>
+                        </li>
+                        <li><a> <i class="icon icon-6">&nbsp;</i> </a>
+                            <div><a>Любые аксессуары в цвет пола </a></div>
+                        </li>
+                        <? /*
+                        <li><a> <i class="icon icon-7">&nbsp;</i> </a>
+                            <div><a>Гарантия<br> лучшей цены </a></div>
+                        </li>
+                        <li><a class="features-menu-readmore" href="info/pochemu_my.html"><i class="icon">&nbsp;</i> </a>
+                            <div><a class="features-menu-readmore" href="info/pochemu_my.html">Посмотреть<br> все преимущества </a></div>
+                            <a class="features-menu-readmore" href="info/pochemu_my.html"> </a>
+                        </li>
+                        */ ?>
+                    </ul>
+                </div>
+            </div>
 		</div>
 		<div class="col-md-5 col-sm-6 entry-summary">
-			<div class="summary">
+			<div class="summary elDetail">
 				<h1 class="product_title entry-title"><?= $offer['NAME'] ?></h1>
-				<p class="price"><?
 
-					$unit = \Local\Catalog\Unit::getById($offer['UNIT']);
-					$forUnit = '';
-					$labelUnit = '';
-					if ($unit['SHOW'])
-					{
-						$forUnit = '/' . $unit['NAME'];
-						$labelUnit = ', ' . $unit['NAME'];
-					}
-
-					$price = number_format($offer['PRICE'], 0, '', ' ');
-					$dPrice = '';
-					if ($offer['PRICE_WO_DISCOUNT'] > $offer['PRICE'])
-						$dPrice = number_format($offer['PRICE_WO_DISCOUNT'], 0, '', ' ');
-					$pPrice = '';
-					if ($isAdmin && $offer['PRICE_P'])
-					{
-						$pPrice = number_format($offer['PRICE_P'], 0, '', ' ');
-						$pPrice = ' (' . $pPrice . ' руб.)';
-					}
-
-					if ($dPrice)
-					{
-						?>
-                        <del><span class="amount"><?= $dPrice ?>  руб.</span></del><?
-					}
-
-					?>
-					<ins><span class="amount"><?= $price ?> руб.<?= $forUnit ?><?= $pPrice ?></span></ins>
-				</p>
-				<div class="product_meta"><?
+				<div class="product_meta row"><?
 
 					$brand = \Local\Catalog\Brand::getById($offer['BRAND']);
 					$country = \Local\Catalog\Country::getById($offer['COUNTRY']);
@@ -227,6 +262,39 @@ $isAdmin = $user->IsAdmin();
 
 					?>
 				</div>
+                <p class="price">
+                    <b>Цена за упаковку: </b>
+                    <?
+
+                    $unit = \Local\Catalog\Unit::getById($offer['UNIT']);
+                    $forUnit = '';
+                    $labelUnit = '';
+                    if ($unit['SHOW'])
+                    {
+                        $forUnit = '/' . $unit['NAME'];
+                        $labelUnit = ', ' . $unit['NAME'];
+                    }
+
+                    $price = number_format($offer['PRICE'], 0, '', ' ');
+                    $dPrice = '';
+                    if ($offer['PRICE_WO_DISCOUNT'] > $offer['PRICE'])
+                        $dPrice = number_format($offer['PRICE_WO_DISCOUNT'], 0, '', ' ');
+                    $pPrice = '';
+                    if ($isAdmin && $offer['PRICE_P'])
+                    {
+                        $pPrice = number_format($offer['PRICE_P'], 0, '', ' ');
+                        $pPrice = ' (' . $pPrice . ' руб.)';
+                    }
+
+                    if ($dPrice)
+                    {
+                        ?>
+                        <del><span class="amount"><?= $dPrice ?>  руб.</span></del><?
+                    }
+
+                    ?>
+                    <ins><span class="amount"><?= $price ?> руб.<?= $forUnit ?><?= $pPrice ?></span></ins>
+                </p>
 				<div class="clear"></div>
                 <form class="cart" data-id="<?= $offer['ID'] ?>"><?
 
@@ -234,7 +302,7 @@ $isAdmin = $user->IsAdmin();
 					{
 						?>
                         <div class="add-to-cart-table">
-                            Сколько <?= $unit['NAME'] ?> вам нужно
+                            <div class="left-info">Сколько <?= $unit['NAME'] ?> вам нужно</div>
                             <div class="quantity">
                                 <input type="number" step="1" min="1" name="qty" value="<?= floor($offer['INPACK']) ?>"
                                        title="Количество<?= $labelUnit ?>" id="qty"
@@ -245,7 +313,7 @@ $isAdmin = $user->IsAdmin();
 
 					?>
                     <div class="add-to-cart-table">
-                        или сразу можно ввести количество упаковок
+                        <div class="left-info">или сразу можно ввести количество упаковок</div>
                         <div class="quantity">
                             <input type="number" step="1" min="1" name="cnt" value="1" title="Количество"
                                    class="input-text qty text" size="4" id="cnt" />
@@ -267,7 +335,7 @@ $isAdmin = $user->IsAdmin();
 							</span>
 							<span class="meta-sum">
 								Сумма:
-								<b id="js-total" data-price="<?= $offer['PRICE'] ?>"><?= $price ?></b> <b>руб.</b>
+								<b id="js-total" data-price="<?= $offer['PRICE'] ?>"><?= $price ?> руб.</b>
 							</span><?
 						}
 
@@ -275,6 +343,9 @@ $isAdmin = $user->IsAdmin();
 					</div>
                     <div class="add-to-cart-table">
                         <button type="submit" class="button">В корзину</button>
+                    </div>
+                    <div class="">
+                        <button type="submit" class="button button-white">ПОДЕЛИТЬСЯ КОРЗИНОЙ</button>
                     </div>
                 </form><?
 

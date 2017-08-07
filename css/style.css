@@ -10107,6 +10107,10 @@ img.grayscale:hover {
     display: inline-block;
     color: #7a3031;
     border-bottom: 2px solid #7a3031;}
+.elTop-phone-text:hover {
+    color: #000;
+    border-bottom: 2px solid #000;
+}
 .elTop-phone-number {font-size: 24px;
     font-weight: 800;
     text-align: right;
@@ -10156,14 +10160,20 @@ img.grayscale:hover {
 }
 
 .elTop-blocks {display: table;width: 100%;}
-.elTop-blocks .block {display: table-cell; position: relative; padding: 0 15px; width: 20%; vertical-align: middle;
-    font-size: 17px; line-height: 22px;}
-.elTop-blocks .block:before {content: ""; position: absolute;
-    width: 2px; left: 0; height: 45%;
+.elTop-blocks .block {display: table-cell; position: relative; padding: 0 10px; width: 23%; vertical-align: middle;
+    font-size: 15px; line-height: 22px;}
+.elTop-blocks .block .text:before {content: ""; position: absolute;
+    width: 2px; top: 0; left: 0; height: 100%;
     background: #a99789;}
 .elTop-blocks .block:first-child:before {display: none;}
+.elTop-blocks .block:first-child {width: 12%;}
+.elTop-blocks .block:last-child {width: 18%;}
 
 .elTop-blocks .block a {display: block; text-align: right;}
+
+.elTop-blocks .block .icon {display: table-cell; vertical-align: middle; padding-right: 10px;}
+.elTop-blocks .block .icon img {}
+.elTop-blocks .block .text {display: table-cell; vertical-align: middle; position: relative; padding-left: 10px;}
 
 @media (max-width: 900px) {
     .elTop-blocks {display: none;}
@@ -10192,3 +10202,11 @@ div.cs-skin-elastic {
 .cs-skin-elastic > span {padding: 4px 52px 4px 10px;}
 
 .cs-skin-elastic > span::after {content: '\25BE';}
+.feedback {
+    font-size: 18px;
+    text-align: center;
+}
+.feedback span {
+    font-size: 25px;
+    font-weight: 600;
+}

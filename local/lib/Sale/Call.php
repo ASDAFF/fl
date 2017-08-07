@@ -52,11 +52,11 @@ class Call
 			else
 				$errors[] = 'Ошибка добавления заявки. Свяжитесь с администрацией';
 		}
-
-		return array(
-			'errors' => implode('<br>', $errors),
-			'id' => $id,
-		);
+        return array(
+            'gtmObject' => \WM\Seo\GTMFormSubmit::get()->setEvent()->setElementId('elFormPhone')->setElements(array($name, $phone))->getResult(),
+            'errors' => implode('<br>', $errors),
+            'id' => $id,
+        );
 	}
 
 }

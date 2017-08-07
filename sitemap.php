@@ -14,7 +14,7 @@ $APPLICATION->SetTitle("Карта сайта");
 		"COL_NUM" => "1",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"LEVEL" => "0",
+		"LEVEL" => "3",
 		"SET_TITLE" => "Y",
 		"SHOW_DESCRIPTION" => "N",
 		"COMPONENT_TEMPLATE" => ".default"

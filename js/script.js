@@ -980,3 +980,58 @@
 	});
 
 })(jQuery);
+
+jQuery(document).ready(function() {
+    _tabs.init(); /* Табы
+	 ._tabs-nav : Стиль меню >li>a id ='val'
+	 ._tabs : Табы переключения div id ='val'
+	 */
+});
+
+var _tabs = {
+    init: function () {
+        this.tabs = jQuery('._tabs');
+        this.tabsNav = jQuery('._tabs-nav');
+        this.tabsContent = jQuery('._tabs-content');
+
+        this.tabsNav_ar = this.tabsNav.find('a');
+        this.tabsContent_ar = this.tabsContent.find('._tab');
+
+        _tabs.load();
+
+        this.tabsNav_ar.each(function(index, element){
+            jQuery(element).on('click', _tabs.click);
+        });
+    },
+    load: function () {
+        _tabs.tabs.each(function(index, element){
+            jQuery(element).attr('_tabs-data-id',index);
+
+            jQuery(element).find('._tab').removeClass('active');
+
+            if(jQuery(element).find('a.active').length !== Number(1)){
+                jQuery(element).find('a').removeClass('active');
+                jQuery(element).find('a').filter(':first').addClass('active');
+            }
+
+            var id = jQuery(element).find('a.active').attr('href');
+            jQuery(element).find('._tab'+id).addClass('active');
+        });
+    },
+    click: function (e){
+        e.preventDefault();
+        var id = jQuery(this).attr("href"),
+            tab = _tabs.tabsContent.find(id),
+            tabs = tab.parents('._tabs[_tabs-data-id]');
+
+        _tabs.update(tabs);
+
+        jQuery(this).addClass('active');
+        tab.addClass('active');
+
+    },
+    update: function (_this) {
+        _this.find('._tabs-nav a').removeClass('active');
+        _this.find('._tabs-content ._tab').removeClass('active');
+    }
+};

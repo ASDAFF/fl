@@ -701,9 +701,15 @@ var Call = {
 		var form = jQuery(this);
 		var result = form.find('.result');
 		jQuery.post('/ajax/call.php', form.serialize(), function(resp) {
+
 			if (resp.id)
 			{
 				result.html('<p>Заявка принята. Мы вам скоро перезвоним</p>');
+				if(resp.gtmObject)
+				{
+					window.dataLayer = window.dataLayer || [];
+					window.dataLayer.push(resp.gtmObject);
+				}
 			}
 			else
 				result.html(resp.errors);

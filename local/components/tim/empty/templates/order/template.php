@@ -18,6 +18,9 @@ if ($_REQUEST['id'])
     <p>Скоро с Вами свяжется наш менеджер для уточнения всех деталей</p><?
 
 	$APPLICATION->SetTitle("Заказ оформлен");
+
+	//set ecommerce
+	\WM\Seo\ECommerce::get()->setIblockId(1)->load((int) $_REQUEST['id'])->setViewContent();
 }
 else
 {

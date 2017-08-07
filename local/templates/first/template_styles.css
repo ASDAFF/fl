@@ -1,0 +1,9 @@
+.entry-image{
+z-index : 0;
+}
+.col-sm-12{
+z-index: 0;
+}
+.commerce ul.products:not(.masonry-products) li.product{
+z-index : 0;
+}
