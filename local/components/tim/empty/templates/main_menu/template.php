@@ -223,7 +223,7 @@ elseif ($arParams['TYPE'] == 'primary')
 				</ul>
 			</li>
         <?else:?>
-            <li class="menu-item-has-children ">
+            <?/*?><li class="menu-item-has-children ">
                 <a href="/about/">
                     <span class="underline">Акции</span> <span class="caret"></span>
                 </a>
@@ -232,7 +232,7 @@ elseif ($arParams['TYPE'] == 'primary')
                 <a href="/about/">
                     <span class="underline">Новинки</span> <span class="caret"></span>
                 </a>
-            </li>
+            </li><?*/?>
             <li class="menu-item-has-children ">
                 <a href="/cat/laminate/">
                     <span class="underline">Ламинат</span> <span class="caret"></span>
@@ -251,6 +251,11 @@ elseif ($arParams['TYPE'] == 'primary')
             <li class="menu-item-has-children ">
                 <a href="/cat/engineer/">
                     <span class="underline">Инженерная доска</span> <span class="caret"></span>
+                </a>
+            </li>
+            <li class="menu-item-has-children ">
+                <a href="/cat/cork/">
+                    <span class="underline">Пробковые полы</span> <span class="caret"></span>
                 </a>
             </li>
             <li class="menu-item-has-children megamenu megamenu-fullwidth dropdown">

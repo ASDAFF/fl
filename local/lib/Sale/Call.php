@@ -1,9 +1,6 @@
 <?
 namespace Local\Sale;
 
-use Bitrix\Main\Loader;
-use Local\Catalog\Offer;
-
 /**
  * Class Call Обратный звонок
  * @package Local\Sale

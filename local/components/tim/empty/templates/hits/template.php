@@ -27,12 +27,13 @@ if (!count($items['ITEMS']))
     <div class="caroufredsel-wrap">
         <div class="commerce columns-3">
             <ul class="products columns-3" data-columns="3">
-                <li class="product product-no-border style-2">
-                    <?
+                <li class="product product-no-border style-2"><?
+
                 $file = new \CFile();
                 $cnt = 0;
                 $columnCount = 0;
-                foreach ($items['ITEMS'] as $item) {
+                foreach ($items['ITEMS'] as $item)
+                {
                     if ($item['ID'] == $offer['ID'])
                         break;
 
@@ -51,14 +52,15 @@ if (!count($items['ITEMS']))
                     $wishCartId = \Local\Sale\Wish::getCartId($item['ID']);
                     $wlAdded = $wishCartId ? ' added' : '';
 
-                    ?>
-                    <?if ($columnCount == 3) {
+                    if ($columnCount == 3)
+                    {
                         $columnCount = 0;
                         ?>
                         </li>
-                        <li class="product product-no-border style-2">
-                    <?
-                    }?>
+                        <li class="product product-no-border style-2"><?
+                    }
+
+                        ?>
                         <div class="product-container">
                             <figure>
                                 <div class="product-wrap">
@@ -138,10 +140,10 @@ if (!count($items['ITEMS']))
                                     </div>
                                 </figcaption>
                             </figure>
-                        </div>
-                   <?
-                $columnCount++;
+                        </div><?
+                    $columnCount++;
                 }
+
                 ?>
                 </li>
             </ul>
