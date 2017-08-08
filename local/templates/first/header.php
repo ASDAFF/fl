@@ -129,7 +129,7 @@ $isAuthorized = $USER->IsAuthorized();
 	<div class="topbar">
 		<div class="container topbar-wap">
 			<div class="row">
-                <div class="col-sm-8 col-lg-8 col-md-6">
+                <div class="col-sm-6 col-lg-8 col-md-6">
                     <div class="elTop-menu">
                         <a href="/about/contacts/">Контакты</a>
                         <a href="/about/delivery/">Доставка</a>
@@ -137,13 +137,13 @@ $isAuthorized = $USER->IsAuthorized();
                         <a href="/about/howto/">Как купить</a>
                     </div>
                 </div>
-                <div class="col-sm-2 col-lg-2 col-md-3">
+                <div class="col-sm-3 col-lg-2 col-md-3">
                     <div class="mag-inf">
                         Режим работы:<br>
                         ежедневно с 7:30 до 22:00
                     </div>
                 </div>
-                <div class="col-sm-2 col-lg-2 col-md-3">
+                <div class="col-sm-3 col-lg-2 col-md-3">
                     <div class="user-login">
 
 

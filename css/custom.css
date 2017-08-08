@@ -1630,3 +1630,7 @@ del .amount {
   min-height: 32px;
   display: inline-block;
 }
+
+
+.content-container {padding-top: 0;}
+.heading-container .heading-standar .page-breadcrumb {padding-bottom: 0;}

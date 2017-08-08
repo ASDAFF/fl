@@ -3430,13 +3430,14 @@ input[type="button"].btn-block {
         left: 0 !important;
         top: 0 !important;
         opacity: 1 !important;
+        padding: 0;
     }
     .primary-nav > .megamenu > .dropdown-menu > li .dropdown-menu li {
         border: none;
     }
     .primary-nav > .megamenu > .dropdown-menu > li .dropdown-menu a {
         background: #ffffff;
-        padding-left: 8px;
+        padding: 2px 8px;
     }
     .primary-nav > .megamenu > .dropdown-menu > li .dropdown-menu a:hover {
         color: #7a3031;
@@ -10111,13 +10112,13 @@ img.grayscale:hover {
     color: #000;
     border-bottom: 2px solid #000;
 }
-.elTop-phone-number {font-size: 24px;
+.elTop-phone-number {font-size: 18px;
     font-weight: 800;
     text-align: right;
     display: block;
     width: 100%;
     color: #313033;
-    padding: 5px;}
+    padding: 1px 0;}
 
 .elTop-adress {vertical-align: top; letter-spacing: 1px;}
 .elTop-btn-abaut {margin-left: 10px;}
