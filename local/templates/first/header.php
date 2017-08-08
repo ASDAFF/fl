@@ -12,10 +12,10 @@ $isAuthorized = $USER->IsAuthorized();
 <html xml:lang="<?= LANGUAGE_ID ?>" lang="<?= LANGUAGE_ID ?>">
 <head><?
 
-	$APPLICATION->IncludeComponent('bitrix:main.include', '', [
+	/*$APPLICATION->IncludeComponent('bitrix:main.include', '', [
 		'AREA_FILE_SHOW' => 'file',
 		'PATH' => '/include/head_top.php'
-	]);
+	]);*/
 
     ?>
     <meta name="geo.placename" content="Малый Левшинский пер., 10, Москва, Россия, 119034" />
