@@ -263,7 +263,7 @@ $isAdmin = $user->IsAdmin();
 					?>
 				</div>
                 <p class="price">
-                    <b>Цена за упаковку: </b>
+                    <b>Цена: </b>
                     <?
 
                     $unit = \Local\Catalog\Unit::getById($offer['UNIT']);
@@ -283,7 +283,7 @@ $isAdmin = $user->IsAdmin();
                     if ($isAdmin && $offer['PRICE_P'])
                     {
                         $pPrice = number_format($offer['PRICE_P'], 0, '', ' ');
-                        $pPrice = ' (' . $pPrice . ' руб.)';
+                        $pPrice = ' (' . $pPrice . ' руб.' . $forUnit . ')';
                     }
 
                     if ($dPrice)
@@ -604,92 +604,7 @@ $isAdmin = $user->IsAdmin();
         </div>
     </div>
 </div>
-</div><?
-
-    /*
-    ?>
-<div class="woo-instagram">
-	<h3 class="heading-center-custom">
-		<span>Instashop</span>
-	</h3>
-
-	<div class="instagram">
-		<div class="instagram-wrap">
-			<div class="caroufredsel caroufredsel-item-no-padding" data-height="variable" data-scroll-fx="scroll"
-			     data-scroll-item="1" data-visible-min="1" data-visible-max="4" data-responsive="1" data-infinite="1"
-			     data-autoplay="0" data-circular="1">
-				<div class="caroufredsel-wrap">
-					<ul class="caroufredsel-items row">
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7HXbHJjB" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7GdlHJi-" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7F21HJi9" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7E8jHJi6" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7DlgnJi2" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7CicnJi1" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T7AWbHJiz" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T6_MAnJix" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T6-PbnJiw" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T69ipHJit" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T68pOHJiq" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-						<li class="caroufredsel-item col-sm-3 col-xs-6">
-							<a href="//instagram.com/p/6T672znJip" title="Instagram Image" target="_blank">
-								<img src="/images/instagram/thumb_320x320.jpg" alt="Instagram Image"/>
-							</a>
-						</li>
-					</ul>
-					<a href="#" class="caroufredsel-prev"></a>
-					<a href="#" class="caroufredsel-next"></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div><?*/
-
-    ?>
+</div>
 </div>
 </div>
 </div>
