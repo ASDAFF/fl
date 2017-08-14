@@ -83,6 +83,7 @@ class Offer
 			    'PROPERTY_ORIG',
 			    'PROPERTY_JSON',
 			    'PROPERTY_PHOTOS',
+			    'PROPERTY_YA_NAME',
 			]);
 			while ($item = $rsItems->Fetch())
 			{
@@ -121,6 +122,7 @@ class Offer
 				    'ORIG' => $item['PROPERTY_ORIG_VALUE'],
 				    'JSON' => $item['PROPERTY_JSON_VALUE'],
 				    'PHOTOS' => $item['PROPERTY_PHOTOS_VALUE'],
+				    'YA_NAME' => $item['PROPERTY_YA_NAME_VALUE'],
 				];
 				if ($item['CODE'])
 					$return['BY_CODE'][$item['CODE']] = $id;
