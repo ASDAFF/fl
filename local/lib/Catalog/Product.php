@@ -50,7 +50,7 @@ class Product
 			$iblockElement = new \CIBlockElement();
 			$rsItems = $iblockElement->GetList([], [
 				'IBLOCK_ID' => self::IBLOCK_ID,
-				'ACTIVE' => 'Y',
+				//'ACTIVE' => 'Y',
 			], false, false, [
 				'ID',
 				'NAME',
