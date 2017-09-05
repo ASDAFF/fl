@@ -98,12 +98,6 @@ class Filter
 		    'ITEMS' => Section::getGroup(),
 		    'MULTI' => true,
 		];
-		$flags = Flags::getAll();
-		foreach ($flags as $name => $items)
-			$return[] = array(
-				'NAME' => $name,
-				'ITEMS' => $items,
-			);
 		$return[] = [
 			'NAME' => 'Производитель',
 			'TYPE' => 'brand',
@@ -112,6 +106,19 @@ class Filter
 			'MULTI' => true,
 			'MAX' => 6,
 		];
+		$return[] = [
+			'NAME' => 'Страна',
+			'TYPE' => 'country',
+			'ITEMS' => Country::getGroup(),
+			'MULTI' => true,
+			'MAX' => 6,
+		];
+		$flags = Flags::getAll();
+		foreach ($flags as $name => $items)
+			$return[] = array(
+				'NAME' => $name,
+				'ITEMS' => $items,
+			);
 		$return[] = [
 			'NAME' => 'Порода дерева',
 			'TYPE' => 'country',
@@ -125,13 +132,6 @@ class Filter
 			'ITEMS' => Color::getGroup(),
 			'MULTI' => true,
 			'MAX' => 16,
-		];
-		$return[] = [
-			'NAME' => 'Страна',
-			'TYPE' => 'country',
-			'ITEMS' => Country::getGroup(),
-			'MULTI' => true,
-			'MAX' => 6,
 		];
 		$return[] = [
 			'NAME' => 'Класс защиты',
