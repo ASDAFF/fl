@@ -91,14 +91,6 @@ class Filter
 			'TYPE' => 'price',
 		];
 		$return[] = [
-			'NAME' => 'Категория',
-			'TYPE' => 'category',
-			'BC' => true,
-		    'TREE' => Section::getTree(),
-		    'ITEMS' => Section::getGroup(),
-		    'MULTI' => true,
-		];
-		$return[] = [
 			'NAME' => 'Производитель',
 			'TYPE' => 'brand',
 			'BC' => true,
@@ -112,6 +104,14 @@ class Filter
 			'ITEMS' => Country::getGroup(),
 			'MULTI' => true,
 			'MAX' => 6,
+		];
+		$return[] = [
+			'NAME' => 'Категория',
+			'TYPE' => 'category',
+			'BC' => true,
+			'TREE' => Section::getTree(),
+			'ITEMS' => Section::getGroup(),
+			'MULTI' => true,
 		];
 		$flags = Flags::getAll();
 		foreach ($flags as $name => $items)
