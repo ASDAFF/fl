@@ -263,7 +263,7 @@ elseif ($arParams['TYPE'] == 'primary')
                     <span class="underline">Еще</span> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="mega-col-6">
+                    <li class="mega-col-4">
                         <h3 class="megamenu-title">Деревянные полы<span class="caret"></span></h3>
                         <ul class="dropdown-menu">
                             <li><a href="/cat/piece/">Штучный паркет</a></li>
@@ -271,7 +271,16 @@ elseif ($arParams['TYPE'] == 'primary')
                             <li><a href="/cat/terrace/">Террасная доска</a></li>
                         </ul>
                     </li>
-                    <li class="mega-col-6">
+                    <li class="mega-col-4">
+                        <h3 class="megamenu-title">Другие покрытия<span class="caret"></span></h3>
+                        <ul class="dropdown-menu">
+                            <li><a href="/cat/cork/">Пробковые полы</a></li>
+                            <li><a href="/cat/vinyl/">Виниловые полы</a></li>
+                            <li><a href="/cat/leather/">Кожаные полы</a></li>
+                            <li><a href="/cat/marmoleum/">Мармолеум</a></li>
+                        </ul>
+                    </li>
+                    <li class="mega-col-4">
                         <h3 class="megamenu-title">Сопутствующие товары<span class="caret"></span></h3>
                         <ul class="dropdown-menu">
                             <li><a href="/cat/plinth/">Плинтусы, порожки</a></li>
