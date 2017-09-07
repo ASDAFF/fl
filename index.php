@@ -7,7 +7,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Напольные покрытия\"");
 
 ?><!-- test new-->
-<div class="container">
+<div class="container _mobile-none">
     <div class="row row-fluid pt-6 pb-6">
         <div class="text-center col-sm-3">
             <div class="box-ft box-ft-5 black">
@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container _mobile-none">
     <div class="row shipping-policy">
         <div class="policy-featured-col col-md-4 col-sm-6">
             <i class="fa fa-money"></i>
@@ -48,6 +48,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Напольные п�
         </div>
     </div>
 </div>
+<div class="_mobile-br"></div>
 <div class="container">
     <div class="row row-fluid mb-10">
         <div class="col-sm-12"><?

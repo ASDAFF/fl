@@ -1634,3 +1634,22 @@ del .amount {
 
 .content-container {padding-top: 0;}
 .heading-container .heading-standar .page-breadcrumb {padding-bottom: 0;}
+
+/* Фильтер - выпадающий список */
+
+.commerce .widget_layered_nav ul.s-filter li {position: relative; }
+.commerce .widget_layered_nav ul.s-filter ul {display: none;}
+.commerce .widget_layered_nav ul.s-filter>ul {display: block;}
+.commerce .widget_layered_nav ul.s-filter li.active>ul.s-filter {display: block;}
+
+.commerce .widget_layered_nav ul i.fa-angle-down {position: absolute; right: 0; top: 2px; cursor: pointer;}
+.commerce .widget_layered_nav li.active>i.fa-angle-down:before {content: "\f105";}
+
+.commerce .widget_layered_nav ul small.count {float: none;}
+
+/* Не выводить на мобильника */
+@media (max-width: 770px) {
+  ._mobile-none {display: none;}
+  ._mobile-br {height: 20px;}
+}
+

@@ -29,7 +29,8 @@ class Section
     {
         $params['filter']['IBLOCK_ID'] = $iblockId;
         $params['filter']['ACTIVE'] = 'Y';
-        $res = (static::CLASS_NAME)::getList($params);
+        $className = static::CLASS_NAME;
+        $res = $className::getList($params);
         $ret = array();
         while($row = $res->fetch())
             $ret[$row['ID']] = $row;
@@ -45,7 +46,8 @@ class Section
         $arNavStartParams   = static::getData($params, 'arNavStartParams',  false);
 
         $ret = array();
-        $res = (static::OLD_CLASS_NAME)::GetList($arOrder, $arFilter, $bIncCnt, $arSelect, $arNavStartParams);
+        $className = static::OLD_CLASS_NAME;
+        $res = $className::GetList($arOrder, $arFilter, $bIncCnt, $arSelect, $arNavStartParams);
         while($row = $res->GetNext())
             $ret[$row['ID']] = $row;
 
@@ -55,7 +57,8 @@ class Section
     public static function getAllD7($iblockId, array $params = array())
     {
         $params['filter']['IBLOCK_ID'] = $iblockId;
-        $res = (static::CLASS_NAME)::getList($params);
+        $className = static::CLASS_NAME;
+        $res = $className::getList($params);
         $ret = array();
         while($row = $res->fetch())
             $ret[$row['ID']] = $row;

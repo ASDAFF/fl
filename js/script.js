@@ -986,6 +986,7 @@ jQuery(document).ready(function() {
 	 ._tabs-nav : Стиль меню >li>a id ='val'
 	 ._tabs : Табы переключения div id ='val'
 	 */
+    _btn.init();
 });
 
 var _tabs = {
@@ -1033,5 +1034,34 @@ var _tabs = {
     update: function (_this) {
         _this.find('._tabs-nav a').removeClass('active');
         _this.find('._tabs-content ._tab').removeClass('active');
+    }
+};
+var _btn = {
+    init: function () {
+        this.btnSwitchParent = jQuery('.commerce .widget_layered_nav ul i.fa-angle-down');
+
+        this.load();
+    },
+    load: function () {
+        _btn.btnSwitchParent.each(function(index, element){
+            var activeBlock = jQuery(element).parent();
+
+            jQuery(element).on('click', function(){
+                event.preventDefault();
+                _btn.clickActiveBlock(activeBlock) ;
+            });
+
+            if(!jQuery(element).parent().find('ul').length) {
+                jQuery(element).css('display','none');
+			}
+
+        });
+    },
+    clickActiveBlock: function (_this) {
+        if (_this.hasClass('active')) {
+            jQuery(_this).removeClass('active');
+        } else {
+            jQuery(_this).addClass('active');
+        }
     }
 };

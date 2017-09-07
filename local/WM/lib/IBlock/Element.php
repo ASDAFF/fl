@@ -51,7 +51,7 @@ class Element
 
         $ret = array();
         $className = static::OLD_CLASS_NAME;
-        $res = $className::GetList($arOrder, $arFilter, $arGroupBy, $arSelect, $arNavStartParams);
+        $res = $className::GetList($arOrder, $arFilter, $arGroupBy, $arNavStartParams, $arSelect);
         while($row = $res->GetNext())
             $ret[$row['ID']] = $row;
 

@@ -93,8 +93,6 @@ $APPLICATION->IncludeComponent('bitrix:main.include', '', [
 //
 ?>
 <div id="panel"><? $APPLICATION->ShowPanel(); ?></div><?
-
-
 ?>
 <div class="offcanvas open">
 	<div class="offcanvas-wrap">
@@ -178,7 +176,7 @@ $APPLICATION->IncludeComponent('bitrix:main.include', '', [
         </div>
         <div class="block">
             <div class="icon"><img src="/images/head-block-2.png"></div>
-            <div class="text">Более 7000 образцов от 100 производителей</div>
+            <div class="text">Более 7000 товаров от 100 производителей</div>
         </div>
         <div class="block">
             <div class="icon"><img src="/images/head-block-3.png"></div>
@@ -186,6 +184,8 @@ $APPLICATION->IncludeComponent('bitrix:main.include', '', [
         </div>
         <div class="block">
 			<a href="tel:+78043336754" class="elTop-phone-number">+7 (804) 333 67 54</a>
+            <a class="elTop-phone-number short-text">(звонок бесплатный)</a>
+            <a href="tel:+74955327974" class="elTop-phone-number">+7 (929) 932 42 30</a>
             <a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a>
             <a href="#elFormPhone" class="popup-inline">
                 <span class="elTop-phone-text">Бесплатный звонок</span>

@@ -21,7 +21,9 @@ function printSection($section, $items)
 		?>
 		<li<?= $checked ?> data-code="<?= $code ?>">
 			<a href="<?= CATALOG_PATH ?><?= $code ?>/"><?= $item['NAME'] ?></a>
-			<small class="count"><?= $item['CNT'] ?></small><?
+			<small class="count"> (<?= $item['CNT'] ?>) </small>
+            <i class="fa fa-angle-down"></i>
+        <?
 	}
 
 	if ($section['ITEMS'])
@@ -219,7 +221,7 @@ function printSection($section, $items)
 							?>
 							<li class="<?= $checked ?><?= $hidden ?>" data-code="<?= $code ?>">
 								<a href="<?= CATALOG_PATH ?><?= $code ?>/"><?= $item['NAME'] ?></a>
-								<small class="count"><?= $item['CNT'] ?></small>
+								<small class="count"> (<?= $item['CNT'] ?>) </small>
 							</li><?
 						}
 						?>
