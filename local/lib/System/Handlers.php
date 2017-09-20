@@ -1,7 +1,6 @@
 <?
 namespace Local\System;
 use Local\Catalog\Offer;
-use Local\Catalog\Product;
 use Local\Sale\Cart;
 use Local\Sale\Wish;
 
