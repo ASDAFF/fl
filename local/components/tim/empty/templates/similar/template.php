@@ -58,6 +58,14 @@ $isAdmin = $user->IsAdmin();
                                     <a href="<?= $item['DETAIL_PAGE_URL'] ?>"><img width="<?= $img2['WIDTH'] ?>" height="<?= $img2['HEIGHT'] ?>"
                                                                       src="<?= $img2['SRC'] ?>" alt="<?= $item['NAME'] ?>"/></a>
                                 </div>
+                                <div class="loop-action">
+                                    <div class="loop-add-to-cart">
+                                        <a href="/personal/cart/?id=<?= $item['ID'] ?>"
+                                           class="add_to_cart_button" data-id="<?= $item['ID'] ?>">
+                                            В корзину
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <figcaption>
@@ -95,14 +103,7 @@ $isAdmin = $user->IsAdmin();
                                             <span class="amount"><?= $price ?> руб.<?= $pPrice ?></span>
                                         </span>
                                     </div>
-                                    <div class="loop-action">
-                                        <div class="loop-add-to-cart">
-                                            <a href="/personal/cart/?id=<?= $item['ID'] ?>"
-                                               class="add_to_cart_button" data-id="<?= $item['ID'] ?>">
-                                                В корзину
-                                            </a>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </figcaption>

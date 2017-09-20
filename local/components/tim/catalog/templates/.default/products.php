@@ -154,6 +154,22 @@ else
 									     src="<?= $img2['SRC'] ?>" alt="<?= $item['NAME'] ?>"/>
 								</a>
 							</div>
+                            <div class="loop-action">
+                                <div class="loop-add-to-cart">
+                                    <a href="/personal/cart/?id=<?= $item['ID'] ?>"
+                                       class="add_to_cart_button" data-id="<?= $item['ID'] ?>">
+                                        В корзину
+                                    </a>
+                                    <a class="popup-inline" href="#elFormOneClick_<?=$item['ID'] ?>"
+                                       data-id="<?=$item['ID'] ?>" data-rel="magnific-popup-link">
+                                        Купить в один клик
+                                    </a><?
+
+                                    \Local\Catalog\Offer::printQuickPopup($item);
+
+                                    ?>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					<figcaption>
@@ -191,22 +207,7 @@ else
                                         <span class="amount"><?= $price ?> руб.<?= $pPrice ?></span>
                                     </span>
 								</div>
-								<div class="loop-action">
-									<div class="loop-add-to-cart">
-										<a href="/personal/cart/?id=<?= $item['ID'] ?>"
-										   class="add_to_cart_button" data-id="<?= $item['ID'] ?>">
-											В корзину
-										</a>
-                                        <a class="popup-inline" href="#elFormOneClick_<?=$item['ID'] ?>"
-                                           data-id="<?=$item['ID'] ?>" data-rel="magnific-popup-link">
-                                            Купить в один клик
-                                        </a><?
 
-										\Local\Catalog\Offer::printQuickPopup($item);
-
-										?>
-									</div>
-								</div>
 							</div>
 						</div>
 					</figcaption>

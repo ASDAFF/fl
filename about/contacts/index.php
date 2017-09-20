@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("Контакты");
 	<div class="row">
 		<div class="col-xs-12">
 			<p>
- <b>Телефон:</b> +7 (804) 333 69 64 (звонок бесплатный), +7 (495) 532 79 74<br>
+ <b>Телефон:</b> +7 (804) 333 67 54 (звонок бесплатный), +7 (495) 532 79 74<br>
  <b>E-mail:</b>&nbsp;<a href="mailto:info@veleslife.ru">info@veleslife.ru</a><br>
  <b>Юридический адрес:</b> г. Москва, ул. Малый Лёвшинский пер., д. 10
 			</p>

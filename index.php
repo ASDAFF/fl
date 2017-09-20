@@ -4,7 +4,8 @@
 define('INDEX_PAGE', true);
 
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Интернет-магазин \"Напольные покрытия\"");
+$APPLICATION->SetPageProperty("title", "Магазин напольных покрытий Veles Life");
+$APPLICATION->SetTitle("Интернет-магазин Veles Life");
 
 ?><!-- test new-->
 <div class="container _mobile-none">

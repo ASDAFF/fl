@@ -1653,3 +1653,11 @@ del .amount {
   ._mobile-br {height: 20px;}
 }
 
+.commerce ul.products li.product.style-2:hover .info-content-wrap .product_title,
+.commerce ul.products li.product.style-2:hover .info-content-wrap .info-price {
+   -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+  opacity: 1;
+}
