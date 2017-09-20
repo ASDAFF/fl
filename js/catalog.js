@@ -29,13 +29,16 @@ var Filters = {
 
 		this.priceInit($);
 
+		// Стилизация селектов
+		this.selectStyle();
+
 		$('.s-filter a').on('click', this.categoryClick);
 		$('.f-color li').on('click', this.colorClick);
 		$('.f-other a').on('click', this.checkboxClick);
 		this.ajaxCont.on('click', '.cur-f a', this.urlClick);
 		this.ajaxCont.on('click', '.paginate a', this.urlClick);
-		this.ajaxCont.on('change', '#sort', this.sortChange);
-		this.ajaxCont.on('change', '#size', this.sizeChange);
+		//this.ajaxCont.on('change', '#sort', this.sortChange);
+		//this.ajaxCont.on('change', '#size', this.sizeChange);
 		this.bcCont.on('click', 'a', this.urlClick);
 		this.groups.find('.widget-title').click(this.toggleGroup);
 		this.groups.find('.show-all span').click(this.toggleAdd);
@@ -75,6 +78,16 @@ var Filters = {
 		});
 
 		this.priceSubmitBtn.click(this.priceSubmit);
+	},
+	selectStyle: function() {
+		Filters.sortSelect = Filters.ajaxCont.find('#sort');
+		new SelectFx(Filters.sortSelect.get(0), {
+			onChange: Filters.sortChange
+		});
+		Filters.sizeSelect = Filters.ajaxCont.find('#size');
+		new SelectFx(Filters.sizeSelect.get(0), {
+			onChange: Filters.sizeChange
+		});
 	},
 	searchSubmit: function() {
 		Filters.updateProducts();
@@ -181,13 +194,11 @@ var Filters = {
 		return false;
 	},
 	sortChange: function() {
-		var select = jQuery(this);
-		Filters.sort = select.val();
+		Filters.sort = Filters.sortSelect.val();
 		Filters.updateProducts();
 	},
 	sizeChange: function() {
-		var select = jQuery(this);
-		Filters.size = select.val();
+		Filters.size = Filters.sizeSelect.val();
 		Filters.updateProducts();
 	},
 	updateProducts: function() {
@@ -248,6 +259,7 @@ var Filters = {
 		}, function (resp) {
 			Filters.ajaxCont.html(resp.HTML);
 
+			Filters.selectStyle();
 			jQuery('.popup-inline').magnificPopup({
 				type: 'inline',
 
