@@ -99,7 +99,7 @@ $isAdmin = $user->IsAdmin();
 
                                 foreach ($images as $img)
                                 {
-                                    $resize = $file->ResizeImageGet($img, ['WIDTH' => 72, 'HEIGHT' => 72]);
+                                    $resize = $file->ResizeImageGet($img, ['width' => 72, 'height' => 72]);
 
                                     ?>
                                     <li class="caroufredsel-item selected">
