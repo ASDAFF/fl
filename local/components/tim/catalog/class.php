@@ -100,7 +100,7 @@ class TimCatalog extends \CBitrixComponent
 		$url = urldecode($_SERVER['REQUEST_URI']);
 		$urlDirs = explode('/', $url);
 		$code = $urlDirs[3];
-		if ($code && count($urlDirs) > 4)
+		if ($code && count($urlDirs) == 5 && !$urlDirs[4])
 			if (is_numeric($code))
 				$this->offer = Offer::getById($code);
 			else
@@ -130,8 +130,11 @@ class TimCatalog extends \CBitrixComponent
 			if (!$empty)
 			{
 				$this->filter = Filter::getData($this->searchIds, $this->searchQuery, $this->urlParams);
-				$this->offers = Offer::get(1, $this->filter['PRODUCTS_FILTER'], $this->sort['QUERY'],
-					$this->navParams);
+				if (!$this->filter['404'])
+				{
+					$this->offers =
+						Offer::get(1, $this->filter['PRODUCTS_FILTER'], $this->sort['QUERY'], $this->navParams);
+				}
 			}
 
 			$this->SetPageProperties();
@@ -296,7 +299,7 @@ class TimCatalog extends \CBitrixComponent
 		{
 			$this->seo = $this->filter['SEO'];
 		}
-		elseif ($this->filter)
+		elseif ($this->filter && !$this->filter['404'])
 		{
 			$this->seo = Seo::getByUrl($this->filter['SEO']['URL']);
 

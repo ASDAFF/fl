@@ -38,6 +38,11 @@ class Filter
 	private static $PRODUCTS_KEY = [];
 
 	/**
+	 * @var bool неверный урл
+	 */
+	private static $e404 = false;
+
+	/**
 	 * Возвращает данные для построения панели фильтров, хлебные крошки и ID отфильтрованных элементов
 	 * @param array $searchIds элементы, отфильтрованные поисковым запросом
 	 * @param string $searchQuery
@@ -50,6 +55,8 @@ class Filter
 		self::$GROUPS = self::getGroups();
 		// Помечаем выбранные пользователем варианты
 		$cnt = self::setChecked($urlParams);
+		if (self::$e404)
+			return ['404' => true];
 		// Формируем фильтры для каждого свойства, чтобы отсеять варианты с учетом пользовательских фильтров
 		self::getUserFilter($searchIds);
 		// Получаем элементы для всех фильтров
@@ -192,6 +199,7 @@ class Filter
 					{
 						$item['CHECKED'] = true;
 						$cnt++;
+						unset($urlCodes[$code]);
 					}
 				}
 				unset($item);
@@ -204,6 +212,9 @@ class Filter
 			$allCnt += $cnt;
 		}
 		unset($group);
+
+		if ($urlCodes)
+			self::$e404 = true;
 
 		return $allCnt;
 	}
