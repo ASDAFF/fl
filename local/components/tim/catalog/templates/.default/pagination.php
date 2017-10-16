@@ -55,7 +55,7 @@ if ($to > $cnt)
 				// Для первой страницы не подмешиваем параметр
 				$href = ($i == 1) ? $url : $urlPage . $i;
 				?>
-				<a class="pagination-meta" href="<?= $href ?>"><i class="fa fa-angle-left"></i></a><?
+				<a class="pagination-meta" href="<?= $href ?>" rel="prev"><i class="fa fa-angle-left"></i></a><?
 			}
 
 			// Первая страница
@@ -107,7 +107,7 @@ if ($to > $cnt)
 				$i = $cur + 1;
 				$href = $urlPage . $i;
 				?>
-				<a class="pagination-meta" href="<?= $href ?>"><i class="fa fa-angle-right"></i></a><?
+				<a class="pagination-meta" href="<?= $href ?>" rel="next"><i class="fa fa-angle-right"></i></a><?
 			}
 
 			?>
