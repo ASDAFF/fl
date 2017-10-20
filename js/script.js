@@ -752,7 +752,7 @@
                 $('.popup-inline').magnificPopup({
                     type: 'inline',
 
-                    fixedContentPos: false,
+                    fixedContentPos: true,
                     fixedBgPos: true,
 
                     overflowY: 'auto',
