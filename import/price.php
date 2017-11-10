@@ -18,6 +18,9 @@ require($_SERVER['DOCUMENT_ROOT'] . '/local/lib/phpQuery-onefile.php');
 
 \Bitrix\Main\Loader::includeModule('catalog');
 
+$_log = new \Local\System\Log('import/' . date('Y_m') . '.log');
+$_log->writeText(date('d.m.Y') . ' Начало импорта');
+
 $iblockElement = new CIBlockElement();
 $offers = \Local\Catalog\Offer::getAll_(true);
 
@@ -32,6 +35,7 @@ while ($item = $res->Fetch())
 }
 
 $pages = [];
+$cnt = 0;
 foreach ($offers['ITEMS'] as &$offer)
 {
 	if ($offer['ACTIVE'] != 'Y')
@@ -42,8 +46,12 @@ foreach ($offers['ITEMS'] as &$offer)
 	$page = $ar[0];
 	$pages[$page] = true;
 	$offer['PAGE'] = $page;
+	$cnt++;
 }
 unset($offer);
+
+$_log->writeText('Активных товаров: ' . $cnt);
+$_log->writeText('Страниц для загрузки: ' . count($pages));
 
 $yaPrices = [];
 foreach ($pages as $page => $v)
@@ -113,6 +121,8 @@ foreach ($pages as $page => $v)
 	}
 }
 
+$cnt1 = 0;
+$cnt2 = 0;
 foreach ($offers['ITEMS'] as $offer)
 {
 	if ($offer['ACTIVE'] != 'Y')
@@ -125,7 +135,11 @@ foreach ($offers['ITEMS'] as $offer)
 	$name = $offer['YA_NAME'];
 	$newPrices = $yaPrices[$page][$name];
 	if (!$newPrices)
+	{
+		$_log->writeText('Не найдены цены для товара [' . $offer['ID'] . ']: ' . $name);
+		$cnt1++;
 		continue;
+	}
 
 	$update = [];
 	if (intval($newPrices[0]) != $offer['PRICE_WO_DISCOUNT'])
@@ -138,29 +152,14 @@ foreach ($offers['ITEMS'] as $offer)
 
 	if ($update)
 	{
-		//debugmessage($update);
-		//$iblockElement->SetPropertyValuesEx($offer['ID'], 5, $update);
-		//\CPrice::Update($prices[$offer['ID']]['ID'], ['PRICE' => $update['PRICE']]);
+		$cnt2++;
+		$iblockElement->SetPropertyValuesEx($offer['ID'], 5, $update);
+		\CPrice::Update($prices[$offer['ID']]['ID'], ['PRICE' => $update['PRICE']]);
 	}
-
-
-	/*if ($price != $offerPrice)
-	{
-		debugmessage($price);
-		debugmessage($offerPrice);
-	}
-
-	/*if (!$price)
-	{
-		$fields = [
-			'PRODUCT_ID' => $offer['ID'],
-			'PRICE' => $offer['PRICE'],
-			'CATALOG_GROUP_ID' => 1,
-			'CURRENCY' => 'RUB',
-		];
-		$x = $pr->Add($fields);
-	}*/
 
 }
+
+$_log->writeText('Товаров, для которых не найдены цены: ' . $cnt1);
+$_log->writeText('Товаров, цены которых изменились: ' . $cnt2);
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");
