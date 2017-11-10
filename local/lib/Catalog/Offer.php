@@ -51,7 +51,7 @@ class Offer
 				'IBLOCK_ID' => self::IBLOCK_ID,
 				//'ACTIVE' => 'Y',
 			], false, false, [
-				'ID', 'NAME', 'CODE',
+				'ID', 'NAME', 'CODE', 'ACTIVE',
 				'PREVIEW_PICTURE',
 				'DETAIL_PICTURE',
 				'PREVIEW_TEXT',
@@ -93,6 +93,7 @@ class Offer
 					'ID' => $id,
 					'NAME' => $item['NAME'],
 					'CODE' => $item['CODE'],
+					'ACTIVE' => $item['ACTIVE'],
 					'PREVIEW_PICTURE' => $item['PREVIEW_PICTURE'],
 					'DETAIL_PICTURE' => $item['DETAIL_PICTURE'],
 				    'PRODUCT' => intval($item['PROPERTY_PRODUCT_VALUE']),
