@@ -11,6 +11,7 @@ else {
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 
+ini_set('memory_limit', '1024M');
 set_time_limit(0);
 
 require($_SERVER['DOCUMENT_ROOT'] . '/local/lib/phpQuery-onefile.php');
