@@ -13,6 +13,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 
 ini_set('memory_limit', '1024M');
 set_time_limit(0);
+date_default_timezone_set("Europe/Moscow");
 
 require($_SERVER['DOCUMENT_ROOT'] . '/local/lib/phpQuery-onefile.php');
 
