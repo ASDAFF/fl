@@ -221,6 +221,7 @@ class Offer
 				$return['WOOD'][$offer['WOOD']]++;
 				$return['PROTECTION'][$offer['PROTECTION']]++;
 				$return['PICTURE_KIND'][$offer['PICTURE_KIND']]++;
+				$return['JOINT'][$offer['JOINT']]++;
 
 				foreach (Flags::getCodes() as $code)
 				{
@@ -264,6 +265,7 @@ class Offer
 			'PROPERTY_COLOR',
 			'PROPERTY_PROTECTION',
 			'PROPERTY_PICTURE_KIND',
+			'PROPERTY_JOINT',
 			'PROPERTY_PRICE',
 			'PROPERTY_PRICE_WO_DISCOUNT',
 		];
@@ -311,6 +313,7 @@ class Offer
 				'COLOR' => intval($item['PROPERTY_COLOR_VALUE']),
 				'PROTECTION' => intval($item['PROPERTY_PROTECTION_VALUE']),
 				'PICTURE_KIND' => intval($item['PROPERTY_PICTURE_KIND_VALUE']),
+				'JOINT' => intval($item['PROPERTY_JOINT_VALUE']),
 			];
 			foreach ($codes as $code)
 				$fields['FLAGS'][$code] = intval($item['PROPERTY_' . $code . '_VALUE']);
@@ -419,6 +422,10 @@ class Offer
                 elseif ($k == 'PICTURE_KIND')
 				{
 					$bitrixFilter['PROPERTY_PICTURE_KIND'] = $v;
+				}
+				elseif ($k == 'JOINT')
+				{
+					$bitrixFilter['PROPERTY_JOINT'] = $v;
 				}
 				elseif ($k == 'ID')
 				{

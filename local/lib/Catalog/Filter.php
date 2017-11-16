@@ -152,6 +152,12 @@ class Filter
 			'ITEMS' => Pkind::getGroup(),
 			'MULTI' => true,
 		];
+		$return[] = [
+			'NAME' => 'Тип замка',
+			'TYPE' => 'joint',
+			'ITEMS' => Joint::getGroup(),
+			'MULTI' => true,
+		];
 
 		return $return;
 	}

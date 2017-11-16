@@ -5136,6 +5136,7 @@ textarea.commerce form .form-row textarea {
 }
 .commerce .widget_layered_nav ul li > a {
   position: relative;
+  font-weight: bold;
 }
 .commerce .widget_layered_nav ul li > a:before {
   content: "\f096";
@@ -5360,6 +5361,7 @@ textarea.commerce form .form-row textarea {
 }
 .commerce .widget_price_filter .price_label {
   float: left;
+  font-weight: bold;
 }
 .commerce .widget_price_filter .ui-slider {
   position: relative;
