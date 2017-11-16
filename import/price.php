@@ -86,6 +86,7 @@ foreach ($pages as $page => $v)
 		$prt = 0;
 		$inp = 0;
 		$name = '';
+		$name1 = '';
 		$dim = '';
 		$offerImgSrc = '';
 		$offerImgDetailSrc = '';
@@ -102,10 +103,11 @@ foreach ($pages as $page => $v)
 					$offerImgDetailSrc = $offerImgDetailSrcAr[1];
 				$font = $td->find('font');
 				$add = $font->text();
-				$font->remove();
 				$td->find('.just_bt')->remove();
 				$offerImg->remove();
 				$name = $td->text();
+				$font->remove();
+				$name1 = $td->text();
 			}
 			elseif ($j == 2)
 			{
@@ -119,6 +121,7 @@ foreach ($pages as $page => $v)
 		}
 
 		$yaPrices[$page][$name] = [$pr, $prt];
+		$yaPrices[$page][$name1] = [$pr, $prt];
 	}
 }
 

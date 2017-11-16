@@ -18,7 +18,7 @@ $sections = \Local\Catalog\Section::getAll();
                 <li>
                     <i class="fa fa-mobile"></i>
                     <h4>Телефон:</h4>
-                    <p>+7 (495) 532 79 74,<br />+7 (929) 932 42 30</p>
+                    <p>+7 (804) 333 67 54</p>
                 </li>
                 <li>
                     <i class="fa fa-envelope"></i>

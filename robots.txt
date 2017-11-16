@@ -2,9 +2,10 @@ User-Agent: *
 Sitemap: http://veleslife.ru/sitemap.xml
 Disallow: /*?utm_source=
 Disallow: /brand/
-Disallow: /wood/
+Disallow: http://veleslife.ru/wood/
 Disallow: /*pochemu_my.html
 Disallow: /*?id=
+Allow: /wood/
 Clean-param: size&sort&p-from /
 
 User-Agent: Yandex
@@ -12,9 +13,10 @@ Crawl-delay: 0.5
 Sitemap: http://veleslife.ru/sitemap.xml
 Disallow: /*?utm_source=
 Disallow: /brand/
-Disallow: /wood/
+Disallow: http://veleslife.ru/wood/
 Disallow: /*pochemu_my.html
 Disallow: /*?id=
+Allow: /wood/
 Clean-param: size&sort&p-from /
 Host: veleslife.ru
 
@@ -22,7 +24,8 @@ User-Agent: GoogleBot
 Sitemap: http://veleslife.ru/sitemap.xml
 Disallow: /*?utm_source=
 Disallow: /brand/
-Disallow: /wood/
+Disallow: http://veleslife.ru/wood/
 Disallow: /*pochemu_my.html
 Disallow: /*?id=
+Allow: /wood/
 Clean-param: size&sort&p-from /
