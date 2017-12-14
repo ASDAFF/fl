@@ -182,13 +182,13 @@ $APPLICATION->IncludeComponent('bitrix:main.include', '', [
             <div class="icon"><img src="/images/head-block-3.png"></div>
             <div class="text">Бесплатная доставка от 50м<small>2</small></div>
         </div>
-        <div class="block">
-			<a href="tel:+78043336754" class="elTop-phone-number">+7 (804) 333 67 54</a>
-			<a class="elTop-phone-number short-text">(звонок бесплатный)</a><?
+        <div class="block"><?
+			/*?><a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 7974</a><?
+			?><a class="elTop-phone-number short-text">(звонок бесплатный)</a><?*/
 
-			/*?>
-            <a href="tel:+74955327974" class="elTop-phone-number">+7 (929) 932 42 30</a>
-			<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a><?*/
+			?>
+            <a href="tel:+79299324230" class="elTop-phone-number">+7 (929) 932 42 30</a>
+			<a href="tel:+74955327974" class="elTop-phone-number">+7 (495) 532 79 74</a><?
 
 			?>
             <a href="#elFormPhone" class="popup-inline">
