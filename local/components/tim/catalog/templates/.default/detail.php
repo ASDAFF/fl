@@ -551,10 +551,44 @@ $isAdmin = $user->IsAdmin();
     <div class="row">
         <div class="col-sm-12"><?
 
-            $cntNeed = 12;
+			//
+			// Подобные товары
+			//
 
-            $sectionId = $offer['SECTION'];
-            $navParams = ['iNumPage' => 1, 'nPageSize' => 13];
+			$sameItems = [];
+
+			if ($offer['YA_URL'])
+			{
+				$navParams = [
+					'iNumPage' => 1,
+					'nPageSize' => 1000
+				];
+				$filter = [
+					'YA_URL' => $offer['YA_URL'],
+				];
+
+				$tmp = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
+				foreach ($tmp['ITEMS'] as $id => $item)
+					if ($id != $offer['ID'])
+						$sameItems[$id] = $item;
+
+				$cnt = count($sameItems);
+
+				if ($cnt)
+					$APPLICATION->IncludeComponent('tim:empty', 'similar', [
+						'ITEMS' => $sameItems,
+						'TITLE' => 'Подобные товары',
+					]);
+			}
+
+            //
+			// Похожие товары
+			//
+
+			$cntNeed = 12;
+
+			$sectionId = $offer['SECTION'];
+			$navParams = ['iNumPage' => 1, 'nPageSize' => 13];
 			$initFilter = [
 				'COLOR' => $offer['COLOR'],
 				'BRAND' => $offer['BRAND'],
@@ -562,36 +596,36 @@ $isAdmin = $user->IsAdmin();
 			];
 			$filter = $initFilter;
 
-            $items = [];
-            $cnt = 0;
-            while ($sectionId)
-            {
+			$items = [];
+			$cnt = 0;
+			while ($sectionId)
+			{
 				$filter['CATEGORY'] = [$sectionId];
-                $tmp = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
-                foreach ($tmp['ITEMS'] as $id => $item)
-                    if ($id != $offer['ID'] && !$items[$id])
+				$tmp = \Local\Catalog\Offer::get(1, $filter, ['PROPERTY_RATING' => 'desc'], $navParams);
+				foreach ($tmp['ITEMS'] as $id => $item)
+					if ($id != $offer['ID'] && !$items[$id] && !$sameItems[$id])
 						$items[$id] = $item;
 
 				$cnt = count($items);
 				if ($cnt >= $cntNeed)
-                    break;
+					break;
 
 				if ($filter['BRAND'] && $filter['WOOD'])
-				    unset($filter['BRAND']);
+					unset($filter['BRAND']);
 				elseif ($filter['WOOD'])
 				{
 					$filter['BRAND'] = $offer['BRAND'];
 					unset($filter['WOOD']);
 				}
-                elseif ($filter['BRAND'])
+				elseif ($filter['BRAND'])
 					unset($filter['BRAND']);
-                else
+				else
 				{
 					$filter = $initFilter;
 					$section = \Local\Catalog\Section::getById($sectionId);
 					$sectionId = $section['PARENT'];
 				}
-            }
+			}
 
 			if ($cnt)
 				$APPLICATION->IncludeComponent('tim:empty', 'similar', [

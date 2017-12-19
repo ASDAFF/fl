@@ -85,6 +85,7 @@ class Offer
 			    'PROPERTY_JSON',
 			    'PROPERTY_PHOTOS',
 			    'PROPERTY_YA_NAME',
+			    'PROPERTY_YA_URL',
 			]);
 			while ($item = $rsItems->Fetch())
 			{
@@ -126,6 +127,7 @@ class Offer
 				    'JSON' => $item['PROPERTY_JSON_VALUE'],
 				    'PHOTOS' => $item['PROPERTY_PHOTOS_VALUE'],
 				    'YA_NAME' => $item['PROPERTY_YA_NAME_VALUE'],
+				    'YA_URL' => $item['PROPERTY_YA_URL_VALUE'],
 				];
 				if ($item['CODE'])
 					$return['BY_CODE'][$item['CODE']] = $id;
@@ -293,6 +295,7 @@ class Offer
 				'PROPERTY_DIM',
 				'PROPERTY_JSON',
 				'PROPERTY_PHOTOS',
+				'PROPERTY_YA_URL',
 			]);
 		}
 
@@ -339,6 +342,7 @@ class Offer
 				$fields['DIM'] = $item['PROPERTY_DIM_VALUE'];
 				$fields['PROPS'] = json_decode($item['~PROPERTY_JSON_VALUE'], true);
 				$fields['PHOTOS'] = $item['PROPERTY_PHOTOS_VALUE'];
+				$fields['YA_URL'] = $item['PROPERTY_YA_URL_VALUE'];
 			}
 
 			$return['ITEMS'][$id] = $fields;
@@ -437,6 +441,10 @@ class Offer
 						$bitrixFilter['>=PROPERTY_PRICE'] = $v['FROM'];
 					if (isset($v['TO']))
 						$bitrixFilter['<=PROPERTY_PRICE'] = $v['TO'];
+				}
+				elseif ($k == 'YA_URL')
+				{
+					$bitrixFilter['PROPERTY_YA_URL'] = $v;
 				}
 				else
 				{
@@ -577,7 +585,7 @@ class Offer
 				__FUNCTION__,
 				$id,
 			],
-			static::CACHE_PATH . __FUNCTION__ . '/',
+			static::CACHE_PATH . __FUNCTION__ . '1/',
 			static::CACHE_TIME
 		);
 		if (!$refreshCache && $extCache->initCache())
