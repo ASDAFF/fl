@@ -172,7 +172,9 @@ function printSection($section, $items)
 							$hidden = $item['CNT'] ? '' : 'hidden ';
 							$bg = 'background:#' . $code;
 
-							$j++;
+							if ($item['CNT'])
+								$j++;
+
 							if ($group['MAX'] && !$max && $j > $group['MAX'] && !$checked)
 							{
 								$max = true;
@@ -208,7 +210,9 @@ function printSection($section, $items)
 							$checked = $item['CHECKED'] ? 'chosen ' : '';
 							$hidden = $item['CNT'] ? '' : 'hidden ';
 
-							$j++;
+							if ($item['CNT'])
+								$j++;
+
 							if ($group['MAX'] && !$max && $j > $group['MAX'] && !$checked)
                             {
 								$max = true;

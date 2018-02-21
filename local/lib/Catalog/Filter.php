@@ -103,6 +103,7 @@ class Filter
 			'BC' => true,
 			'ITEMS' => Brand::getGroup(),
 			'MULTI' => true,
+			'NO_SORT' => true,
 			'MAX' => 6,
 		];
 		$return[] = [
@@ -411,7 +412,8 @@ class Filter
 						else
 							$items2[$code] = $item;
 
-					uasort($items2, 'self::cntCmp');
+					if (!$group['NO_SORT'])
+						uasort($items2, 'self::cntCmp');
 
 					$group['ITEMS'] = [];
 					foreach ($items1 as $code => $item)
